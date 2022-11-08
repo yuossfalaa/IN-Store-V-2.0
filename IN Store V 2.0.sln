@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INStore.Domain", "INStore.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INStore.EntityFramework", "INStore.EntityFramework\INStore.EntityFramework.csproj", "{6E32A586-E72C-45A9-B994-8079B5C4AE07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INStore.Domain.Test", "INStore.Domain.Test\INStore.Domain.Test.csproj", "{36A16E63-23C5-43E7-8DED-0EC68816E582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "INStore.Domain.Test", "INStore.Domain.Test\INStore.Domain.Test.csproj", "{36A16E63-23C5-43E7-8DED-0EC68816E582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INStore", "INStore\INStore.csproj", "{991C9A03-B329-46AA-A133-E8517CD09501}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{36A16E63-23C5-43E7-8DED-0EC68816E582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A16E63-23C5-43E7-8DED-0EC68816E582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36A16E63-23C5-43E7-8DED-0EC68816E582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991C9A03-B329-46AA-A133-E8517CD09501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991C9A03-B329-46AA-A133-E8517CD09501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991C9A03-B329-46AA-A133-E8517CD09501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991C9A03-B329-46AA-A133-E8517CD09501}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
