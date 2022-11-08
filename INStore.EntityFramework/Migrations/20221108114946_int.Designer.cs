@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace INStore.EntityFramework.Migrations
 {
     [DbContext(typeof(INStoreDbContext))]
-    [Migration("20221106150553_initial")]
-    partial class initial
+    [Migration("20221108114946_int")]
+    partial class @int
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace INStore.EntityFramework.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("INStore.Domain.Models.Customers", b =>
+            modelBuilder.Entity("INStore.Domain.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,15 +33,12 @@ namespace INStore.EntityFramework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CustomerAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerPhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -49,7 +46,7 @@ namespace INStore.EntityFramework.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("INStore.Domain.Models.Employees", b =>
+            modelBuilder.Entity("INStore.Domain.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,32 +55,27 @@ namespace INStore.EntityFramework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("EmployeeAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeJob")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeePhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("EmployeeSalary")
+                    b.Property<double?>("EmployeeSalary")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("EmployeeShiftEndsAt")
+                    b.Property<DateTime?>("EmployeeShiftEndsAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EmployeeShiftStartsAt")
+                    b.Property<DateTime?>("EmployeeShiftStartsAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -100,17 +92,15 @@ namespace INStore.EntityFramework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CustomerPhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReceiptDate")
+                    b.Property<DateTime?>("ReceiptDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("ReceipttTotal")
+                    b.Property<double?>("ReceipttTotal")
                         .HasColumnType("float");
 
                     b.Property<string>("TypeofSellingOperation")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -127,19 +117,18 @@ namespace INStore.EntityFramework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ItemName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ItemNumber")
+                    b.Property<int?>("ItemNumber")
                         .HasColumnType("int");
 
-                    b.Property<double>("ItemSellingPrice")
+                    b.Property<double?>("ItemSellingPrice")
                         .HasColumnType("float");
 
-                    b.Property<double>("ItemTotalCost")
+                    b.Property<double?>("ItemTotalCost")
                         .HasColumnType("float");
 
-                    b.Property<int>("ReceiptId")
+                    b.Property<int?>("ReceiptId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -157,34 +146,34 @@ namespace INStore.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("AddDeleteItems")
+                    b.Property<bool?>("AddDeleteItems")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("CancelOrders")
+                    b.Property<bool?>("CancelOrders")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ChangeAccountinfo")
+                    b.Property<bool?>("ChangeAccountinfo")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("MakeRefund")
+                    b.Property<bool?>("MakeRefund")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ViewDashboard")
+                    b.Property<bool?>("ViewDashboard")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ViewEmployeeInfo")
+                    b.Property<bool?>("ViewEmployeeInfo")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ViewMYStore")
+                    b.Property<bool?>("ViewMYStore")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ViewSettings")
+                    b.Property<bool?>("ViewSettings")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ViewTools")
+                    b.Property<bool?>("ViewTools")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ViewVendorsAndCustomersInfo")
+                    b.Property<bool?>("ViewVendorsAndCustomersInfo")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -200,20 +189,19 @@ namespace INStore.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("StoreBarcodeLength")
+                    b.Property<int?>("StoreBarcodeLength")
                         .HasColumnType("int");
 
-                    b.Property<int>("StoreCurrency")
+                    b.Property<int?>("StoreCurrency")
                         .HasColumnType("int");
 
                     b.Property<string>("StoreName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StorePhoneNumber")
+                    b.Property<int?>("StorePhoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("StoreRecieptSize")
+                    b.Property<int?>("StoreRecieptSize")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -230,21 +218,18 @@ namespace INStore.EntityFramework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ItemBarCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ItemPurchasingPrice")
+                    b.Property<double?>("ItemPurchasingPrice")
                         .HasColumnType("float");
 
-                    b.Property<double>("ItemSellingPrice")
+                    b.Property<double?>("ItemSellingPrice")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -260,17 +245,16 @@ namespace INStore.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ItemId")
+                    b.Property<int?>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ItemNumberInStock")
+                    b.Property<int?>("ItemNumberInStock")
                         .HasColumnType("int");
 
-                    b.Property<int>("ItemNumberInStore")
+                    b.Property<int?>("ItemNumberInStore")
                         .HasColumnType("int");
 
                     b.Property<string>("ItemPlace")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -280,7 +264,7 @@ namespace INStore.EntityFramework.Migrations
                     b.ToTable("StoreItems");
                 });
 
-            modelBuilder.Entity("INStore.Domain.Models.Users", b =>
+            modelBuilder.Entity("INStore.Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -288,23 +272,19 @@ namespace INStore.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("AccountState")
+                    b.Property<bool?>("AccountState")
                         .HasColumnType("bit");
 
                     b.Property<string>("AdminPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -312,7 +292,7 @@ namespace INStore.EntityFramework.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("INStore.Domain.Models.Vendors", b =>
+            modelBuilder.Entity("INStore.Domain.Models.Vendor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,19 +301,15 @@ namespace INStore.EntityFramework.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("VendorAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorPhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -345,9 +321,7 @@ namespace INStore.EntityFramework.Migrations
                 {
                     b.HasOne("INStore.Domain.Models.Receipts", "Receipt")
                         .WithMany("SoldItems")
-                        .HasForeignKey("ReceiptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReceiptId");
 
                     b.Navigation("Receipt");
                 });
@@ -356,9 +330,7 @@ namespace INStore.EntityFramework.Migrations
                 {
                     b.HasOne("INStore.Domain.Models.StoreItemProperties", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ItemId");
 
                     b.Navigation("Item");
                 });

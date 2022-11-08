@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace INStore.EntityFramework.Migrations
 {
-    public partial class initial : Migration
+    public partial class @int : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,9 +15,9 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,14 +30,14 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeJob = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeShiftStartsAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EmployeeShiftEndsAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EmployeeSalary = table.Column<double>(type: "float", nullable: false)
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeJob = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeShiftStartsAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmployeeShiftEndsAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmployeeSalary = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,10 +50,10 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ReceipttTotal = table.Column<double>(type: "float", nullable: false),
-                    ReceiptDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TypeofSellingOperation = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ReceipttTotal = table.Column<double>(type: "float", nullable: true),
+                    ReceiptDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CustomerPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeofSellingOperation = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,16 +66,16 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ChangeAccountinfo = table.Column<bool>(type: "bit", nullable: false),
-                    AddDeleteItems = table.Column<bool>(type: "bit", nullable: false),
-                    ViewMYStore = table.Column<bool>(type: "bit", nullable: false),
-                    ViewEmployeeInfo = table.Column<bool>(type: "bit", nullable: false),
-                    ViewVendorsAndCustomersInfo = table.Column<bool>(type: "bit", nullable: false),
-                    ViewSettings = table.Column<bool>(type: "bit", nullable: false),
-                    ViewDashboard = table.Column<bool>(type: "bit", nullable: false),
-                    ViewTools = table.Column<bool>(type: "bit", nullable: false),
-                    MakeRefund = table.Column<bool>(type: "bit", nullable: false),
-                    CancelOrders = table.Column<bool>(type: "bit", nullable: false)
+                    ChangeAccountinfo = table.Column<bool>(type: "bit", nullable: true),
+                    AddDeleteItems = table.Column<bool>(type: "bit", nullable: true),
+                    ViewMYStore = table.Column<bool>(type: "bit", nullable: true),
+                    ViewEmployeeInfo = table.Column<bool>(type: "bit", nullable: true),
+                    ViewVendorsAndCustomersInfo = table.Column<bool>(type: "bit", nullable: true),
+                    ViewSettings = table.Column<bool>(type: "bit", nullable: true),
+                    ViewDashboard = table.Column<bool>(type: "bit", nullable: true),
+                    ViewTools = table.Column<bool>(type: "bit", nullable: true),
+                    MakeRefund = table.Column<bool>(type: "bit", nullable: true),
+                    CancelOrders = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,11 +88,11 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StoreName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StorePhoneNumber = table.Column<int>(type: "int", nullable: false),
-                    StoreCurrency = table.Column<int>(type: "int", nullable: false),
-                    StoreRecieptSize = table.Column<int>(type: "int", nullable: false),
-                    StoreBarcodeLength = table.Column<int>(type: "int", nullable: false)
+                    StoreName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StorePhoneNumber = table.Column<int>(type: "int", nullable: true),
+                    StoreCurrency = table.Column<int>(type: "int", nullable: true),
+                    StoreRecieptSize = table.Column<int>(type: "int", nullable: true),
+                    StoreBarcodeLength = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,11 +105,11 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemBarCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemSellingPrice = table.Column<double>(type: "float", nullable: false),
-                    ItemPurchasingPrice = table.Column<double>(type: "float", nullable: false)
+                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemBarCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemSellingPrice = table.Column<double>(type: "float", nullable: true),
+                    ItemPurchasingPrice = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,11 +122,11 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AdminPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountState = table.Column<bool>(type: "bit", nullable: false),
-                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdminPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountState = table.Column<bool>(type: "bit", nullable: true),
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -139,10 +139,10 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VendorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VendorPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VendorAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VendorType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    VendorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VendorPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VendorAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VendorType = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,11 +155,11 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ReceiptId = table.Column<int>(type: "int", nullable: false),
-                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemNumber = table.Column<int>(type: "int", nullable: false),
-                    ItemSellingPrice = table.Column<double>(type: "float", nullable: false),
-                    ItemTotalCost = table.Column<double>(type: "float", nullable: false)
+                    ReceiptId = table.Column<int>(type: "int", nullable: true),
+                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemNumber = table.Column<int>(type: "int", nullable: true),
+                    ItemSellingPrice = table.Column<double>(type: "float", nullable: true),
+                    ItemTotalCost = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -168,8 +168,7 @@ namespace INStore.EntityFramework.Migrations
                         name: "FK_SellingHistory_Receipts_ReceiptId",
                         column: x => x.ReceiptId,
                         principalTable: "Receipts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -178,10 +177,10 @@ namespace INStore.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    ItemPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemNumberInStore = table.Column<int>(type: "int", nullable: false),
-                    ItemNumberInStock = table.Column<int>(type: "int", nullable: false)
+                    ItemId = table.Column<int>(type: "int", nullable: true),
+                    ItemPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemNumberInStore = table.Column<int>(type: "int", nullable: true),
+                    ItemNumberInStock = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,8 +189,7 @@ namespace INStore.EntityFramework.Migrations
                         name: "FK_StoreItems_StoreItemProperties_ItemId",
                         column: x => x.ItemId,
                         principalTable: "StoreItemProperties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
