@@ -1,4 +1,5 @@
-﻿using System;
+﻿using INStore.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,6 +14,7 @@ namespace INStore
         protected override void OnStartup(StartupEventArgs e)
         {
             Window window = new MainWindow();
+            window.DataContext = new MainViewModel();
             window.Show();
             base.OnStartup(e);
         }
