@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace INStore.ViewModels
 {
-    public class AboutViewModel
+    public class AboutViewModel : ViewModelBase
     {
     }
 }
