@@ -20,4 +20,5 @@
                 
                    <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#000000"/>
                   <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="White"/>
+    
 </ResourceDictionary>
