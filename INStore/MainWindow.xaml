@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock Text="Daaa"/>
+        <ContentControl Content="{Binding Navigator.CurrentViewModel}"/>
     </Grid>
 </Window>
