@@ -1,11 +1,11 @@
 ﻿using INStore.Commands;
+using INStore.Models;
 using INStore.ViewModels;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace INStore.State.Navigators
 {
-    public class Navigator : INavigator , INotifyPropertyChanged
+    public class Navigator : ObeservableObject,INavigator 
     {
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -20,10 +20,6 @@ namespace INStore.State.Navigators
 
         public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged (string propertyName)
-        {
-            PropertyChanged?.Invoke (this, new PropertyChangedEventArgs (propertyName));    
-        }
+    
     }
 }
