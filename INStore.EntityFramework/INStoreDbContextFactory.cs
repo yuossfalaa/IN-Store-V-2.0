@@ -9,9 +9,17 @@ namespace INStore.EntityFramework
         public INStoreDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<INStoreDbContext>();
-            options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=INStoreDB;Trusted_Connection=True;");
+            options.UseSqlite(ConnectionStringAssembler());
             return new INStoreDbContext(options.Options);
           
+        }
+        private string ConnectionStringAssembler()
+        {
+            string connectionstring = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
+            connectionstring = connectionstring + @"\IN Store";
+            System.IO.Directory.CreateDirectory(connectionstring);
+            connectionstring = "Data Source = " + connectionstring + "\\INStore.db";
+            return connectionstring;
         }
     }
 }
