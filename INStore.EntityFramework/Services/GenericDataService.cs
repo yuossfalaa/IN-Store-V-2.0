@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace INStore.EntityFramework.Services
@@ -47,11 +48,11 @@ namespace INStore.EntityFramework.Services
             }
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<T> entities  = await context.Set<T>().ToListAsync();
+                List<T> entities  = await context.Set<T>().ToListAsync();
                 return entities;
             }
         }
