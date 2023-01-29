@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using INStore.State.Navigators;
+using INStore.UserControls.SignUp_IN.ViewModels;
 
 namespace INStore.ViewModels
 {
+
     public class ViewModelBase
     {
+        public INavigator Navigator { get; set; } = new Navigator();
 
     }
 }
