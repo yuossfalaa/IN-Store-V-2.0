@@ -8,9 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Language\Strings.ar-EG.resx" />
+    <EmbeddedResource Remove="Language\Strings.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Fonts\Avatarock.ttf" />
     <None Remove="Resources\Fonts\Century_Gothic.ttf" />
     <None Remove="Resources\Fonts\gothicb.ttf" />
+    <None Remove="Resources\Images\INstore Background - Solid.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +26,19 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="UserControls\Login\Views\" />
+    <Folder Include="UserControls\Login\ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Language\Strings.ar-EG.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Language\Strings.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +56,22 @@
     <Resource Include="Resources\Fonts\gothicb.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\INstore Background - Solid.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Language\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Language\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
