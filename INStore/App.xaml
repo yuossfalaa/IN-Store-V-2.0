@@ -2,9 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:viewmodels ="clr-namespace:INStore.ViewModels"
-             xmlns:views ="clr-namespace:INStore.Views"
-             xmlns:local="clr-namespace:INStore">
+             xmlns:local="clr-namespace:INStore" 
+             xmlns:HomeViewModels="clr-namespace:INStore.UserControls.Home.ViewModels" 
+             xmlns:HomeView="clr-namespace:INStore.UserControls.Home.Views"
+             xmlns:LoginView="clr-namespace:INStore.UserControls.SignUp_IN.Views"
+             xmlns:LoginViewModel="clr-namespace:INStore.UserControls.SignUp_IN.ViewModels">
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,11 +21,15 @@
                 <ResourceDictionary Source="/Resources/Fonts/FontsDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
-            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                <views:HomeView/>
+            <DataTemplate DataType="{x:Type HomeViewModels:HomeViewModel}">
+                <HomeView:HomeView/>
             </DataTemplate>
-            
-            
+            <DataTemplate DataType="{x:Type LoginViewModel:LoginViewModel}">
+                <LoginView:LoginView/>
+            </DataTemplate>
+
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
