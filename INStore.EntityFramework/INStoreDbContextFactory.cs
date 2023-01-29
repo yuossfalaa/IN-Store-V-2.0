@@ -9,7 +9,8 @@ namespace INStore.EntityFramework
         public INStoreDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<INStoreDbContext>();
-            options.UseSqlite(ConnectionStringAssembler());
+            //options.UseSqlite(ConnectionStringAssembler());
+            options.UseSqlite("Data Source = INStore.db");
             return new INStoreDbContext(options.Options);
           
         }
