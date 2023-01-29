@@ -1,4 +1,6 @@
 ﻿using INStore.State.Navigators;
+using INStore.UserControls.Home.ViewModels;
+using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
 using System;
 using System.Windows.Input;
@@ -48,6 +50,9 @@ namespace INStore.Commands
                         break;
                     case ViewType.Tools:
                         _navigator.CurrentViewModel = new ToolsViewModel();
+                        break;
+                    case ViewType.Login:
+                        _navigator.CurrentViewModel = new LoginViewModel();
                         break;
                 }
             }
