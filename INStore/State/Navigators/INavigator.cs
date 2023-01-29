@@ -13,7 +13,8 @@ namespace INStore.State.Navigators
             MyStore,
             RefundDashboard,
             SellerDashboard,
-            Tools
+            Tools,
+            Login
         }
         ViewModelBase CurrentViewModel { get; set; }
         ICommand UpdateCurrentViewModelCommand { get; }
