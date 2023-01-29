@@ -3,5 +3,10 @@
     <FontFamily x:Key="MainFont">pack://application:,,,/Resources/Fonts/#Century_Gothic</FontFamily>
     <FontFamily x:Key="Avatarock">pack://application:,,,/Resources/Fonts/#Avatarock</FontFamily>
     <FontFamily x:Key="gothicb">pack://application:,,,/Resources/Fonts/#gothicb</FontFamily>
-
+    <!--
+    Very large = 32
+    Large = 26
+    mid = 24
+    smale = 20
+    -->
 </ResourceDictionary>
