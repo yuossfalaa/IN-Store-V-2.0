@@ -33,24 +33,6 @@ namespace INStore.Commands
                     case ViewType.Home:
                         _navigator.CurrentViewModel = new HomeViewModel();
                         break;
-                    case ViewType.About:
-                        _navigator.CurrentViewModel = new AboutViewModel();
-                        break;
-                    case ViewType.DashBoard:
-                        _navigator.CurrentViewModel = new DashBoardViewModel();
-                        break;
-                    case ViewType.MyStore:
-                        _navigator.CurrentViewModel = new MyStoreViewModel();
-                        break;
-                    case ViewType.RefundDashboard:
-                        _navigator.CurrentViewModel = new RefundDashboardViewModel();
-                        break;
-                    case ViewType.SellerDashboard:
-                        _navigator.CurrentViewModel = new SellerDashboardViewModel();
-                        break;
-                    case ViewType.Tools:
-                        _navigator.CurrentViewModel = new ToolsViewModel();
-                        break;
                     case ViewType.Login:
                         _navigator.CurrentViewModel = new LoginViewModel();
                         break;
