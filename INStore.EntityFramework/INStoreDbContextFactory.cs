@@ -9,18 +9,28 @@ namespace INStore.EntityFramework
         public INStoreDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<INStoreDbContext>();
-            //options.UseSqlite(ConnectionStringAssembler());
-            options.UseSqlite("Data Source = INStore.db");
+            options.UseSqlite(ConnectionStringAssembler());
             return new INStoreDbContext(options.Options);
           
         }
         private string ConnectionStringAssembler()
         {
-            string connectionstring = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
-            connectionstring = connectionstring + @"\IN Store";
-            System.IO.Directory.CreateDirectory(connectionstring);
-            connectionstring = "Data Source = " + connectionstring + "\\INStore.db";
+            string connectionstring = "";
+            try
+            {
+                connectionstring = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
+                connectionstring = connectionstring + @"\IN Store\Data";
+                System.IO.Directory.CreateDirectory(connectionstring);
+                connectionstring = "Data Source = " + connectionstring + "\\INStore.db";
+                
+            }
+            catch (Exception ConnectionStringAssemblerFailed)
+            {
+
+            }
             return connectionstring;
+
+
         }
     }
 }
