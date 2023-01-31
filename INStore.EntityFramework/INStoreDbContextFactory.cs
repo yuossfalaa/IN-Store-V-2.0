@@ -3,34 +3,22 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace INStore.EntityFramework
 {
-    public class INStoreDbContextFactory : IDesignTimeDbContextFactory<INStoreDbContext>
+    public class INStoreDbContextFactory 
     {
-     
-        public INStoreDbContext CreateDbContext(string[] args = null)
+
+        private readonly Action<DbContextOptionsBuilder> _configureDbContext;
+
+        public INStoreDbContextFactory(Action<DbContextOptionsBuilder> configureDbContext)
         {
-            var options = new DbContextOptionsBuilder<INStoreDbContext>();
-            options.UseSqlite(ConnectionStringAssembler());
+            _configureDbContext = configureDbContext;
+        }
+
+        public INStoreDbContext CreateDbContext()
+        {
+            DbContextOptionsBuilder<INStoreDbContext> options = new DbContextOptionsBuilder<INStoreDbContext>();
+            _configureDbContext(options);
             return new INStoreDbContext(options.Options);
-          
         }
-        private string ConnectionStringAssembler()
-        {
-            string connectionstring = "";
-            try
-            {
-                connectionstring = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
-                connectionstring = connectionstring + @"\IN Store\Data";
-                System.IO.Directory.CreateDirectory(connectionstring);
-                connectionstring = "Data Source = " + connectionstring + "\\INStore.db";
-                
-            }
-            catch (Exception ConnectionStringAssemblerFailed)
-            {
 
-            }
-            return connectionstring;
-
-
-        }
     }
 }

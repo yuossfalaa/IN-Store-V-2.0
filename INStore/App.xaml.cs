@@ -8,6 +8,7 @@ using Serilog;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using INStore.HostBuilders;
 
 namespace INStore
 {
@@ -16,23 +17,27 @@ namespace INStore
         private readonly IHost _host;
         public App()
         {
-           _host = Host.CreateDefaultBuilder()
-                 .UseSerilog((host, loggerConfiguration) =>
-                 {
-                     loggerConfiguration.WriteTo.File(LoggingPathAssembler().Result, rollingInterval: RollingInterval.Day)
-                         .WriteTo.Debug()
-                         .MinimumLevel.Information();
-                 })
-                 .ConfigureServices(services =>
-                 {
-                     services.AddScoped<MainViewModel>();
-                     services.AddScoped<INavigator,Navigator> ();
+            _host = Host.CreateDefaultBuilder()
+                  .UseSerilog((host, loggerConfiguration) =>
+                  {
+                      loggerConfiguration.WriteTo.File(LoggingPathAssembler().Result, rollingInterval: RollingInterval.Day)
+                          .WriteTo.Debug()
+                          .MinimumLevel.Information();
+                  })
+                  .ConfigureServices(services =>
+                  {
+                      services.AddScoped<MainViewModel>();
+                      services.AddScoped<INavigator, Navigator>();
 
-                     services.AddSingleton<INStoreDbContextFactory>();
-                     services.AddScoped<MainWindow>(s => new MainWindow(_host!.Services.GetRequiredService<MainViewModel>()));
+                      services.AddScoped<MainWindow>(s => new MainWindow(_host!.Services.GetRequiredService<MainViewModel>()));
 
-                 })
+                  })
+                  .AddDbContext()
                  .Build(); 
+        }
+        public static IHostBuilder CreatHostBuilder(string[] args = null)
+        {
+            return null;
         }
         private async Task DbContextCreator()
         {
