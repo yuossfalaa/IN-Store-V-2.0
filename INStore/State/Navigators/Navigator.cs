@@ -1,11 +1,10 @@
 ﻿using INStore.Commands;
-using INStore.Models;
 using INStore.ViewModels;
 using System.Windows.Input;
 
 namespace INStore.State.Navigators
 {
-    public class Navigator : ObeservableObject,INavigator 
+    public class Navigator : ViewModelBase,INavigator 
     {
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
