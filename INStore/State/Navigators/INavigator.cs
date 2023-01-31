@@ -17,6 +17,5 @@ namespace INStore.State.Navigators
             Login
         }
         ViewModelBase CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
     }
 }
