@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace INStore.UserControls.SignUp_IN.ViewModels
 {
-    class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
     }
 }
