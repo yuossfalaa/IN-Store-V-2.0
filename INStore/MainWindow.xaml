@@ -56,7 +56,7 @@
                     <materialDesign:PackIcon Kind="Close" Height="25" Width="25" />
                 </Button>
             </StackPanel>
-            <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="1"/>
+            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Window>

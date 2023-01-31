@@ -17,22 +17,17 @@ namespace INStore
         private readonly IHost _host;
         public App()
         {
-            _host = Host.CreateDefaultBuilder()
-                  .AddSerilog()
-                  .ConfigureServices(services =>
-                  {
-                      services.AddScoped<MainViewModel>();
-                      services.AddScoped<INavigator, Navigator>();
-
-                      services.AddScoped<MainWindow>(s => new MainWindow(_host!.Services.GetRequiredService<MainViewModel>()));
-
-                  })
-                  .AddDbContext()
-                  .Build(); 
+            _host = CreateHostBuilder().Build();
         }
-        public static IHostBuilder CreatHostBuilder(string[] args = null)
+        public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
-            return null;
+            return Host
+                  .CreateDefaultBuilder(args)
+                  .AddSerilog()
+                  .AddState()
+                  .AddDbContext()
+                  .AddViewModels()
+                  .AddViews();
         }
         private async Task DbContextCreator()
         {
