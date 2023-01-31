@@ -18,12 +18,7 @@ namespace INStore
         public App()
         {
             _host = Host.CreateDefaultBuilder()
-                  .UseSerilog((host, loggerConfiguration) =>
-                  {
-                      loggerConfiguration.WriteTo.File(LoggingPathAssembler().Result, rollingInterval: RollingInterval.Day)
-                          .WriteTo.Debug()
-                          .MinimumLevel.Information();
-                  })
+                  .AddSerilog()
                   .ConfigureServices(services =>
                   {
                       services.AddScoped<MainViewModel>();
@@ -33,7 +28,7 @@ namespace INStore
 
                   })
                   .AddDbContext()
-                 .Build(); 
+                  .Build(); 
         }
         public static IHostBuilder CreatHostBuilder(string[] args = null)
         {
@@ -45,25 +40,6 @@ namespace INStore
             {
                 iNStoreDbContext.Database.MigrateAsync().Wait();
             }
-
-        }
-        private async Task<string> LoggingPathAssembler()
-        {
-            string LoggingPath = "";
-            try
-            {
-                LoggingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
-                LoggingPath = LoggingPath + @"\IN Store\Logs";
-                System.IO.Directory.CreateDirectory(LoggingPath);
-                LoggingPath += @"\INStore - .txt";
-
-            }
-            catch (Exception ConnectionStringAssemblerFailed)
-            {
-
-            }
-            return LoggingPath;
-
 
         }
         protected override async void OnStartup(StartupEventArgs e)

@@ -16,5 +16,6 @@ namespace INStore.ViewModels
             Navigator = navigator;
             Navigator.CurrentViewModel = new LoginViewModel();
         }
+
     }
 }
