@@ -9,15 +9,18 @@ namespace INStore.State.Navigators
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
-            get { return _currentViewModel; }
+            get 
+            {
+                return _currentViewModel;
+            }
             set 
-            { 
+            {
+                _currentViewModel?.Dispose();
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
 
     
     }
