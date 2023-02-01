@@ -1,5 +1,6 @@
 ﻿using INStore.Commands;
 using INStore.ViewModels;
+using System.Windows;
 using System.Windows.Input;
 
 namespace INStore.State.Navigators
@@ -20,8 +21,8 @@ namespace INStore.State.Navigators
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
+       
 
 
-    
     }
 }
