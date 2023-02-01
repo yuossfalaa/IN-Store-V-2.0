@@ -10,21 +10,13 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private readonly ILogger<LoginViewModel> _MainViewModelLogger;
+        private readonly ILogger<LoginViewModel> _LoginViewModelLogger;
 
-        public LoginViewModel(ILogger<LoginViewModel> mainViewModelLogger)
+        public LoginViewModel(ILogger<LoginViewModel> LoginViewModelLogger)
         {
-            _MainViewModelLogger = mainViewModelLogger;
-            text = "brah";
-            mainViewModelLogger.LogError(text);
+            _LoginViewModelLogger = LoginViewModelLogger;
         }
-        private string _text;
-
-        public string text
-        {
-            get { return _text; }
-            set { _text = value; OnPropertyChanged(nameof(text)); }
-        }
+        
 
     }
 }
