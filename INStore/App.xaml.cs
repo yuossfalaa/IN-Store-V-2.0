@@ -28,8 +28,9 @@ namespace INStore
                   .AddSerilog()
                   .AddState()
                   .AddDbContext()
-                  .AddViewModels()
-                  .AddViews();
+                  .AddServices()
+                  .AddViews()
+                  .AddViewModels();
         }
         private async Task DbContextCreator()
         {
