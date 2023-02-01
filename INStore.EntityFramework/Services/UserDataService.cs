@@ -62,6 +62,13 @@ namespace INStore.EntityFramework.Services
             }
         }
 
-
+        public async Task<User> GetByAdminPassword(string AdminPassword)
+        {
+            using (INStoreDbContext context = _contextFactory.CreateDbContext())
+            {
+                User entity = await context.Set<User>().FirstOrDefaultAsync((e) => e.AdminPasswordHash == AdminPassword);
+                return entity;
+            }
+        }
     }
 }
