@@ -11,7 +11,7 @@ using System;
 
 namespace INStore.HostBuilders
 {
-    public static class AddViewModelsHostBuilderExtensions
+    public static class AddViewModelsHostBuilderExtension
     {
         public static IHostBuilder AddViewModels(this IHostBuilder host)
         {

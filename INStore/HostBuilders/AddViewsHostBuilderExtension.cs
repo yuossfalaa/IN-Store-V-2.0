@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace INStore.HostBuilders
 {
-    public static class AddViewsHostBuilderExtensions
+    public static class AddViewsHostBuilderExtension
     {
         public static IHostBuilder AddViews(this IHostBuilder host)
         {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace INStore.HostBuilders
 {
-    public static class AddDbContextHostBuilderExtensions
+    public static class AddDbContextHostBuilderExtension
     {
         public static IHostBuilder AddDbContext(this IHostBuilder host)
         {

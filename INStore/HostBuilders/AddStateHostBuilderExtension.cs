@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace INStore.HostBuilders
 {
-    public static class AddStateHostBuilderExtensions
+    public static class AddStateHostBuilderExtension
     {
         public static IHostBuilder AddState(this IHostBuilder host)
         {
