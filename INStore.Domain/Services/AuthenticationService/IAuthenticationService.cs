@@ -1,9 +1,4 @@
 ﻿using INStore.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace INStore.Domain.Services.AuthenticationService
 {
@@ -15,6 +10,7 @@ namespace INStore.Domain.Services.AuthenticationService
             AdminPasswordDoNotMatch,
             UsernameAlreadyExists
         }
+        User user { get; }
         Task<RegistrationResult> Registre(string UserName,
             string Password, string AdminPassword,
             string AccountState, string EmployeeName);
