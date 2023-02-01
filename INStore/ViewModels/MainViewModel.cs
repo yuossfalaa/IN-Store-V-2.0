@@ -3,7 +3,11 @@ using INStore.Factories;
 using INStore.State.Navigators;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace INStore.ViewModels
 {
@@ -13,9 +17,19 @@ namespace INStore.ViewModels
         private readonly ILogger<MainViewModel> _MainViewModelLogger;
         private readonly INavigator _navigator;
         private readonly IINStoreViewModelFactory _viewModelFactory;
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private Visibility _logoVisibilty;
+        public Visibility LogoVisibilty
+        {
+            get { return _logoVisibilty; }
+            set
+            {
+                _logoVisibilty = value;
+                OnPropertyChanged(nameof(LogoVisibilty));
+            }
+        }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
-        public ICommand UpdateCurrentViewModelCommand { get;}
-
+        public ICommand UpdateCurrentViewModelCommand { get; }
         public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, INavigator navigator, IINStoreViewModelFactory viewModelFactory)
         {
             _MainViewModelLogger = mainViewModelLogger;
@@ -23,11 +37,20 @@ namespace INStore.ViewModels
             _viewModelFactory = viewModelFactory;
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory,_navigator);
             UpdateCurrentViewModelCommand.Execute(INavigator.ViewType.Login);
-
+            dispatcherTimerInit();
         }
+        private void dispatcherTimerInit()
+        {
+            LogoVisibilty = Visibility.Collapsed;
 
-
-
-
+            dispatcherTimer.Tick += LogoVisibiltyTimer;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+        }
+        private void LogoVisibiltyTimer(object sender, EventArgs e)
+        {
+            LogoVisibilty = Visibility.Visible;
+            dispatcherTimer.Stop();
+        }
     }
 }
