@@ -1,4 +1,5 @@
-﻿using INStore.Factories;
+﻿using INStore.Domain.Services.AuthenticationService;
+using INStore.Factories;
 using INStore.State.Navigators;
 using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.SignUp_IN.ViewModels;
@@ -36,7 +37,7 @@ namespace INStore.HostBuilders
 
         private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
         {
-            return new LoginViewModel(services.GetRequiredService<ILogger<LoginViewModel>>());
+            return new LoginViewModel(services.GetRequiredService<ILogger<LoginViewModel>>(),services.GetRequiredService<IAuthenticationService>());
         }
     }
 
