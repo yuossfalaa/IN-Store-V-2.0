@@ -1,5 +1,6 @@
 ﻿using INStore.Domain.Models;
 using INStore.Domain.Services;
+using INStore.EntityFramework.Services.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -8,31 +9,26 @@ namespace INStore.EntityFramework.Services
     public class GenericDataService<T> : IDataService<T> where T : DomainObject
     {
         private readonly INStoreDbContextFactory _contextFactory;
+        private readonly NonQueryDataService<T> _nonQueryDataService;
 
         public GenericDataService(INStoreDbContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
+            _nonQueryDataService = new NonQueryDataService<T>(contextFactory);
         }
 
         public async Task<T> Create(T entity)
         {
-            using (INStoreDbContext context = _contextFactory.CreateDbContext())
-            {
-                EntityEntry<T> createdResult =   await context.Set<T>().AddAsync(entity);
-                await context.SaveChangesAsync();
-                return createdResult.Entity;
-            }
+            return await _nonQueryDataService.Create(entity);
         }
 
-         public async Task<bool> Delete(T entity)
+        public async Task<bool> Delete(T entity)
         {
-            using (INStoreDbContext context = _contextFactory.CreateDbContext())
-            {
-                T ToBeDeletedEntity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == entity.Id);
-                context.Set<T>().Remove(ToBeDeletedEntity);
-                await context.SaveChangesAsync();
-                return true;
-            }
+            return await _nonQueryDataService.Delete(entity);
+        }
+        public async Task<T> Update(int id, T entity)
+        {
+            return await _nonQueryDataService.Update(id, entity);
         }
 
         public async Task<T> Get(int id)
@@ -53,16 +49,6 @@ namespace INStore.EntityFramework.Services
             }
         }
 
-        public async Task<T> Update(int id, T entity)
-        {
-            using (INStoreDbContext context = _contextFactory.CreateDbContext())
-            {
-                entity.Id = id;
-                context.Set<T>().Update(entity);
-                await context.SaveChangesAsync();
-                return entity;
-            }
-           
-        }
+
     }
 }
