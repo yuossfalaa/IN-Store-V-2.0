@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="login" FontSize="100"></TextBlock>
+        <TextBlock Text="{Binding text}" FontSize="100"></TextBlock>
     </Grid>
 </UserControl>
