@@ -9,7 +9,13 @@ namespace INStore.Domain.Services.AuthenticationService
 {
     public interface IAuthenticationService
     {
-        Task<bool> Registre(string UserName,
+        public enum RegistrationResult
+        {
+            Success,
+            AdminPasswordDoNotMatch,
+            UsernameAlreadyExists
+        }
+        Task<RegistrationResult> Registre(string UserName,
             string Password, string AdminPassword,
             string AccountState, string EmployeeName);
 
