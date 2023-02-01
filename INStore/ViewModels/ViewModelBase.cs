@@ -1,5 +1,6 @@
 ﻿using INStore.State.Navigators;
 using System.ComponentModel;
+using System.Windows;
 
 namespace INStore.ViewModels
 {
@@ -14,8 +15,11 @@ namespace INStore.ViewModels
 
         protected void OnPropertyChanged(string propertyName)
         {
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+       
     }
 
 }
