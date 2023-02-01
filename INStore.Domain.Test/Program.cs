@@ -8,9 +8,9 @@ namespace Program
     {
         static void Main (string[] args)
         {
-            IDataService<User> user = new GenericDataService<User>(new INStoreDbContextFactory());
-            Console.WriteLine(user.GetAll().Result);
-            Console.ReadLine ();
+            //IDataService<User> user = new GenericDataService<User>(new INStoreDbContextFactory());
+            //Console.WriteLine(user.GetAll().Result);
+            //Console.ReadLine ();
         }
     }
 
