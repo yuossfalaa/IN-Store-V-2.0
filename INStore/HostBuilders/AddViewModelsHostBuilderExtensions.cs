@@ -5,6 +5,7 @@ using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 
 
@@ -35,7 +36,7 @@ namespace INStore.HostBuilders
 
         private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
         {
-            return new LoginViewModel();
+            return new LoginViewModel(services.GetRequiredService<ILogger<LoginViewModel>>());
         }
     }
 
