@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using INStore.HostBuilders;
+using System.Globalization;
 
 namespace INStore
 {
@@ -17,6 +18,7 @@ namespace INStore
         private readonly IHost _host;
         public App()
         {
+
             _host = CreateHostBuilder().Build();
         }
         public static IHostBuilder CreateHostBuilder(string[] args = null)
@@ -42,6 +44,8 @@ namespace INStore
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new CultureInfo("en-US");
             DbContextCreator();
             await _host.StartAsync();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
