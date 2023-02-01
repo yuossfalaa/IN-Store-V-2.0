@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:lex ="http://wpflocalizeextension.codeplex.com"
         xmlns:local="clr-namespace:INStore" 
-        xmlns:ViewModels="clr-namespace:INStore.ViewModels"
+        xmlns:ViewModels="clr-namespace:INStore.ViewModels" 
+        xmlns:Converters="clr-namespace:INStore.Converters"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="INStore"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" 
         WindowStartupLocation="CenterScreen"
@@ -13,11 +18,25 @@
         WindowStyle="None"
         Background="{x:Null}">
 
-    <Grid>
+    <Window.Resources>
+        <Converters:CurrentViewModelToVisibilityConverter x:Key="CurrentViewModelToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToLogoutVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+    </Window.Resources>
+    <Grid >
         <Border>
             <Image Source="\Resources\Images\INstore Background - Solid.jpg" Stretch="Fill"/>
         </Border>
-        <Grid>
+        <Border VerticalAlignment="Top" HorizontalAlignment="Right" 
+                Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToVisibilityConverter}  }">
+            <materialDesign:TransitioningContent Visibility="{Binding LogoVisibilty}">
+                <materialDesign:TransitioningContent.OpeningEffects >
+                    <materialDesign:TransitionEffect Kind="SlideInFromTop"/>
+                    <materialDesign:TransitionEffect Kind="SlideInFromRight"/>
+                </materialDesign:TransitioningContent.OpeningEffects>
+                <Image Source="\Resources\Images\INstore Background - Logo.png" Width="1650" Height="1100" Margin="0 -320 -500 -400"/>
+            </materialDesign:TransitioningContent>
+        </Border>
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -38,25 +57,31 @@
                     Margin="0,0,10,0"
                     Orientation="Horizontal">
                 <Button Height="30" Width="30" Margin="0,5,20,0" 
-                     Style="{StaticResource MaterialDesignIconForegroundButton}">
+                     Style="{StaticResource MaterialDesignIconForegroundButton}"
+                       Foreground="{StaticResource DefaultButtonColor}"
+                       Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToLogoutVisibilityConverter}  }">
                     <materialDesign:PackIcon Kind="Logout" Height="25" Width="25"  />
                 </Button>
                 <Button Height="30" Width="30" Margin="20,5,0,0" 
-                     Style="{StaticResource MaterialDesignIconForegroundButton}" Click="MinimizeWindow">
+                     Style="{StaticResource MaterialDesignIconForegroundButton}" 
+                        Foreground="{StaticResource DefaultButtonColor}"
+                        Click="MinimizeWindow">
                     <materialDesign:PackIcon Kind="Minus" Height="25" Width="25"  />
                 </Button>
                 <Button Height="30" Width="30" Margin="20,5,0,0"  
                     Style="{StaticResource MaterialDesignIconForegroundButton}" 
+                        Foreground="{StaticResource DefaultButtonColor}"
                     Click="MaximizeWindow" >
                     <materialDesign:PackIcon Kind="WindowMaximize" Height="25" Width="25" x:Name="MaximizeWindowPackIcon"/>
                 </Button>
                 <Button Height="30" Width="30" Margin="20,5,0,0" 
-                    Style="{StaticResource MaterialDesignIconButton}" 
+                    Style="{StaticResource MaterialDesignIconForegroundButton}" 
+                        Foreground="{StaticResource DefaultButtonColor}"
                     Click="CloseApplication">
                     <materialDesign:PackIcon Kind="Close" Height="25" Width="25" />
                 </Button>
             </StackPanel>
-            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"/>
+            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"  FlowDirection="{lex:Loc Key=GeneralFlowDirection}"/>
         </Grid>
     </Grid>
 </Window>
