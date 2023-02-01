@@ -59,5 +59,50 @@ namespace INStore.Language {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LeftToRight.
+        /// </summary>
+        internal static string GeneralFlowDirection {
+            get {
+                return ResourceManager.GetString("GeneralFlowDirection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginViewLogin {
+            get {
+                return ResourceManager.GetString("LoginViewLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string LoginViewPassword {
+            get {
+                return ResourceManager.GetString("LoginViewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign Up.
+        /// </summary>
+        internal static string LoginViewSignUp {
+            get {
+                return ResourceManager.GetString("LoginViewSignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        internal static string LoginViewUsername {
+            get {
+                return ResourceManager.GetString("LoginViewUsername", resourceCulture);
+            }
+        }
     }
 }
