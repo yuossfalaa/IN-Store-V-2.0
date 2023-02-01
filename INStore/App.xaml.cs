@@ -33,10 +33,13 @@ namespace INStore
         {
             using (INStoreDbContext iNStoreDbContext = _host.Services.GetRequiredService<INStoreDbContextFactory>().CreateDbContext())
             {
+                
                 iNStoreDbContext.Database.MigrateAsync().Wait();
+
             }
 
         }
+
         protected override async void OnStartup(StartupEventArgs e)
         {
             DbContextCreator();
