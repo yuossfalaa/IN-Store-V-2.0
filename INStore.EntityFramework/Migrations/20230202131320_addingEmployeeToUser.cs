@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace INStore.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class INStoreDb100 : Migration
+    public partial class addingEmployeeToUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,26 +24,6 @@ namespace INStore.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    EmployeeName = table.Column<string>(type: "TEXT", nullable: true),
-                    EmployeeAddress = table.Column<string>(type: "TEXT", nullable: true),
-                    EmployeeDescription = table.Column<string>(type: "TEXT", nullable: true),
-                    EmployeePhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    EmployeeJob = table.Column<string>(type: "TEXT", nullable: true),
-                    EmployeeShiftStartsAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    EmployeeShiftEndsAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    EmployeeSalary = table.Column<double>(type: "REAL", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,10 +105,9 @@ namespace INStore.EntityFramework.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Password = table.Column<string>(type: "TEXT", nullable: true),
-                    AdminPassword = table.Column<string>(type: "TEXT", nullable: true),
-                    AccountState = table.Column<bool>(type: "INTEGER", nullable: true),
-                    EmployeeName = table.Column<string>(type: "TEXT", nullable: true)
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    AdminPasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    AccountState = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -194,6 +173,38 @@ namespace INStore.EntityFramework.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    EmployeeName = table.Column<string>(type: "TEXT", nullable: true),
+                    EmployeeAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    EmployeeDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    EmployeePhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    EmployeeJob = table.Column<string>(type: "TEXT", nullable: true),
+                    EmployeeShiftStartsAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    EmployeeShiftEndsAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    EmployeeSalary = table.Column<double>(type: "REAL", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employees_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_UserId",
+                table: "Employees",
+                column: "UserId",
+                unique: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_SellingHistory_ReceiptId",
                 table: "SellingHistory",
@@ -227,10 +238,10 @@ namespace INStore.EntityFramework.Migrations
                 name: "StoreItems");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Vendors");
 
             migrationBuilder.DropTable(
-                name: "Vendors");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Receipts");

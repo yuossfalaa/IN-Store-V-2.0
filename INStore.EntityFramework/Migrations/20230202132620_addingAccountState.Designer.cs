@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace INStore.EntityFramework.Migrations
 {
     [DbContext(typeof(INStoreDbContext))]
-    [Migration("20230201044411_PasswordHash")]
-    partial class PasswordHash
+    [Migration("20230202132620_addingAccountState")]
+    partial class addingAccountState
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,13 @@ namespace INStore.EntityFramework.Migrations
                     b.Property<DateTime?>("EmployeeShiftStartsAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Employees");
                 });
@@ -250,13 +256,10 @@ namespace INStore.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool?>("AccountState")
+                    b.Property<int?>("AccountState")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AdminPasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("EmployeeName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
@@ -293,6 +296,15 @@ namespace INStore.EntityFramework.Migrations
                     b.ToTable("Vendors");
                 });
 
+            modelBuilder.Entity("INStore.Domain.Models.Employee", b =>
+                {
+                    b.HasOne("INStore.Domain.Models.User", "user")
+                        .WithOne("employee")
+                        .HasForeignKey("INStore.Domain.Models.Employee", "UserId");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("INStore.Domain.Models.SellingHistory", b =>
                 {
                     b.HasOne("INStore.Domain.Models.Receipts", "Receipt")
@@ -314,6 +326,12 @@ namespace INStore.EntityFramework.Migrations
             modelBuilder.Entity("INStore.Domain.Models.Receipts", b =>
                 {
                     b.Navigation("SoldItems");
+                });
+
+            modelBuilder.Entity("INStore.Domain.Models.User", b =>
+                {
+                    b.Navigation("employee")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
