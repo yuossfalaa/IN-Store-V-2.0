@@ -14,6 +14,6 @@ namespace INStore.State.Authenticators
 
         Task Login(string UserName, string Password);
         void Logout();
-        Task<IAuthenticationService.RegistrationResult> Register(string UserName, string Password, string AdminPassword, string AccountState, string EmployeeName);
+        Task<IAuthenticationService.RegistrationResult> Register(string UserName, string Password, string AdminPassword, AccountState accountState, Employee employee);
     }
 }

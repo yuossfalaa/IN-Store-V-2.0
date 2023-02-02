@@ -43,9 +43,9 @@ namespace INStore.State.Authenticators
         {
             CurrentUser = null;
         }
-        public async Task<RegistrationResult> Register(string UserName, string Password, string AdminPassword, string AccountState, string EmployeeName)
+        public async Task<RegistrationResult> Register(string UserName, string Password, string AdminPassword, AccountState accountState, Employee employee)
         {
-            return await _authenticationService.Registre(UserName, Password, AdminPassword, AccountState, EmployeeName);
+            return await _authenticationService.Registre(UserName, Password, AdminPassword, accountState, employee);
         }
 
     }
