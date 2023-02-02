@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using INStore.HostBuilders;
 using System.Globalization;
+using INStore.Domain.Services;
+using INStore.EntityFramework.Services;
+using MaterialDesignThemes.Wpf;
+using INStore.Domain.Models;
+using System.Collections.Generic;
 
 namespace INStore
 {
@@ -36,7 +41,7 @@ namespace INStore
         {
             using (INStoreDbContext iNStoreDbContext = _host.Services.GetRequiredService<INStoreDbContextFactory>().CreateDbContext())
             {
-                
+
                 iNStoreDbContext.Database.MigrateAsync().Wait();
 
             }
@@ -60,5 +65,7 @@ namespace INStore
             _host.Dispose();
             base.OnExit(e);
         }
+
+
     }
 }
