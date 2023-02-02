@@ -1,5 +1,6 @@
 ﻿using INStore.Commands;
 using INStore.Domain.Services.AuthenticationService;
+using INStore.State.Authenticators;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using System.Threading.Tasks;
 
@@ -7,18 +8,18 @@ namespace INStore.UserControls.SignUp_IN.Commands
 {
     public class LoginCommand : AsyncCommandBase
     {
-        private readonly IAuthenticationService _authenticationService;
         private readonly LoginViewModel _loginViewModel;
+        private readonly IAuthenticators _authenticators;
 
-        public LoginCommand(LoginViewModel loginViewModel, IAuthenticationService authenticationService)
+        public LoginCommand(LoginViewModel loginViewModel, IAuthenticators authenticators)
         {
+            _authenticators = authenticators;
             _loginViewModel = loginViewModel;
-            _authenticationService = authenticationService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await _authenticationService.LogIn(_loginViewModel.Username, _loginViewModel.Password);
+            await _authenticators.Login(_loginViewModel.Username, _loginViewModel.Password);
         }
     }
 }
