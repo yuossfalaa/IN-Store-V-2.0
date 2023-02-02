@@ -38,7 +38,13 @@ namespace INStore.HostBuilders
 
         private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
         {
-            return new LoginViewModel(services.GetRequiredService<ILogger<LoginViewModel>>(),services.GetRequiredService<IAuthenticators>());
+            return new LoginViewModel
+                (
+                services.GetRequiredService<ILogger<LoginViewModel>>(),
+                services.GetRequiredService<IAuthenticators>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>()
+                );
         }
     }
 
