@@ -1,7 +1,9 @@
 ﻿using INStore.Domain.Models;
 using INStore.Domain.Services.AuthenticationService;
+using INStore.State.Authenticators;
 using INStore.UserControls.SignUp_IN.Commands;
 using INStore.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,16 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private readonly ILogger<LoginViewModel> _LoginViewModelLogger;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IAuthenticators _Authenticators;
+
+        public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger,IAuthenticators authenticators)
+        {
+            _Authenticators = authenticators;
+            _LoginViewModelLogger = loginViewModelLogger;
+            LoginCommand = new LoginCommand(this, authenticators);
+
+        }
+
         public ICommand LoginCommand { get; set; }
 
         private string _Username;
@@ -40,14 +51,12 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-
-
-        public LoginViewModel(ILogger<LoginViewModel> LoginViewModelLogger, IAuthenticationService authenticationService)
+        public override void Dispose()
         {
-            _LoginViewModelLogger = LoginViewModelLogger;
-            _authenticationService = authenticationService;
-            LoginCommand = new LoginCommand(this, authenticationService);
+            base.Dispose();
         }
+
+
 
 
     }
