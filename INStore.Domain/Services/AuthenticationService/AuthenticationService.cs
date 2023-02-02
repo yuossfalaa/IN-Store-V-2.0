@@ -37,7 +37,7 @@ namespace INStore.Domain.Services.AuthenticationService
             return StoredUser;
         }
 
-        public async Task<RegistrationResult> Registre(string UserName, string Password, string AdminPassword, string AccountState, string EmployeeName)
+        public async Task<RegistrationResult> Registre(string UserName, string Password, string AdminPassword, AccountState accountState, Employee employee)
         {
             RegistrationResult result = RegistrationResult.Success;
             string HashedPassword = _passwordhasher.HashPassword(Password);
@@ -67,8 +67,9 @@ namespace INStore.Domain.Services.AuthenticationService
                     UserName = UserName,
                     PasswordHash = HashedPassword,
                     AdminPasswordHash = HashedAdminPassword,
-                    AccountState = AccountState,
-                    EmployeeName = EmployeeName
+                    AccountState = accountState,
+                    employee= employee
+
                 };
                 await _userService.Create(user);
                 
