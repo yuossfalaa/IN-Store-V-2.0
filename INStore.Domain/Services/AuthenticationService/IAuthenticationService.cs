@@ -10,7 +10,6 @@ namespace INStore.Domain.Services.AuthenticationService
             AdminPasswordDoNotMatch,
             UsernameAlreadyExists
         }
-        User user { get; }
         Task<RegistrationResult> Registre(string UserName,
             string Password, string AdminPassword,
             string AccountState, string EmployeeName);

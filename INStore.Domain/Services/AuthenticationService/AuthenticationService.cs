@@ -21,7 +21,6 @@ namespace INStore.Domain.Services.AuthenticationService
             _passwordhasher = passwordhasher;
         }
 
-        public User user { get; private set; }
 
         public async Task<User> LogIn(string UserName, string Password)
         {
@@ -35,8 +34,7 @@ namespace INStore.Domain.Services.AuthenticationService
             {
                 throw new UserNotFoundException(UserName,Password);
             }
-            user = StoredUser;
-            return user;
+            return StoredUser;
         }
 
         public async Task<RegistrationResult> Registre(string UserName, string Password, string AdminPassword, string AccountState, string EmployeeName)
