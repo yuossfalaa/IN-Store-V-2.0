@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows;
 
-namespace INStore.Controls
+namespace INStore.ControlsHelpers
 {
     public static class PasswordBindingHelper
     {
