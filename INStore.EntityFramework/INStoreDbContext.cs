@@ -18,7 +18,7 @@ namespace INStore.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<User>().HasOne(u => u.employee).WithOne(u => u.user).HasForeignKey<Employee>(u => u.UserId);
             base.OnModelCreating(modelBuilder);
         }
 
