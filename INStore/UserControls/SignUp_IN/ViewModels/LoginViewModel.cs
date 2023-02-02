@@ -1,16 +1,9 @@
-﻿using INStore.Domain.Models;
-using INStore.Domain.Services.AuthenticationService;
+﻿using INStore.Commands;
 using INStore.State.Authenticators;
+using INStore.State.Navigators;
 using INStore.UserControls.SignUp_IN.Commands;
 using INStore.ViewModels;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace INStore.UserControls.SignUp_IN.ViewModels
@@ -19,17 +12,24 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
     {
         private readonly ILogger<LoginViewModel> _LoginViewModelLogger;
         private readonly IAuthenticators _Authenticators;
+        private readonly IRenavigator _loginRenavigator;
+        private readonly IRenavigator _registerRenavigator;
 
-        public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger,IAuthenticators authenticators)
+        public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger,
+                              IAuthenticators authenticators, 
+                              IRenavigator loginRenavigator, 
+                              IRenavigator registerRenavigator)
         {
             _Authenticators = authenticators;
+            _loginRenavigator = loginRenavigator;
+            _registerRenavigator = registerRenavigator;
             _LoginViewModelLogger = loginViewModelLogger;
-            LoginCommand = new LoginCommand(this, authenticators);
-
+            LoginCommand = new LoginCommand(this, authenticators, loginRenavigator);
+            RegisterCommand = new RenavigateCommand(registerRenavigator);
         }
 
         public ICommand LoginCommand { get; set; }
-
+        public ICommand RegisterCommand { get; set; }
         private string _Username;
         public string Username
         {
