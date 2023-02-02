@@ -12,7 +12,7 @@ namespace INStore.Domain.Services.AuthenticationService
         }
         Task<RegistrationResult> Registre(string UserName,
             string Password, string AdminPassword,
-            string AccountState, string EmployeeName);
+            AccountState accountState, Employee employee);
 
         Task<User> LogIn(string UserName, string Password);
     }
