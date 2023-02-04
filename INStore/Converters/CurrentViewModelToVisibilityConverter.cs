@@ -24,6 +24,10 @@ namespace INStore.Converters
             {
                 return TrueValue;
             }
+            else if (value.ToString() == typeof(RegisterViewModel).ToString())
+            {
+                return TrueValue;
+            }
             else
             {
                 return FalseValue;
