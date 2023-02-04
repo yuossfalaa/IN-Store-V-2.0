@@ -1,4 +1,5 @@
 ﻿using INStore.ViewModels;
+using System;
 using System.Windows.Input;
 
 namespace INStore.State.Navigators
@@ -7,15 +8,12 @@ namespace INStore.State.Navigators
     {
         public enum ViewType
         {
-            Home,
-            About,
-            DashBoard,
-            MyStore,
-            RefundDashboard,
-            SellerDashboard,
-            Tools,
-            Login
+            Login,
+            Register,
+            Home
         }
         ViewModelBase CurrentViewModel { get; set; }
+        event Action StateChanged;
+
     }
 }
