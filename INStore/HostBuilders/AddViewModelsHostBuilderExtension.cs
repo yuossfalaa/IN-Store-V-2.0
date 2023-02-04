@@ -24,13 +24,26 @@ namespace INStore.HostBuilders
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
+                services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
                 services.AddSingleton<IINStoreViewModelFactory, INStoreViewModelFactory>();
                 services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
                 services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
+                services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
             });
             return host;
         }
+
+        private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
+        {
+            return new RegisterViewModel
+                (
+                services.GetRequiredService<ILogger<RegisterViewModel>>(),
+                services.GetRequiredService<IAuthenticators>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>()
+                ) ;
+        }
+
         private static HomeViewModel CreateHomeViewModel(IServiceProvider services)
         {
             return new HomeViewModel();
@@ -43,7 +56,7 @@ namespace INStore.HostBuilders
                 services.GetRequiredService<ILogger<LoginViewModel>>(),
                 services.GetRequiredService<IAuthenticators>(),
                 services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>()
+                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>()
                 );
         }
     }
