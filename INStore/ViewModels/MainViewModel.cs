@@ -1,10 +1,8 @@
 ﻿using INStore.Commands;
 using INStore.Factories;
 using INStore.State.Navigators;
-using INStore.UserControls.SignUp_IN.ViewModels;
 using Microsoft.Extensions.Logging;
 using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -35,10 +33,20 @@ namespace INStore.ViewModels
             _MainViewModelLogger = mainViewModelLogger;
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
+
+            _navigator.StateChanged += Navigator_StateChanged;
+
+
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory,_navigator);
             UpdateCurrentViewModelCommand.Execute(INavigator.ViewType.Login);
             dispatcherTimerInit();
         }
+
+        private void Navigator_StateChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
+
         private void dispatcherTimerInit()
         {
             LogoVisibilty = Visibility.Collapsed;
