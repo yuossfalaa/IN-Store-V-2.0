@@ -62,7 +62,8 @@
                             </StackPanel>
                         </materialDesign:HintAssist.Hint>
                     </PasswordBox>
-                    <Button Content="{lex:Loc Key=LoginViewLogin}" 
+                    <Button 
+                        Content="{lex:Loc Key=LoginViewLogin}" 
                         MinHeight="60"
                         Margin="50 40 50 0"
                         BorderThickness="0"
@@ -70,8 +71,10 @@
                         FontSize="26"
                         Background="{StaticResource PrimarytButtonColor}"
                         FontFamily="{StaticResource MainFont}"
-                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"/>
-                    <Button Content="{lex:Loc Key=LoginViewSignUp}" 
+                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
+                        Command="{Binding LoginCommand}"/>
+                    <Button 
+                        Content="{lex:Loc Key=LoginViewSignUp}" 
                         MinHeight="60"
                         Margin="50 40 50 0"
                         Foreground="White"
@@ -79,7 +82,8 @@
                         FontFamily="{StaticResource MainFont}"
                         BorderThickness="2"
                         BorderBrush="{StaticResource SecondaryButtonColor}"
-                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"/>
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        Command="{Binding RegisterCommand}"/>
                 </StackPanel>
             </Border>
         </materialDesign:TransitioningContent>
