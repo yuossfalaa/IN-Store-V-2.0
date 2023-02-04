@@ -2,10 +2,6 @@
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static INStore.State.Navigators.INavigator;
 
 namespace INStore.Factories
@@ -14,13 +10,16 @@ namespace INStore.Factories
     {
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
+        private readonly CreateViewModel<RegisterViewModel> _createRegisterViewModel;
 
         public INStoreViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel,
-            CreateViewModel<LoginViewModel> createLoginViewModel)
+            CreateViewModel<LoginViewModel> createLoginViewModel,
+            CreateViewModel<RegisterViewModel> createRegisterViewModel)
 
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
+            _createRegisterViewModel = createRegisterViewModel;
         }
         public ViewModelBase CreateViewModel(ViewType viewType)
         {
@@ -31,6 +30,9 @@ namespace INStore.Factories
                     break;
                 case ViewType.Login:
                     return _createLoginViewModel();
+                    break;               
+                case ViewType.Register:
+                    return _createRegisterViewModel();
                     break;
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
