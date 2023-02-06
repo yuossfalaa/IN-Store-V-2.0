@@ -10,6 +10,7 @@ namespace INStore.State.Navigators
         {
             Login,
             Register,
+            RegisterEmployee,
             Home
         }
         ViewModelBase CurrentViewModel { get; set; }
