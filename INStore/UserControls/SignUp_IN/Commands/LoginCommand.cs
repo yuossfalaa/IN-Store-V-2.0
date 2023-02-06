@@ -23,7 +23,7 @@ namespace INStore.UserControls.SignUp_IN.Commands
         {
             try
             {
-                //await _authenticators.Login(_loginViewModel.Username, _loginViewModel.Password);
+                await _authenticators.Login(_loginViewModel.Username, _loginViewModel.Password);
 
                 _renavigator.Renavigate();
             }
