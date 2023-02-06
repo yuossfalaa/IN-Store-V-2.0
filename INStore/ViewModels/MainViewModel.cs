@@ -1,5 +1,6 @@
 ﻿using INStore.Commands;
 using INStore.Factories;
+using INStore.Language;
 using INStore.State.Navigators;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -16,8 +17,29 @@ namespace INStore.ViewModels
         private readonly ILogger<MainViewModel> _MainViewModelLogger;
         private readonly INavigator _navigator;
         private readonly IINStoreViewModelFactory _viewModelFactory;
+        private readonly ILanguageSetter _languageSetter;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private Visibility _logoVisibilty;
+        private bool _IsEnglish;
+
+        public bool IsEnglish
+        {
+            get { return _IsEnglish; }
+            set 
+            {
+                _IsEnglish = value;
+                OnPropertyChanged(nameof(IsEnglish));
+                if (!IsEnglish)
+                {
+                    _languageSetter.SetToArabic();
+                }
+                else if (IsEnglish)
+                {
+                    _languageSetter.SetToEnglish();
+                }
+            }
+        }
+
         public ISnackbarMessageQueue MyMessageQueue { get; set; }
         public Visibility LogoVisibilty
         {
@@ -30,18 +52,28 @@ namespace INStore.ViewModels
         }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public ICommand UpdateCurrentViewModelCommand { get; }
-        public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, INavigator navigator, IINStoreViewModelFactory viewModelFactory, ISnackbarMessageQueue myMessageQueue)
+        public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, 
+            INavigator navigator, 
+            IINStoreViewModelFactory viewModelFactory, 
+            ISnackbarMessageQueue myMessageQueue,
+            ILanguageSetter languageSetter)
         {
+            //Fields
             _MainViewModelLogger = mainViewModelLogger;
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
-            _navigator.StateChanged += Navigator_StateChanged;
             MyMessageQueue = myMessageQueue;
-
+            _languageSetter = languageSetter;
+            _IsEnglish = _languageSetter.IsArabic();
+            //Events
+            _navigator.StateChanged += Navigator_StateChanged;
+            OnPropertyChanged(nameof(IsEnglish));
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory, _navigator);
             UpdateCurrentViewModelCommand.Execute(INavigator.ViewType.Login);
+
             dispatcherTimerInit();
+
             _MainViewModelLogger.Log(LogLevel.Information, "MainViewModel Initialized");
         }
 
