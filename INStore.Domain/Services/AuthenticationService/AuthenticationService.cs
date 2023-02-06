@@ -32,7 +32,7 @@ namespace INStore.Domain.Services.AuthenticationService
             PasswordVerificationResult passwordResult = _passwordhasher.VerifyHashedPassword(StoredUser.PasswordHash, Password);
             if (passwordResult != PasswordVerificationResult.Success)
             {
-                throw new UserNotFoundException(UserName,Password);
+                throw new WrongPasswordExcption();
             }
             return StoredUser;
         }
