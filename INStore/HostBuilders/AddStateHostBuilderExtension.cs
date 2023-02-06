@@ -1,4 +1,5 @@
 ﻿using INStore.State.Navigators;
+using INStore.State.UserStore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -16,6 +17,8 @@ namespace INStore.HostBuilders
             host.ConfigureServices(services =>
             {
                 services.AddSingleton<INavigator, Navigator>();
+                services.AddSingleton<IUserStore, UserStore>();
+                services.AddSingleton<IInRegistrationUser, InRegistrationUser>();
             });
             return host;
         }
