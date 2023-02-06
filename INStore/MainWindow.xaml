@@ -83,5 +83,7 @@
             </StackPanel>
             <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"  FlowDirection="{lex:Loc Key=GeneralFlowDirection}"/>
         </Grid>
+        <materialDesign:Snackbar MessageQueue="{Binding MyMessageQueue}"/>
+
     </Grid>
 </Window>
