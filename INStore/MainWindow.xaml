@@ -43,7 +43,7 @@
             </Grid.RowDefinitions>
             <Label Content="IN Store" 
                    FontFamily="{StaticResource Avatarock}" 
-                   Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
+                   Foreground="White" 
                    FontSize="32"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
