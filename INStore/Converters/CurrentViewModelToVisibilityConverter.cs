@@ -28,6 +28,10 @@ namespace INStore.Converters
             {
                 return TrueValue;
             }
+            else if (value.ToString() == typeof(RegisterEmployeeViewModel).ToString())
+            {
+                return TrueValue;
+            }
             else
             {
                 return FalseValue;
