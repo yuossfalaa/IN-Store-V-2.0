@@ -2,6 +2,7 @@
 using INStore.Factories;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
+using INStore.State.UserStore;
 using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
@@ -23,15 +24,30 @@ namespace INStore.HostBuilders
                 services.AddTransient<MainViewModel>();
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
-                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
-                services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
+                services.AddTransient<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
+                services.AddScoped<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
+                services.AddScoped<CreateViewModel<RegisterEmployeeViewModel>>(services => () => CreateRegisterEmployeeViewModel(services));
 
                 services.AddSingleton<IINStoreViewModelFactory, INStoreViewModelFactory>();
                 services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
-                services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
-                services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
+                services.AddTransient<ViewModelDelegateRenavigator<LoginViewModel>>();
+                services.AddScoped<ViewModelDelegateRenavigator<RegisterViewModel>>();
+                services.AddScoped<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>();
             });
             return host;
+        }
+
+        private static RegisterEmployeeViewModel CreateRegisterEmployeeViewModel(IServiceProvider services)
+        {
+            return new RegisterEmployeeViewModel
+                (
+                services.GetRequiredService<ILogger<RegisterEmployeeViewModel>>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
+                services.GetRequiredService<IInRegistrationUser>(),
+                services.GetRequiredService<IAuthenticators>()
+             
+                );
         }
 
         private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
@@ -39,8 +55,9 @@ namespace INStore.HostBuilders
             return new RegisterViewModel
                 (
                 services.GetRequiredService<ILogger<RegisterViewModel>>(),
-                services.GetRequiredService<IAuthenticators>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>()
+                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
+                services.GetRequiredService<IInRegistrationUser>()
                 ) ;
         }
 
