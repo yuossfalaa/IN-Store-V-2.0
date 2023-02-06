@@ -1,6 +1,7 @@
 ﻿using INStore.Commands;
 using INStore.Factories;
 using INStore.State.Navigators;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace INStore.ViewModels
         private readonly IINStoreViewModelFactory _viewModelFactory;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private Visibility _logoVisibilty;
+        public ISnackbarMessageQueue MyMessageQueue { get; set; }
         public Visibility LogoVisibilty
         {
             get { return _logoVisibilty; }
@@ -28,22 +30,24 @@ namespace INStore.ViewModels
         }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public ICommand UpdateCurrentViewModelCommand { get; }
-        public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, INavigator navigator, IINStoreViewModelFactory viewModelFactory)
+        public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, INavigator navigator, IINStoreViewModelFactory viewModelFactory, ISnackbarMessageQueue myMessageQueue)
         {
             _MainViewModelLogger = mainViewModelLogger;
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
-
             _navigator.StateChanged += Navigator_StateChanged;
+            MyMessageQueue = myMessageQueue;
 
 
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory,_navigator);
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory, _navigator);
             UpdateCurrentViewModelCommand.Execute(INavigator.ViewType.Login);
             dispatcherTimerInit();
+            _MainViewModelLogger.Log(LogLevel.Information, "MainViewModel Initialized");
         }
 
         private void Navigator_StateChanged()
         {
+            _MainViewModelLogger.Log(LogLevel.Information, "CurrentViewModel Changed To => " + CurrentViewModel.ToString());
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 
