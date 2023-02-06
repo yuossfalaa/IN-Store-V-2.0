@@ -4,6 +4,7 @@ using INStore.State.Navigators;
 using INStore.State.UserStore;
 using INStore.UserControls.SignUp_IN.Commands;
 using INStore.ViewModels;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
         private readonly IRenavigator LoginRenavigator;
         private readonly IInRegistrationUser _InRegistrationUser;
         private readonly IAuthenticators _Authenticators;
+        private readonly ISnackbarMessageQueue snackbarMessageQueue;
         private string _EmployeeName;
 
         public string EmployeeName
@@ -107,15 +109,24 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
 
         public ICommand RegisterRenavigatCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
-        public RegisterEmployeeViewModel(ILogger<RegisterEmployeeViewModel> registerEmployeeViewModelLogger, IRenavigator registerRenavigator, IRenavigator loginRenavigator, IInRegistrationUser inRegistrationUser, IAuthenticators authenticators)
+        public RegisterEmployeeViewModel(ILogger<RegisterEmployeeViewModel> registerEmployeeViewModelLogger, 
+            IRenavigator registerRenavigator,
+            IRenavigator loginRenavigator,
+            IInRegistrationUser inRegistrationUser,
+            IAuthenticators authenticators, 
+            ISnackbarMessageQueue snackbarMessageQueue)
         {
             _RegisterEmployeeViewModelLogger = registerEmployeeViewModelLogger;
             RegisterRenavigator = registerRenavigator;
             _InRegistrationUser = inRegistrationUser;
             _Authenticators = authenticators;
-            RegisterRenavigatCommand = new RenavigateCommand(RegisterRenavigator);
+            this.snackbarMessageQueue = snackbarMessageQueue;
             LoginRenavigator = loginRenavigator;
-            RegisterCommand = new RegisterCommand(_Authenticators, _InRegistrationUser,LoginRenavigator);
+
+            RegisterRenavigatCommand = new RenavigateCommand(RegisterRenavigator);
+            RegisterCommand = new RegisterCommand(_Authenticators, _InRegistrationUser, LoginRenavigator, snackbarMessageQueue, _RegisterEmployeeViewModelLogger);
+
+            _RegisterEmployeeViewModelLogger.Log(LogLevel.Information, "RegisterEmployeeViewModel Initialized");
         }
     }
 }
