@@ -11,15 +11,18 @@ namespace INStore.Factories
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
         private readonly CreateViewModel<RegisterViewModel> _createRegisterViewModel;
+        private readonly CreateViewModel<RegisterEmployeeViewModel> _createRegisterEmployeeViewModel;
 
         public INStoreViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel,
             CreateViewModel<LoginViewModel> createLoginViewModel,
-            CreateViewModel<RegisterViewModel> createRegisterViewModel)
+            CreateViewModel<RegisterViewModel> createRegisterViewModel,
+            CreateViewModel<RegisterEmployeeViewModel> createRegisterEmployeeViewModel)
 
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
             _createRegisterViewModel = createRegisterViewModel;
+            _createRegisterEmployeeViewModel = createRegisterEmployeeViewModel;
         }
         public ViewModelBase CreateViewModel(ViewType viewType)
         {
@@ -33,6 +36,9 @@ namespace INStore.Factories
                     break;               
                 case ViewType.Register:
                     return _createRegisterViewModel();
+                    break;
+                case ViewType.RegisterEmployee:
+                    return _createRegisterEmployeeViewModel();
                     break;
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
