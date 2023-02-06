@@ -18,7 +18,7 @@
             </materialDesign:TransitioningContent.OpeningEffects>
             <Border BorderBrush="{StaticResource BorderBorderBrush}" BorderThickness="0.5" 
                 Background="{StaticResource BackgroundBorderBrush}" 
-                MinWidth="500" Height="600" CornerRadius="15"
+                MinWidth="500" Height="400" CornerRadius="15"
                 VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Orientation="Vertical" Margin="20" VerticalAlignment="Center" >
                     <TextBox
@@ -26,7 +26,7 @@
                          FontSize="26"
                          FontFamily="{StaticResource MainFont}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Margin="0 0 0 40"
+                         Margin="0 0 0 50"
                         Text="{Binding Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
@@ -46,7 +46,7 @@
                             Foreground="White"
                             FontFamily="{StaticResource MainFont}"
                             FontSize="26"
-                            Margin="0 0 0 40"
+                            Margin="0 0 0 50"
                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                             BindingHelper:PasswordBindingHelper.Password="{Binding Password}">
                         <materialDesign:HintAssist.Hint>
@@ -62,21 +62,11 @@
                             </StackPanel>
                         </materialDesign:HintAssist.Hint>
                     </PasswordBox>
-                    <Button 
-                        Content="{lex:Loc Key=LoginViewLogin}" 
-                        MinHeight="60"
-                        Margin="50 40 50 0"
-                        BorderThickness="0"
-                        Foreground="White"
-                        FontSize="26"
-                        Background="{StaticResource PrimarytButtonColor}"
-                        FontFamily="{StaticResource MainFont}"
-                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
-                        Command="{Binding LoginCommand}"/>
-                    <Button 
+                    <StackPanel Orientation="Horizontal">
+                        <Button 
                         Content="{lex:Loc Key=LoginViewSignUp}" 
-                        MinHeight="60"
-                        Margin="50 40 50 0"
+                        MinHeight="60" MinWidth="200"
+                        Margin="0 30 0 0"
                         Foreground="White"
                         FontSize="26"
                         FontFamily="{StaticResource MainFont}"
@@ -84,6 +74,19 @@
                         BorderBrush="{StaticResource SecondaryButtonColor}"
                         Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
                         Command="{Binding RegisterCommand}"/>
+                        <Button 
+                        Content="{lex:Loc Key=LoginViewLogin}" 
+                        MinHeight="60" MinWidth="200"
+                        Margin="50 30 0 0"
+                        BorderThickness="0"
+                        Foreground="White"
+                        FontSize="26"
+                        Background="{StaticResource PrimarytButtonColor}"
+                        FontFamily="{StaticResource MainFont}"
+                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
+                        Command="{Binding LoginCommand}"/>
+                    </StackPanel>
+                 
                 </StackPanel>
             </Border>
         </materialDesign:TransitioningContent>
