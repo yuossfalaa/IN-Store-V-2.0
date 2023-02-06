@@ -83,7 +83,9 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
 
 
 
-        public RegisterViewModel(ILogger<RegisterViewModel> registerViewModelLogger, IRenavigator registerEmployeeRenavigator, IRenavigator loginRenavigator, IInRegistrationUser inRegistrationUser)
+        public RegisterViewModel(ILogger<RegisterViewModel> registerViewModelLogger,
+            IRenavigator registerEmployeeRenavigator, IRenavigator loginRenavigator,
+            IInRegistrationUser inRegistrationUser)
         {
 
             LoginRenavigatCommand = new RenavigateCommand(loginRenavigator);
@@ -92,6 +94,8 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
             RegisterEmployeeRenavigator = registerEmployeeRenavigator;
             _loginRenavigator = loginRenavigator;
             _InRegistrationUser = inRegistrationUser;
+
+            _RegisterViewModelLogger.Log(LogLevel.Information, "RegisterViewModel Initialized");
         }
     }
 }
