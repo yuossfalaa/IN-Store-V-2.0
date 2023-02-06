@@ -6,6 +6,7 @@ using INStore.State.UserStore;
 using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -20,17 +21,20 @@ namespace INStore.HostBuilders
         {
             host.ConfigureServices(services => 
             {
-                services.AddTransient(CreateHomeViewModel);
                 services.AddTransient<MainViewModel>();
 
+                services.AddTransient(CreateHomeViewModel);
+                services.AddScoped(CreateRegisterViewModel);
+                services.AddScoped(CreateRegisterEmployeeViewModel);
+
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
-                services.AddTransient<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
-                services.AddScoped<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
-                services.AddScoped<CreateViewModel<RegisterEmployeeViewModel>>(services => () => CreateRegisterEmployeeViewModel(services));
+                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
+                services.AddScoped<CreateViewModel<RegisterViewModel>>(services => () => services.GetRequiredService<RegisterViewModel>());
+                services.AddScoped<CreateViewModel<RegisterEmployeeViewModel>>(services => () => services.GetRequiredService<RegisterEmployeeViewModel>());
 
                 services.AddSingleton<IINStoreViewModelFactory, INStoreViewModelFactory>();
                 services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
-                services.AddTransient<ViewModelDelegateRenavigator<LoginViewModel>>();
+                services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
                 services.AddScoped<ViewModelDelegateRenavigator<RegisterViewModel>>();
                 services.AddScoped<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>();
             });
@@ -45,8 +49,8 @@ namespace INStore.HostBuilders
                 services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
                 services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
                 services.GetRequiredService<IInRegistrationUser>(),
-                services.GetRequiredService<IAuthenticators>()
-             
+                services.GetRequiredService<IAuthenticators>(),
+                services.GetRequiredService<ISnackbarMessageQueue>()
                 );
         }
 
@@ -73,7 +77,8 @@ namespace INStore.HostBuilders
                 services.GetRequiredService<ILogger<LoginViewModel>>(),
                 services.GetRequiredService<IAuthenticators>(),
                 services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>()
+                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
+                services.GetRequiredService<ISnackbarMessageQueue>()
                 );
         }
     }
