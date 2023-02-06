@@ -3,6 +3,7 @@ using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using INStore.UserControls.SignUp_IN.Commands;
 using INStore.ViewModels;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using System.Windows.Input;
 
@@ -14,18 +15,22 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
         private readonly IAuthenticators _Authenticators;
         private readonly IRenavigator _loginRenavigator;
         private readonly IRenavigator _registerRenavigator;
+        private readonly ISnackbarMessageQueue snackbarMessageQueue;
 
         public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger,
-                              IAuthenticators authenticators, 
-                              IRenavigator loginRenavigator, 
-                              IRenavigator registerRenavigator)
+                              IAuthenticators authenticators,
+                              IRenavigator loginRenavigator,
+                              IRenavigator registerRenavigator,
+                              ISnackbarMessageQueue snackbarMessageQueue)
         {
             _Authenticators = authenticators;
             _loginRenavigator = loginRenavigator;
             _registerRenavigator = registerRenavigator;
             _LoginViewModelLogger = loginViewModelLogger;
-            LoginCommand = new LoginCommand(this, authenticators, loginRenavigator);
+            this.snackbarMessageQueue = snackbarMessageQueue;
+            LoginCommand = new LoginCommand(this, authenticators, loginRenavigator, snackbarMessageQueue, _LoginViewModelLogger);
             RegisterCommand = new RenavigateCommand(registerRenavigator);
+            _LoginViewModelLogger.Log(LogLevel.Information, "LoginViewModel Initialized");
         }
 
         public ICommand LoginCommand { get; set; }
