@@ -132,4 +132,55 @@
   <data name="LoginViewUsername" xml:space="preserve">
     <value>اسم المستخدم</value>
   </data>
+  <data name="RegisterEmployeeViewBack" xml:space="preserve">
+    <value>عُد</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeAddress" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeDescription" xml:space="preserve">
+    <value>وصف</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeJob" xml:space="preserve">
+    <value>العمل</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeName" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeePhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeSalary" xml:space="preserve">
+    <value>الراتب</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeShiftEndsAt" xml:space="preserve">
+    <value>مناوبة تنتهي في</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeShiftStartsAt" xml:space="preserve">
+    <value>مناوبة تبدأ في</value>
+  </data>
+  <data name="RegisterEmployeeViewRegister" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
+  <data name="RegisterViewAdmin" xml:space="preserve">
+    <value>مسؤل</value>
+  </data>
+  <data name="RegisterViewAdminPassword" xml:space="preserve">
+    <value>كلمة مرور المسؤل</value>
+  </data>
+  <data name="RegisterViewEmployee" xml:space="preserve">
+    <value>موظف</value>
+  </data>
+  <data name="RegisterViewLogin" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="RegisterViewNext" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="RegisterViewPassword" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="RegisterViewUsername" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
 </root>

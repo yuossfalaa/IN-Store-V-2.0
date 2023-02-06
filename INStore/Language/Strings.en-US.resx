@@ -132,4 +132,55 @@
   <data name="LoginViewUsername" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="RegisterEmployeeViewBack" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeJob" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeePhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeSalary" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeShiftEndsAt" xml:space="preserve">
+    <value>Shift Ends At</value>
+  </data>
+  <data name="RegisterEmployeeViewEmployeeShiftStartsAt" xml:space="preserve">
+    <value>Shift Starts At</value>
+  </data>
+  <data name="RegisterEmployeeViewRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterViewAdmin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="RegisterViewAdminPassword" xml:space="preserve">
+    <value>Admin Password</value>
+  </data>
+  <data name="RegisterViewEmployee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="RegisterViewLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="RegisterViewNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="RegisterViewPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="RegisterViewUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
 </root>

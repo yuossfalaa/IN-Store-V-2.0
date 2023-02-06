@@ -104,5 +104,158 @@ namespace INStore.Language {
                 return ResourceManager.GetString("LoginViewUsername", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go back.
+        /// </summary>
+        internal static string RegisterEmployeeViewBack {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeAddress {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeDescription {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeJob {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeName {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeePhoneNumber {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeePhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salary.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeSalary {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeSalary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Ends At.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeShiftEndsAt {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeShiftEndsAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Starts At.
+        /// </summary>
+        internal static string RegisterEmployeeViewEmployeeShiftStartsAt {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewEmployeeShiftStartsAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string RegisterEmployeeViewRegister {
+            get {
+                return ResourceManager.GetString("RegisterEmployeeViewRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        internal static string RegisterViewAdmin {
+            get {
+                return ResourceManager.GetString("RegisterViewAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin Password.
+        /// </summary>
+        internal static string RegisterViewAdminPassword {
+            get {
+                return ResourceManager.GetString("RegisterViewAdminPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee.
+        /// </summary>
+        internal static string RegisterViewEmployee {
+            get {
+                return ResourceManager.GetString("RegisterViewEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string RegisterViewLogin {
+            get {
+                return ResourceManager.GetString("RegisterViewLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string RegisterViewNext {
+            get {
+                return ResourceManager.GetString("RegisterViewNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string RegisterViewPassword {
+            get {
+                return ResourceManager.GetString("RegisterViewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        internal static string RegisterViewUsername {
+            get {
+                return ResourceManager.GetString("RegisterViewUsername", resourceCulture);
+            }
+        }
     }
 }
