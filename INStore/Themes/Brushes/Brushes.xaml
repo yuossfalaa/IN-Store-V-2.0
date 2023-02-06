@@ -11,25 +11,16 @@
     
     <!--Primary Brushs-->
     <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#808080" />
-
-                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White"/>
-
-     <!---->
+    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White"/>
     <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="White"/>
-
     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#000000 "/>
-                    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White"/>
-                
-                   <!--Secondary Brushs-->
-    <SolidColorBrush x:Key="SecondaryHueLightBrush" Color="#ED1C24"/>
-
-                  <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="White"/>
-
+    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#000000"/>
+    <!--Secondary Brushs-->
+    <!--<SolidColorBrush x:Key="SecondaryHueLightBrush" Color="#ED1C24"/>
+    <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="White"/>-->
     <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#BE1E2D"/>
-                  <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="White"/>
-
-    <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#681E2D"/>
-                  <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="White"/>
-
+    <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="White"/>
+    <!--<SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#681E2D"/>
+    <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="White"/>-->
 
 </ResourceDictionary>
