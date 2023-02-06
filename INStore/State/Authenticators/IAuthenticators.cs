@@ -1,5 +1,6 @@
 ﻿using INStore.Domain.Models;
 using INStore.Domain.Services.AuthenticationService;
+using INStore.State.UserStore;
 using System;
 using System.Threading.Tasks;
 
@@ -14,6 +15,6 @@ namespace INStore.State.Authenticators
 
         Task Login(string UserName, string Password);
         void Logout();
-        Task<IAuthenticationService.RegistrationResult> Register(string UserName, string Password, string AdminPassword, AccountState accountState, Employee employee);
+        Task<IAuthenticationService.RegistrationResult> Register(IInRegistrationUser inRegistrationUser);
     }
 }
