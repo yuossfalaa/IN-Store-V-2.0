@@ -1,20 +1,11 @@
 ﻿using INStore.EntityFramework;
-using INStore.State.Navigators;
-using INStore.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using INStore.HostBuilders;
-using System.Globalization;
-using INStore.Domain.Services;
-using INStore.EntityFramework.Services;
-using MaterialDesignThemes.Wpf;
-using INStore.Domain.Models;
-using System.Collections.Generic;
 
 namespace INStore
 {
@@ -50,8 +41,6 @@ namespace INStore
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
-            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new CultureInfo("en-US");
             DbContextCreator();
             await _host.StartAsync();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
