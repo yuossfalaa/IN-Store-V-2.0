@@ -3,6 +3,7 @@ using INStore.Domain.Services.AuthenticationService;
 using INStore.EntityFramework.Services;
 using INStore.State.Authenticators;
 using INStore.State.UserStore;
+using MaterialDesignThemes.Wpf;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,7 @@ namespace INStore.HostBuilders
                 services.AddSingleton<IUserService, UserDataService>();
                 services.AddSingleton<IAuthenticationService, AuthenticationService>();
                 services.AddSingleton<IAuthenticators, Authenticators>();
+                services.AddSingleton<ISnackbarMessageQueue, SnackbarMessageQueue>();
             });
             return host;
         }
