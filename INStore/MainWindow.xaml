@@ -31,7 +31,7 @@
                     <materialDesign:TransitionEffect Kind="SlideInFromTop"/>
                     <materialDesign:TransitionEffect Kind="SlideInFromRight"/>
                 </materialDesign:TransitioningContent.OpeningEffects>
-                <Image Source="\Resources\Images\INstore Background - Logo.png" Width="1650" Height="1100" Margin="0 -320 -500 -400"/>
+                <Image Source="\Resources\Images\INstore Background - Logo.png"  Margin="0 -500 -700 0" Stretch="UniformToFill"/>
             </materialDesign:TransitioningContent>
         </Border>
         <Grid >
