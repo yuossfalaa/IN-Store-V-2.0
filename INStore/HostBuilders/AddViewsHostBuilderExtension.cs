@@ -2,6 +2,8 @@
 using INStore.Language;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
+using INStore.UserControls.Home.ViewModels;
+using INStore.UserControls.MyStore.ViewModels;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
@@ -34,7 +36,9 @@ namespace INStore.HostBuilders
                     s.GetRequiredService<ISnackbarMessageQueue>(),
                     s.GetRequiredService<ILanguageSetter>(),
                     s.GetRequiredService<IAuthenticators>(),
-                    s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>()
+                    s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
+                    s.GetRequiredService<ViewModelDelegateRenavigator<MyStoreViewModel>>(),
+                    s.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>()
                 );
         }
     }
