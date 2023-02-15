@@ -6,7 +6,9 @@
              xmlns:HomeViewModels="clr-namespace:INStore.UserControls.Home.ViewModels" 
              xmlns:HomeView="clr-namespace:INStore.UserControls.Home.Views"
              xmlns:LoginView="clr-namespace:INStore.UserControls.SignUp_IN.Views"
-             xmlns:LoginViewModel="clr-namespace:INStore.UserControls.SignUp_IN.ViewModels">
+             xmlns:LoginViewModel="clr-namespace:INStore.UserControls.SignUp_IN.ViewModels" 
+             xmlns:MyStoreView="clr-namespace:INStore.UserControls.MyStore.Views"
+             xmlns:MyStoreViewModel="clr-namespace:INStore.UserControls.MyStore.ViewModels">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -34,6 +36,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type LoginViewModel:RegisterEmployeeViewModel}">
                 <LoginView:RegisterEmployeeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type MyStoreViewModel:MyStoreViewModel}">
+                <MyStoreView:MyStore/>
             </DataTemplate>
 
 
