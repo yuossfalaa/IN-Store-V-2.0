@@ -1,11 +1,7 @@
 ﻿using INStore.Domain.Models;
 using INStore.Domain.Services.AuthenticationService;
 using INStore.State.UserStore;
-using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static INStore.Domain.Services.AuthenticationService.IAuthenticationService;
 
