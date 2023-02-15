@@ -7,6 +7,8 @@
         xmlns:local="clr-namespace:INStore" 
         xmlns:ViewModels="clr-namespace:INStore.ViewModels" 
         xmlns:Converters="clr-namespace:INStore.Converters" 
+        xmlns:NavigationBar="clr-namespace:INStore.UserControls.NavigationBar.View" 
+        xmlns:Controls="clr-namespace:INStore.Themes.Controls"
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="INStore"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -14,18 +16,20 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized" 
         WindowStyle="None"
-        Background="{x:Null}">
+        Background="{x:Null}"
+        UseLayoutRounding="True">
 
     <Window.Resources>
         <Converters:CurrentViewModelToVisibilityConverter x:Key="CurrentViewModelToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToLogoutVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToNavigationBarVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
     </Window.Resources>
     <Grid >
         <Border>
             <Image Source="\Resources\Images\INstore Background - Solid.jpg" Stretch="Fill"/>
         </Border>
         <Border VerticalAlignment="Top" HorizontalAlignment="Right" 
-                Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToVisibilityConverter}  }">
+                Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToVisibilityConverter}}">
             <materialDesign:TransitioningContent Visibility="{Binding LogoVisibilty}">
                 <materialDesign:TransitioningContent.OpeningEffects >
                     <materialDesign:TransitionEffect Kind="SlideInFromTop"/>
@@ -40,21 +44,35 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Content="IN Store" 
-                   FontFamily="{StaticResource Avatarock}" 
-                   Foreground="White" 
-                   FontSize="32"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Left"
-                   Margin="10,5,0,0"/>
+            <NavigationBar:NavigationBar  
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
+                    Margin="0,0,20,10"/>
+            <StackPanel Margin="10,0,0,5" Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
+                <Label Content="IN" 
+                    FontFamily="{StaticResource Avatarock}" 
+                    Foreground="#D2714E" 
+                    FontSize="50"/>
+                <Label Content="Store" 
+                    FontFamily="{StaticResource Avatarock}" 
+                    Foreground="#844742" 
+                    FontSize="50"/>
+            </StackPanel>
             <StatusBar Grid.Row="0" 
                        Background="Transparent"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Stretch"
                        MouseMove="TriggerMoveWindow"/>
             <StackPanel Height="40" HorizontalAlignment="Right"
-                    Margin="0,0,10,0"
-                    Orientation="Horizontal">
+                        VerticalAlignment="Top"
+                    Margin="0,5,10,0"
+                    Orientation="Horizontal"
+                    Grid.Row="0" >
                 <ToggleButton  Height="30" Width="30" Margin="0,5,20,0" 
                     Style="{StaticResource MaterialDesignActionToggleButton}"
                     Foreground="Black"  
@@ -90,7 +108,9 @@
                 <Button Height="30" Width="30" Margin="10,0,0,0" 
                      Style="{StaticResource MaterialDesignIconForegroundButton}"
                        Foreground="{StaticResource DefaultButtonColor}"
-                       Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToLogoutVisibilityConverter}  }">
+                       Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToLogoutVisibilityConverter}  }"
+                        Command="{Binding logoutCommand}">
+                    
                     <materialDesign:PackIcon Kind="Logout" Height="25" Width="25"  />
                 </Button>
 

@@ -15,6 +15,7 @@
     <None Remove="Resources\Images\ICON.ico" />
     <None Remove="Resources\Images\INstore Background - Logo.png" />
     <None Remove="Resources\Images\INstore Background - Solid.jpg" />
+    <None Remove="Resources\Images\Navigation Bar Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +53,7 @@
     <Resource Include="Resources\Images\ICON.ico" />
     <Resource Include="Resources\Images\INstore Background - Logo.png" />
     <Resource Include="Resources\Images\INstore Background - Solid.jpg" />
+    <Resource Include="Resources\Images\Navigation Bar Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
