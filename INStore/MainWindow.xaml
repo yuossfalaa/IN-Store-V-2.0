@@ -115,6 +115,14 @@
                 </Button>
 
             </StackPanel>
+            <NavigationBar:NavigationBar  
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelTBZkWWuUHNahSjQZtmeoQYjMvmHe1WYuCT}}"
+                    Margin="0,0,20,10"/>
+
         </Grid>
         <materialDesign:Snackbar MessageQueue="{Binding MyMessageQueue}"/>
 
