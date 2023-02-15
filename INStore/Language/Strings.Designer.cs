@@ -106,6 +106,51 @@ namespace INStore.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string NavigationBarAbout {
+            get {
+                return ResourceManager.GetString("NavigationBarAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        internal static string NavigationBarDashboard {
+            get {
+                return ResourceManager.GetString("NavigationBarDashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string NavigationBarHome {
+            get {
+                return ResourceManager.GetString("NavigationBarHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Store.
+        /// </summary>
+        internal static string NavigationBarMyStore {
+            get {
+                return ResourceManager.GetString("NavigationBarMyStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        internal static string NavigationBarTools {
+            get {
+                return ResourceManager.GetString("NavigationBarTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go back.
         /// </summary>
         internal static string RegisterEmployeeViewBack {
