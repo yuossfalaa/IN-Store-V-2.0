@@ -21,6 +21,8 @@ namespace INStore.ViewModels
         private readonly ILanguageSetter _languageSetter;
         private readonly IAuthenticators authenticators;
         private readonly IRenavigator loginRenavigator;
+        private readonly IRenavigator myStoreRenavigator;
+        private readonly IRenavigator homeRenavigator;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private Visibility _logoVisibilty;
         private bool _IsEnglish;
@@ -56,14 +58,19 @@ namespace INStore.ViewModels
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public ICommand UpdateCurrentViewModelCommand { get; }
         public ICommand logoutCommand { get; set; }
+        public ICommand MyStoreRenavigatCommand { get; set; }
+        public ICommand HomeRenavigatCommand { get; set; }
         public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, 
             INavigator navigator, 
             IINStoreViewModelFactory viewModelFactory, 
             ISnackbarMessageQueue myMessageQueue,
             ILanguageSetter languageSetter,
             IAuthenticators authenticators,
-            IRenavigator loginRenavigator)
+            IRenavigator loginRenavigator,
+            IRenavigator myStoreRenavigator,
+            IRenavigator HomeRenavigator)
         {
+
             //Fields
             _MainViewModelLogger = mainViewModelLogger;
             _navigator = navigator;
@@ -72,15 +79,23 @@ namespace INStore.ViewModels
             _languageSetter = languageSetter;
             this.authenticators = authenticators;
             this.loginRenavigator = loginRenavigator;
+            this.myStoreRenavigator = myStoreRenavigator;
+            homeRenavigator = HomeRenavigator;
             _IsEnglish = _languageSetter.IsArabic();
+
+
             //Events
             _navigator.StateChanged += Navigator_StateChanged;
             OnPropertyChanged(nameof(IsEnglish));
 
+            //commands
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory, _navigator);
             UpdateCurrentViewModelCommand.Execute(INavigator.ViewType.Login);
             logoutCommand = new LogoutCommand(this.authenticators, this.loginRenavigator);
+            MyStoreRenavigatCommand = new RenavigateCommand(this.myStoreRenavigator);
+            HomeRenavigatCommand = new RenavigateCommand(this.homeRenavigator);
 
+            //func
             dispatcherTimerInit();
 
             _MainViewModelLogger.Log(LogLevel.Information, "MainViewModel Initialized");
