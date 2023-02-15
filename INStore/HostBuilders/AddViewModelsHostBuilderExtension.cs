@@ -1,9 +1,10 @@
-﻿using INStore.Domain.Services.AuthenticationService;
-using INStore.Factories;
+﻿using INStore.Factories;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using INStore.State.UserStore;
 using INStore.UserControls.Home.ViewModels;
+using INStore.UserControls.MyStore.ViewModels;
+using INStore.UserControls.MyStore.Views;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
@@ -26,19 +27,27 @@ namespace INStore.HostBuilders
                 services.AddTransient(CreateHomeViewModel);
                 services.AddScoped(CreateRegisterViewModel);
                 services.AddScoped(CreateRegisterEmployeeViewModel);
+                services.AddScoped(CreateMyStoreViewModel);
 
-                services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
                 services.AddScoped<CreateViewModel<RegisterViewModel>>(services => () => services.GetRequiredService<RegisterViewModel>());
                 services.AddScoped<CreateViewModel<RegisterEmployeeViewModel>>(services => () => services.GetRequiredService<RegisterEmployeeViewModel>());
+                services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
+                services.AddScoped<CreateViewModel<MyStoreViewModel>>(services => () => services.GetRequiredService<MyStoreViewModel>());
 
                 services.AddSingleton<IINStoreViewModelFactory, INStoreViewModelFactory>();
                 services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
                 services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
                 services.AddScoped<ViewModelDelegateRenavigator<RegisterViewModel>>();
                 services.AddScoped<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>();
+                services.AddScoped<ViewModelDelegateRenavigator<MyStoreViewModel>>();
             });
             return host;
+        }
+
+        private static MyStoreViewModel CreateMyStoreViewModel(IServiceProvider services)
+        {
+            return new MyStoreViewModel();
         }
 
         private static RegisterEmployeeViewModel CreateRegisterEmployeeViewModel(IServiceProvider services)
