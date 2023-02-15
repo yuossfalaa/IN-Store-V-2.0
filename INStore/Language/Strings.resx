@@ -132,6 +132,21 @@
   <data name="LoginViewUsername" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="NavigationBarAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="NavigationBarDashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="NavigationBarHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="NavigationBarMyStore" xml:space="preserve">
+    <value>My Store</value>
+  </data>
+  <data name="NavigationBarTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
   <data name="RegisterEmployeeViewBack" xml:space="preserve">
     <value>Go back</value>
   </data>
