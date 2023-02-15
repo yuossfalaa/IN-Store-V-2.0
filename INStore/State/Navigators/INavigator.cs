@@ -11,7 +11,8 @@ namespace INStore.State.Navigators
             Login,
             Register,
             RegisterEmployee,
-            Home
+            Home,
+            MyStore
         }
         ViewModelBase CurrentViewModel { get; set; }
         event Action StateChanged;
