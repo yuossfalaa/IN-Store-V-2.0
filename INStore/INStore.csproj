@@ -71,4 +71,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UserControls\MyStore\Commands\" />
+  </ItemGroup>
+
 </Project>
