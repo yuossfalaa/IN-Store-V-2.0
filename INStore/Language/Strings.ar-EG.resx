@@ -132,6 +132,21 @@
   <data name="LoginViewUsername" xml:space="preserve">
     <value>اسم المستخدم</value>
   </data>
+  <data name="NavigationBarAbout" xml:space="preserve">
+    <value>حول</value>
+  </data>
+  <data name="NavigationBarDashboard" xml:space="preserve">
+    <value>الإحصاءات</value>
+  </data>
+  <data name="NavigationBarHome" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="NavigationBarMyStore" xml:space="preserve">
+    <value>متجري</value>
+  </data>
+  <data name="NavigationBarTools" xml:space="preserve">
+    <value>الأدوات</value>
+  </data>
   <data name="RegisterEmployeeViewBack" xml:space="preserve">
     <value>عُد</value>
   </data>
