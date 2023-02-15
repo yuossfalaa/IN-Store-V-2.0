@@ -1,6 +1,7 @@
 ﻿using INStore.Commands;
 using INStore.Factories;
 using INStore.Language;
+using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -18,6 +19,8 @@ namespace INStore.ViewModels
         private readonly INavigator _navigator;
         private readonly IINStoreViewModelFactory _viewModelFactory;
         private readonly ILanguageSetter _languageSetter;
+        private readonly IAuthenticators authenticators;
+        private readonly IRenavigator loginRenavigator;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private Visibility _logoVisibilty;
         private bool _IsEnglish;
@@ -52,11 +55,14 @@ namespace INStore.ViewModels
         }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public ICommand UpdateCurrentViewModelCommand { get; }
+        public ICommand logoutCommand { get; set; }
         public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, 
             INavigator navigator, 
             IINStoreViewModelFactory viewModelFactory, 
             ISnackbarMessageQueue myMessageQueue,
-            ILanguageSetter languageSetter)
+            ILanguageSetter languageSetter,
+            IAuthenticators authenticators,
+            IRenavigator loginRenavigator)
         {
             //Fields
             _MainViewModelLogger = mainViewModelLogger;
@@ -64,6 +70,8 @@ namespace INStore.ViewModels
             _viewModelFactory = viewModelFactory;
             MyMessageQueue = myMessageQueue;
             _languageSetter = languageSetter;
+            this.authenticators = authenticators;
+            this.loginRenavigator = loginRenavigator;
             _IsEnglish = _languageSetter.IsArabic();
             //Events
             _navigator.StateChanged += Navigator_StateChanged;
@@ -71,6 +79,7 @@ namespace INStore.ViewModels
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelFactory, _navigator);
             UpdateCurrentViewModelCommand.Execute(INavigator.ViewType.Login);
+            logoutCommand = new LogoutCommand(this.authenticators, this.loginRenavigator);
 
             dispatcherTimerInit();
 
