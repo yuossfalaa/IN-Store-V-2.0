@@ -12,7 +12,7 @@
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="INStore"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
-        Title="MainWindow" Height="720" Width="1280" 
+        Title="IN Store" Height="720" Width="1280" 
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized" 
         WindowStyle="None"
@@ -120,7 +120,7 @@
                     HorizontalAlignment="Right"
                     Grid.Row="1"
                     Grid.RowSpan="2"
-                    Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelTBZkWWuUHNahSjQZtmeoQYjMvmHe1WYuCT}}"
+                    Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
                     Margin="0,0,20,10"/>
 
         </Grid>
