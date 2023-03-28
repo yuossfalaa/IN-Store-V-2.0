@@ -9,7 +9,164 @@
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="INStore"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings">
-    <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
-        <TextBlock Text="Mystore"/>
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+        <ScrollViewer>
+            <StackPanel>
+                <Border Background="{StaticResource BackgroundBorderBrush }" CornerRadius="5" Margin="20">
+                    <WrapPanel Orientation="Horizontal" Margin="0 5 10 10">
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="Item Name" Margin="20 10 0 10"/>
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="Selling Price" Margin="30 10 0 10"/>
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="Purchase Price" Margin="30 10 0 10"/>
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="In Store" Margin="30 10 0 10"/>
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="In Stock" Margin="30 10 0 10"/>
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="Description" Margin="30 10 0 10"/>
+                        <TextBox Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                materialDesign:HintAssist.Hint="BarCode" Margin="30 10 0 10"/>
+                        <Button Background="{x:Null}" BorderBrush="{x:Null}"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Content="{materialDesign:PackIcon Kind=Add, Size=35 }"
+                                Foreground ="White" Margin="35 10 0 10"
+                                FontSize="26" />
+                        <Button 
+                                Content="Import" 
+                                MinHeight="40" MinWidth="100"
+                                Foreground="White"
+                                FontSize="26"
+                                Margin="30 10 10 10"
+                                FontFamily="{StaticResource MainFont}"
+                                BorderThickness="2"
+                                BorderBrush="{StaticResource SecondaryButtonColor}"
+                                Style="{StaticResource MaterialDesignOutlinedSecondaryButton}" />
+                        <Button 
+                                Content="Export" 
+                                MinHeight="40" MinWidth="100"
+                                Margin="10 10 20 10"
+                                BorderThickness="0"
+                                Foreground="White"
+                                FontSize="26"
+                                Background="{StaticResource PrimarytButtonColor}"
+                                FontFamily="{StaticResource MainFont}"
+                                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"/>
+
+                    </WrapPanel>
+                </Border>
+                <Border Background="{StaticResource BackgroundBorderBrush }" CornerRadius="5" Margin="20">
+                    <StackPanel HorizontalAlignment ="Stretch" VerticalAlignment="Stretch" Margin="0 0 10 0">
+                        <WrapPanel Orientation="Horizontal" Margin="0 5 0 10">
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Item Name" Margin="20 10 0 10"/>
+                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Selling Price" Margin="20 10 0 10"/>
+                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Purchase Price" Margin="20 10 0 10"/>
+                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="In Store" Margin="20 10 0 10"/>
+                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="In Stock" Margin="20 10 0 10"/>
+                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Description" Margin="20 10 0 10"/>
+                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                            <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="BarCode" Margin="20 10 0 10"/>
+
+                            <Button Background="{x:Null}" BorderBrush="{x:Null}"
+                                Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Content="{materialDesign:PackIcon Kind=ContentSaveOutline, Size=30 }"
+                                Foreground ="White"
+                                Margin="20 0 0 10"
+                                FontSize="26" />
+                        </WrapPanel>
+                        <Expander
+                                Background="{x:Null}"
+                                Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Header="More Info">
+                            <WrapPanel Margin="0 5 0 10" >
+                                <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Sold This Month : 50" Margin="20 10 0 10"/>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Favorite paired item: some" Margin="20 10 0 10"/>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Average price : 50" Margin="20 10 0 10"/>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Highest price : 50" Margin="20 10 0 10"/>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Lowest price : 50" Margin="20 10 0 10"/>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                <Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Item Rating  :" Margin="20 10 0 10"/>
+                                <materialDesign:RatingBar
+                                    Value="5"
+                                    Margin="30 17 0 10"/>
+                            </WrapPanel>
+                        </Expander>
+                    </StackPanel>
+                </Border>
+
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using INStore.UserControls.Home.ViewModels;
+using INStore.UserControls.MyStore.ViewModels;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using System;
 using System.Globalization;
@@ -34,6 +35,10 @@ namespace INStore.Converters
                 return TrueValue;
             }
             else if (value.ToString() == typeof(HomeViewModel).ToString())
+            {
+                return TrueValue;
+            }
+            else if (value.ToString() == typeof(MyStoreViewModel).ToString())
             {
                 return TrueValue;
             }
