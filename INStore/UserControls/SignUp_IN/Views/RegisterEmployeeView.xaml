@@ -221,6 +221,7 @@
                         BorderThickness="0"
                         Foreground="White"
                         FontSize="26"
+                        IsDefault="True"
                         Background="{StaticResource PrimarytButtonColor}"
                         FontFamily="{StaticResource MainFont}"
                         Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
