@@ -73,7 +73,8 @@
                         BorderThickness="2"
                         BorderBrush="{StaticResource SecondaryButtonColor}"
                         Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
-                        Command="{Binding RegisterCommand}"/>
+                        Command="{Binding RegisterCommand}"
+                        />
                         <Button 
                         Content="{lex:Loc Key=LoginViewLogin}" 
                         MinHeight="60" MinWidth="200"
@@ -81,6 +82,7 @@
                         BorderThickness="0"
                         Foreground="White"
                         FontSize="26"
+                        IsDefault="True"
                         Background="{StaticResource PrimarytButtonColor}"
                         FontFamily="{StaticResource MainFont}"
                         Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
