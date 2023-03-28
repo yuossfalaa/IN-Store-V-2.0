@@ -1,11 +1,6 @@
 ﻿using INStore.Domain.Exceptions;
 using INStore.Domain.Models;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static INStore.Domain.Services.AuthenticationService.IAuthenticationService;
 
 namespace INStore.Domain.Services.AuthenticationService
