@@ -7,8 +7,8 @@ namespace INStore.Domain.Services.AuthenticationService
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly  IPasswordHasher _passwordhasher;
-        private readonly  IUserService _userService;
+        private readonly IPasswordHasher _passwordhasher;
+        private readonly IUserService _userService;
 
         public AuthenticationService(IUserService userService, IPasswordHasher passwordhasher)
         {
@@ -20,9 +20,9 @@ namespace INStore.Domain.Services.AuthenticationService
         public async Task<User> LogIn(string UserName, string Password)
         {
             User StoredUser = await _userService.GetByUsername(UserName);
-            if (StoredUser == null) 
+            if (StoredUser == null)
             {
-                throw new UserNotFoundException(UserName); 
+                throw new UserNotFoundException(UserName);
             }
             PasswordVerificationResult passwordResult = _passwordhasher.VerifyHashedPassword(StoredUser.PasswordHash, Password);
             if (passwordResult != PasswordVerificationResult.Success)
@@ -40,7 +40,7 @@ namespace INStore.Domain.Services.AuthenticationService
 
 
             User UserNameCheck = await _userService.GetByUsername(UserName);
-            if (UserNameCheck != null) 
+            if (UserNameCheck != null)
             {
                 result = RegistrationResult.UsernameAlreadyExists;
             }
@@ -55,7 +55,7 @@ namespace INStore.Domain.Services.AuthenticationService
 
             }
 
-            if (result == RegistrationResult.Success)    
+            if (result == RegistrationResult.Success)
             {
                 User user = new User()
                 {
@@ -63,13 +63,13 @@ namespace INStore.Domain.Services.AuthenticationService
                     PasswordHash = HashedPassword,
                     AdminPasswordHash = HashedAdminPassword,
                     AccountState = accountState,
-                    employee= employee
+                    employee = employee
 
                 };
                 await _userService.Create(user);
-                
+
             }
             return result;
         }
-        }
     }
+}
