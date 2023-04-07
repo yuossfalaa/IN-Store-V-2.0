@@ -10,6 +10,9 @@
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="INStore"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings">
+    <UserControl.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+    </UserControl.InputBindings>
     <Grid >
         <materialDesign:TransitioningContent >
             <materialDesign:TransitioningContent.OpeningEffects >
@@ -48,7 +51,8 @@
                             FontSize="26"
                             Margin="0 0 0 50"
                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                            BindingHelper:PasswordBindingHelper.Password="{Binding Password}">
+                            BindingHelper:PasswordBindingHelper.Password="{Binding Password}"
+                            >
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                             Orientation="Horizontal"
@@ -77,6 +81,7 @@
                         />
                         <Button 
                         Content="{lex:Loc Key=LoginViewLogin}" 
+                            x:Name="LoginButton"
                         MinHeight="60" MinWidth="200"
                         Margin="50 30 0 0"
                         BorderThickness="0"
@@ -86,7 +91,11 @@
                         Background="{StaticResource PrimarytButtonColor}"
                         FontFamily="{StaticResource MainFont}"
                         Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
-                        Command="{Binding LoginCommand}"/>
+                        Command="{Binding LoginCommand}">
+                            <Button.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                            </Button.InputBindings>
+                        </Button>
                     </StackPanel>
                  
                 </StackPanel>
