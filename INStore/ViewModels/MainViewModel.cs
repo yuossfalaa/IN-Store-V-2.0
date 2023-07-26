@@ -3,6 +3,9 @@ using INStore.Factories;
 using INStore.Language;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
+using INStore.UserControls.Home.ViewModels;
+using INStore.UserControls.MyStore.ViewModels;
+using INStore.UserControls.SignUp_IN.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,7 +17,7 @@ namespace INStore.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
+        #region private Variables
         private readonly ILogger<MainViewModel> _MainViewModelLogger;
         private readonly INavigator _navigator;
         private readonly IINStoreViewModelFactory _viewModelFactory;
@@ -26,11 +29,12 @@ namespace INStore.ViewModels
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private Visibility _logoVisibilty;
         private bool _IsEnglish;
-
+        #endregion
+        #region public Variables
         public bool IsEnglish
         {
             get { return _IsEnglish; }
-            set 
+            set
             {
                 _IsEnglish = value;
                 OnPropertyChanged(nameof(IsEnglish));
@@ -56,19 +60,22 @@ namespace INStore.ViewModels
             }
         }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
+        #endregion
+        #region Commands
         public ICommand UpdateCurrentViewModelCommand { get; }
         public ICommand logoutCommand { get; set; }
         public ICommand MyStoreRenavigatCommand { get; set; }
         public ICommand HomeRenavigatCommand { get; set; }
-        public MainViewModel(ILogger<MainViewModel> mainViewModelLogger, 
-            INavigator navigator, 
-            IINStoreViewModelFactory viewModelFactory, 
+        #endregion
+        public MainViewModel(ILogger<MainViewModel> mainViewModelLogger,
+            INavigator navigator,
+            IINStoreViewModelFactory viewModelFactory,
             ISnackbarMessageQueue myMessageQueue,
             ILanguageSetter languageSetter,
             IAuthenticators authenticators,
-            IRenavigator loginRenavigator,
-            IRenavigator myStoreRenavigator,
-            IRenavigator HomeRenavigator)
+            ViewModelDelegateRenavigator<LoginViewModel> loginRenavigator,
+            ViewModelDelegateRenavigator<MyStoreViewModel> myStoreRenavigator,
+            ViewModelDelegateRenavigator<HomeViewModel> HomeRenavigator)
         {
 
             //Fields
@@ -94,13 +101,15 @@ namespace INStore.ViewModels
             logoutCommand = new LogoutCommand(this.authenticators, this.loginRenavigator);
             MyStoreRenavigatCommand = new RenavigateCommand(this.myStoreRenavigator);
             HomeRenavigatCommand = new RenavigateCommand(this.homeRenavigator);
-
             //func
             dispatcherTimerInit();
-
             _MainViewModelLogger.Log(LogLevel.Information, "MainViewModel Initialized");
         }
 
+
+
+
+        #region Private Functions
         private void Navigator_StateChanged()
         {
             _MainViewModelLogger.Log(LogLevel.Information, "CurrentViewModel Changed To => " + CurrentViewModel.ToString());
@@ -120,5 +129,8 @@ namespace INStore.ViewModels
             LogoVisibilty = Visibility.Visible;
             dispatcherTimer.Stop();
         }
+        #endregion
+
+
     }
 }
