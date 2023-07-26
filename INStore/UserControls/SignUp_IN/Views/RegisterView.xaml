@@ -27,7 +27,7 @@
                          FontFamily="{StaticResource MainFont}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          Margin="0 0 0 40"
-                        Text="{Binding Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        Text="{Binding CurrentUser.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                             Orientation="Horizontal"
@@ -47,7 +47,7 @@
                             FontSize="26"
                             Margin="0 0 0 40"
                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                            BindingHelper:PasswordBindingHelper.Password="{Binding Password}">
+                            BindingHelper:PasswordBindingHelper.Password="{Binding CurrentUser.PasswordHash}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                             Orientation="Horizontal"
@@ -67,7 +67,7 @@
                             FontSize="26"
                             Margin="0 0 0 40"
                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                            BindingHelper:PasswordBindingHelper.Password="{Binding AdminPassword}">
+                            BindingHelper:PasswordBindingHelper.Password="{Binding CurrentUser.AdminPasswordHash}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                             Orientation="Horizontal"

@@ -1,6 +1,9 @@
 ﻿using INStore.Commands;
+using INStore.Domain.Models;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
+using INStore.State.UserStore;
+using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.SignUp_IN.Commands;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
@@ -16,46 +19,43 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
         private readonly IRenavigator _loginRenavigator;
         private readonly IRenavigator _registerRenavigator;
         private readonly ISnackbarMessageQueue snackbarMessageQueue;
+        private readonly IInRegistrationUser _inRegistrationUser;
+        private User _currentUser;
 
-        public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger,
-                              IAuthenticators authenticators,
-                              IRenavigator loginRenavigator,
-                              IRenavigator registerRenavigator,
-                              ISnackbarMessageQueue snackbarMessageQueue)
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+            }
+        }
+        public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
+
+        public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger, IAuthenticators authenticators,
+            ViewModelDelegateRenavigator<HomeViewModel> loginRenavigator, ViewModelDelegateRenavigator<RegisterViewModel> registerRenavigator, 
+            ISnackbarMessageQueue snackbarMessageQueue, IInRegistrationUser inRegistrationUser)
         {
             _Authenticators = authenticators;
             _loginRenavigator = loginRenavigator;
             _registerRenavigator = registerRenavigator;
             _LoginViewModelLogger = loginViewModelLogger;
             this.snackbarMessageQueue = snackbarMessageQueue;
+            _inRegistrationUser = inRegistrationUser;
+
+
+            CurrentUser = new User();
             LoginCommand = new LoginCommand(this, authenticators, loginRenavigator, snackbarMessageQueue, _LoginViewModelLogger);
             RegisterCommand = new RenavigateCommand(registerRenavigator);
+            _inRegistrationUser.RegisteringUser = new User();
+
             _LoginViewModelLogger.Log(LogLevel.Information, "LoginViewModel Initialized");
+
         }
 
-        public ICommand LoginCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
-        private string _Username;
-        public string Username
-        {
-            get { return _Username; }
-            set 
-            { 
-                _Username = value;
-                OnPropertyChanged(nameof(Username));
-            }
-        }
-        private string _password;
 
-        public string Password
-        {
-            get { return _password; }
-            set 
-            { 
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
         public override void Dispose()
         {
             base.Dispose();

@@ -15,76 +15,49 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
         private readonly IRenavigator RegisterEmployeeRenavigator;
         private readonly IRenavigator _loginRenavigator;
         private readonly IInRegistrationUser _InRegistrationUser;
-        public ICommand LoginRenavigatCommand { get; set; }
-        public ICommand RegisterEmployeeRenavigatcommand { get; set; }
-        private string _userName;
 
-        public string Username
+        private User _currentUser;
+
+        public User CurrentUser
         {
-            get 
+            get { return _currentUser; }
+            set
             {
-                return _userName;
-            }
-            set 
-            { 
-                _userName = value; 
-                OnPropertyChanged(nameof(Username));
-                _InRegistrationUser.RegisteringUser.UserName = Username; 
+                _currentUser = value;
+                _InRegistrationUser.RegisteringUser = _currentUser;
+                OnPropertyChanged(nameof(CurrentUser));
             }
         }
-        private string _password;
-
-        public string Password
-        {
-            get { return _password; }
-            set 
-            { 
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-                _InRegistrationUser.RegisteringUser.PasswordHash = Password;
-            }
-        }
-        private string _adminPassword;
-
-        public string AdminPassword
-        {
-            get { return _adminPassword; }
-            set 
-            { 
-                _adminPassword = value;
-                OnPropertyChanged(nameof(AdminPassword));
-                _InRegistrationUser.RegisteringUser.AdminPasswordHash = AdminPassword;
-            }
-        }
-        private bool _isAdmin;
-
-        public bool IsAdmin
-        {
-            get { return _isAdmin; }
-            set 
-            {
-                _isAdmin = value;
-                OnPropertyChanged(nameof(IsAdmin));
-                _InRegistrationUser.RegisteringUser.AccountState = AccountState.Admin;
-            }
-        }
-        private bool _isEmployee;
+        private bool _IsEmployee;
 
         public bool IsEmployee
         {
-            get { return _isEmployee; }
+            get { return _IsEmployee; }
+            set
+            { 
+                _IsEmployee = value;
+                OnPropertyChanged(nameof(IsEmployee));
+                if (IsEmployee) _currentUser.AccountState = AccountState.Employee;
+            }
+        }
+        private bool _IsAdmin;
+
+        public bool IsAdmin
+        {
+            get { return _IsAdmin; }
             set 
             { 
-                _isEmployee = value;
-                OnPropertyChanged(nameof(IsEmployee));
-                _InRegistrationUser.RegisteringUser.AccountState = AccountState.Employee;
+                _IsAdmin = value;
+                OnPropertyChanged(nameof(IsAdmin));
+                if (IsAdmin) _currentUser.AccountState = AccountState.Admin;
             }
         }
 
 
-
+        public ICommand LoginRenavigatCommand { get; set; }
+        public ICommand RegisterEmployeeRenavigatcommand { get; set; }
         public RegisterViewModel(ILogger<RegisterViewModel> registerViewModelLogger,
-            IRenavigator registerEmployeeRenavigator, IRenavigator loginRenavigator,
+            ViewModelDelegateRenavigator<RegisterEmployeeViewModel> registerEmployeeRenavigator, ViewModelDelegateRenavigator<LoginViewModel> loginRenavigator,
             IInRegistrationUser inRegistrationUser)
         {
 
@@ -94,6 +67,7 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
             RegisterEmployeeRenavigator = registerEmployeeRenavigator;
             _loginRenavigator = loginRenavigator;
             _InRegistrationUser = inRegistrationUser;
+            CurrentUser = _InRegistrationUser.RegisteringUser;
 
             _RegisterViewModelLogger.Log(LogLevel.Information, "RegisterViewModel Initialized");
         }

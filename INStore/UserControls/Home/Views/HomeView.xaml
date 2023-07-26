@@ -7,8 +7,9 @@
              xmlns:lex ="http://wpflocalizeextension.codeplex.com"
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="INStore"
-             lex:ResxLocalizationProvider.DefaultDictionary="Strings">
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings" >
     <Grid>
         <TextBlock Text="Home" />
+       
     </Grid>
 </UserControl>

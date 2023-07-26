@@ -1,103 +1,101 @@
 ﻿<UserControl x:Class="INStore.UserControls.SignUp_IN.Views.LoginView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:INStore.UserControls.SignUp_IN.Views" 
-             xmlns:BindingHelper="clr-namespace:INStore.ControlsHelpers" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:INStore.UserControls.SignUp_IN.Views"
+             xmlns:BindingHelper="clr-namespace:INStore.ControlsHelpers"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:lex ="http://wpflocalizeextension.codeplex.com"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="INStore"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <UserControl.InputBindings>
-                <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+        <KeyBinding Key="Enter"
+                    Command="{Binding LoginCommand}" />
     </UserControl.InputBindings>
-    <Grid >
-        <materialDesign:TransitioningContent >
-            <materialDesign:TransitioningContent.OpeningEffects >
-                <materialDesign:TransitionEffect Kind="FadeIn"/>
-                <materialDesign:TransitionEffect Kind="SlideInFromLeft"/>
+    <Grid>
+        <materialDesign:TransitioningContent>
+            <materialDesign:TransitioningContent.OpeningEffects>
+                <materialDesign:TransitionEffect Kind="FadeIn" />
+                <materialDesign:TransitionEffect Kind="SlideInFromLeft" />
             </materialDesign:TransitioningContent.OpeningEffects>
-            <Border BorderBrush="{StaticResource BorderBorderBrush}" BorderThickness="0.5" 
-                Background="{StaticResource BackgroundBorderBrush}" 
-                CornerRadius="15"
-                VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical" Margin="20" VerticalAlignment="Center" >
-                    <TextBox
-                         Foreground="White"
-                         FontSize="26"
-                         FontFamily="{StaticResource MainFont}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Margin="0 0 0 50"
-                        Text="{Binding Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <Border BorderBrush="{StaticResource BorderBorderBrush}"
+                    BorderThickness="0.5"
+                    Background="{StaticResource BackgroundBorderBrush}"
+                    CornerRadius="15"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical"
+                            Margin="20"
+                            VerticalAlignment="Center">
+                    <TextBox Foreground="White"
+                             FontSize="26"
+                             FontFamily="{StaticResource MainFont}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Margin="0 0 0 50"
+                             Text="{Binding CurrentUser.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
-                            <StackPanel
-                            Orientation="Horizontal"
-                            Margin="-2 0 0 0">
-                                <materialDesign:PackIcon
-                                Kind="Account" 
-                                Width="25" Height="25" 
-                                Margin="0 0 10 0"/>
-                                <TextBlock
-                                Text="{lex:Loc Key=LoginViewUsername}" />
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="-2 0 0 0">
+                                <materialDesign:PackIcon Kind="Account"
+                                                         Width="25"
+                                                         Height="25"
+                                                         Margin="0 0 10 0" />
+                                <TextBlock Text="{lex:Loc Key=LoginViewUsername}" />
                             </StackPanel>
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
-                    <PasswordBox
-                            x:Name="PasswordBox"
-                            Foreground="White"
-                            FontFamily="{StaticResource MainFont}"
-                            FontSize="26"
-                            Margin="0 0 0 50"
-                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                            BindingHelper:PasswordBindingHelper.Password="{Binding Password}"
-                            >
+                    <PasswordBox x:Name="PasswordBox"
+                                 Foreground="White"
+                                 FontFamily="{StaticResource MainFont}"
+                                 FontSize="26"
+                                 Margin="0 0 0 50"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 BindingHelper:PasswordBindingHelper.Password="{Binding CurrentUser.PasswordHash,UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
-                            <StackPanel
-                            Orientation="Horizontal"
-                            Margin="-2 0 0 0">
-                                <materialDesign:PackIcon
-                                Kind="Password" 
-                                Width="25" Height="25" 
-                                Margin="0 0 10 0"/>
-                                <TextBlock
-                                Text="{lex:Loc Key=LoginViewPassword}" />
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="-2 0 0 0">
+                                <materialDesign:PackIcon Kind="Password"
+                                                         Width="25"
+                                                         Height="25"
+                                                         Margin="0 0 10 0" />
+                                <TextBlock Text="{lex:Loc Key=LoginViewPassword}" />
                             </StackPanel>
                         </materialDesign:HintAssist.Hint>
                     </PasswordBox>
                     <StackPanel Orientation="Horizontal">
-                        <Button 
-                        Content="{lex:Loc Key=LoginViewSignUp}" 
-                        MinHeight="60" MinWidth="200"
-                        Margin="0 30 0 0"
-                        Foreground="White"
-                        FontSize="26"
-                        FontFamily="{StaticResource MainFont}"
-                        BorderThickness="2"
-                        BorderBrush="{StaticResource SecondaryButtonColor}"
-                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
-                        Command="{Binding RegisterCommand}"
-                        />
-                        <Button 
-                        Content="{lex:Loc Key=LoginViewLogin}" 
-                            x:Name="LoginButton"
-                        MinHeight="60" MinWidth="200"
-                        Margin="50 30 0 0"
-                        BorderThickness="0"
-                        Foreground="White"
-                        FontSize="26"
-                        IsDefault="True"
-                        Background="{StaticResource PrimarytButtonColor}"
-                        FontFamily="{StaticResource MainFont}"
-                        Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
-                        Command="{Binding LoginCommand}">
+                        <Button Content="{lex:Loc Key=LoginViewSignUp}"
+                                MinHeight="60"
+                                MinWidth="200"
+                                Margin="0 30 0 0"
+                                Foreground="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                BorderThickness="2"
+                                BorderBrush="{StaticResource SecondaryButtonColor}"
+                                Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                                Command="{Binding RegisterCommand}" />
+                        <Button Content="{lex:Loc Key=LoginViewLogin}"
+                                x:Name="LoginButton"
+                                MinHeight="60"
+                                MinWidth="200"
+                                Margin="50 30 0 0"
+                                BorderThickness="0"
+                                Foreground="White"
+                                FontSize="26"
+                                IsDefault="True"
+                                Background="{StaticResource PrimarytButtonColor}"
+                                FontFamily="{StaticResource MainFont}"
+                                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}"
+                                Command="{Binding LoginCommand}">
                             <Button.InputBindings>
-                                <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                                <KeyBinding Key="Enter"
+                                            Command="{Binding LoginCommand}" />
                             </Button.InputBindings>
                         </Button>
                     </StackPanel>
-                 
+
                 </StackPanel>
             </Border>
         </materialDesign:TransitioningContent>

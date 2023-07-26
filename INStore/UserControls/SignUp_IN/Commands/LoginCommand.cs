@@ -1,5 +1,6 @@
 ﻿using INStore.Commands;
 using INStore.Domain.Exceptions;
+using INStore.Domain.Models;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using INStore.UserControls.SignUp_IN.ViewModels;
@@ -12,18 +13,18 @@ namespace INStore.UserControls.SignUp_IN.Commands
 {
     public class LoginCommand : AsyncCommandBase
     {
-        private readonly LoginViewModel _loginViewModel;
+        private readonly LoginViewModel _loginviewModel;
         private readonly IAuthenticators _authenticators;
         private readonly IRenavigator _renavigator;
         private readonly ISnackbarMessageQueue snackbarMessageQueue;
         private readonly ILogger<LoginViewModel> _Logger;
 
 
-        public LoginCommand(LoginViewModel loginViewModel, IAuthenticators authenticators, IRenavigator Renavigator, ISnackbarMessageQueue snackbarMessageQueue, ILogger<LoginViewModel> logger)
+        public LoginCommand(LoginViewModel loginviewModel, IAuthenticators authenticators, IRenavigator Renavigator, ISnackbarMessageQueue snackbarMessageQueue, ILogger<LoginViewModel> logger)
         {
             _authenticators = authenticators;
             _renavigator = Renavigator;
-            _loginViewModel = loginViewModel;
+            _loginviewModel = loginviewModel;
             this.snackbarMessageQueue = snackbarMessageQueue;
             _Logger = logger;
         }
@@ -31,8 +32,9 @@ namespace INStore.UserControls.SignUp_IN.Commands
         {
             try
             {
-                await _authenticators.Login(_loginViewModel.Username, _loginViewModel.Password);
+                await _authenticators.Login(_loginviewModel.CurrentUser.UserName, _loginviewModel.CurrentUser.PasswordHash);
                 _Logger.LogInformation("successful login");
+                snackbarMessageQueue.Enqueue("Welcome Back " + _authenticators.CurrentUser.Employee.EmployeeName );
                 _renavigator.Renavigate();
             }
             catch (UserNotFoundException userNotFound)

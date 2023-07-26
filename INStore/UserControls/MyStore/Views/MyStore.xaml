@@ -71,182 +71,189 @@
                     </WrapPanel>
                 </Border>
                 <Border Background="{StaticResource BackgroundBorderBrush }" CornerRadius="5" Margin="20">
-                    <StackPanel HorizontalAlignment ="Stretch" VerticalAlignment="Stretch" Margin="0 0 10 0">
-                        <WrapPanel Orientation="Horizontal" Margin="0 5 0 10">
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="Item Name" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="Selling Price" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="Purchase Price" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="In Store" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="In Stock" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="Description" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-
-                            <!--<Label Foreground ="White"
-                                FontSize="26"
-                                FontFamily="{StaticResource MainFont}"
-                                Content="BarCode" Margin="20 10 0 10"/>-->
-                            <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
-                                       Foreground ="White"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource MainFont}"
-                                       Margin="20 10 0 10">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                            <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
-                                     Foreground ="White"
-                                     FontSize="26"
-                                     FontFamily="{StaticResource MainFont}"
-                                     Margin="20 10 0 10">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <Button Background="{x:Null}" BorderBrush="{x:Null}"
+                    <Grid>
+                        <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right"
                                 Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
                                 Foreground ="White"
                                 Margin="20 0 0 10"
                                 FontSize="26" >
-                                <materialDesign:PackIcon Kind="{Binding EditSaveIcon}" Height="30" Width="30"/>
-                            </Button>
-                            
-                        </WrapPanel>
-                        <Expander
+                            <materialDesign:PackIcon Kind="{Binding EditSaveIcon}" Height="30" Width="30"/>
+                        </Button>
+                        <StackPanel HorizontalAlignment ="Stretch" VerticalAlignment="Stretch" Margin="0 0 40 0">
+                            <WrapPanel Orientation="Horizontal" Margin="0 5 0 10">
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Item Name" Margin="20 10 0 10"/>-->
+                                <Border BorderBrush="White" BorderThickness="0 0 5 0 " Margin="20 0 0 10" MinWidth="5" CornerRadius="0.5" Height="30" Padding=" 0 0 20 0">
+
+
+                                    <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                        
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       >
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </Border>
+
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Selling Price" Margin="20 10 0 10"/>-->
+                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       Margin="20 10 0 10">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Purchase Price" Margin="20 10 0 10"/>-->
+                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       Margin="20 10 0 10">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="In Store" Margin="20 10 0 10"/>-->
+                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       Margin="20 10 0 10">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="In Stock" Margin="20 10 0 10"/>-->
+                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       Margin="20 10 0 10">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="Description" Margin="20 10 0 10"/>-->
+                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       Margin="20 10 0 10">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+
+                                <!--<Label Foreground ="White"
+                                FontSize="26"
+                                FontFamily="{StaticResource MainFont}"
+                                Content="BarCode" Margin="20 10 0 10"/>-->
+                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                       Foreground ="White"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource MainFont}"
+                                       Margin="20 10 0 10">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                     Foreground ="White"
+                                     FontSize="26"
+                                     FontFamily="{StaticResource MainFont}"
+                                     Margin="20 10 0 10">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+
+
+                            </WrapPanel>
+                            <Expander
                                 Background="{x:Null}"
                                 Foreground ="White"
                                 FontSize="26"
@@ -254,132 +261,133 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 Header="More Info">
-                            <WrapPanel Margin="0 5 0 10" >
-                                <!--<Label Foreground ="White"
+                                <WrapPanel Margin="0 5 0 10" >
+                                    <!--<Label Foreground ="White"
                                 FontSize="26"
                                 FontFamily="{StaticResource MainFont}"
                                 Content="Sold This Month : 50" Margin="20 10 0 10"/>-->
-                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                    <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
                                        Foreground ="White"
                                        FontSize="26"
                                        FontFamily="{StaticResource MainFont}"
                                        Margin="20 10 0 10">
-                                    <TextBlock.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                    </TextBlock.InputBindings>
-                                </TextBlock>
-                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
                                      Foreground ="White"
                                      FontSize="26"
                                      FontFamily="{StaticResource MainFont}"
                                      Margin="20 10 0 10">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                                <!--<Label Foreground ="White"
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                        </TextBox.InputBindings>
+                                    </TextBox>
+                                    <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                    <!--<Label Foreground ="White"
                                 FontSize="26"
                                 FontFamily="{StaticResource MainFont}"
                                 Content="Favorite paired item: some" Margin="20 10 0 10"/>-->
-                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                    <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
                                        Foreground ="White"
                                        FontSize="26"
                                        FontFamily="{StaticResource MainFont}"
                                        Margin="20 10 0 10">
-                                    <TextBlock.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                    </TextBlock.InputBindings>
-                                </TextBlock>
-                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
                                      Foreground ="White"
                                      FontSize="26"
                                      FontFamily="{StaticResource MainFont}"
                                      Margin="20 10 0 10">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                                <!--<Label Foreground ="White"
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                        </TextBox.InputBindings>
+                                    </TextBox>
+                                    <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                    <!--<Label Foreground ="White"
                                 FontSize="26"
                                 FontFamily="{StaticResource MainFont}"
                                 Content="Average price : 50" Margin="20 10 0 10"/>-->
-                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                    <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
                                        Foreground ="White"
                                        FontSize="26"
                                        FontFamily="{StaticResource MainFont}"
                                        Margin="20 10 0 10">
-                                    <TextBlock.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                    </TextBlock.InputBindings>
-                                </TextBlock>
-                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
                                      Foreground ="White"
                                      FontSize="26"
                                      FontFamily="{StaticResource MainFont}"
                                      Margin="20 10 0 10">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                                <!--<Label Foreground ="White"
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                        </TextBox.InputBindings>
+                                    </TextBox>
+                                    <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                    <!--<Label Foreground ="White"
                                 FontSize="26"
                                 FontFamily="{StaticResource MainFont}"
                                 Content="Highest price : 50" Margin="20 10 0 10"/>-->
-                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                    <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
                                        Foreground ="White"
                                        FontSize="26"
                                        FontFamily="{StaticResource MainFont}"
                                        Margin="20 10 0 10">
-                                    <TextBlock.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                    </TextBlock.InputBindings>
-                                </TextBlock>
-                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
                                      Foreground ="White"
                                      FontSize="26"
                                      FontFamily="{StaticResource MainFont}"
                                      Margin="20 10 0 10">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                                <!--<Label Foreground ="White"
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                        </TextBox.InputBindings>
+                                    </TextBox>
+                                    <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                    <!--<Label Foreground ="White"
                                 FontSize="26"
                                 FontFamily="{StaticResource MainFont}"
                                 Content="Lowest price : 50" Margin="20 10 0 10"/>-->
-                                <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
+                                    <TextBlock Text="{Binding Text}" Visibility="{Binding TextBlockVisabilty}"
                                        Foreground ="White"
                                        FontSize="26"
                                        FontFamily="{StaticResource MainFont}"
                                        Margin="20 10 0 10">
-                                    <TextBlock.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
-                                    </TextBlock.InputBindings>
-                                </TextBlock>
-                                <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditCommand}" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBox Text="{Binding Text}" Visibility="{Binding TextVisabilty}" 
                                      Foreground ="White"
                                      FontSize="26"
                                      FontFamily="{StaticResource MainFont}"
                                      Margin="20 10 0 10">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                                <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
-                                <Label Foreground ="White"
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding FinishEditCommand}"/>
+                                        </TextBox.InputBindings>
+                                    </TextBox>
+                                    <Border Background="White" Opacity="0.5" Margin="20 0 0 10" MinWidth="5" CornerRadius="2" Height="30"/>
+                                    <Label Foreground ="White"
                                 FontSize="26"
                                 FontFamily="{StaticResource MainFont}"
                                 Content="Item Rating  :" Margin="20 10 0 10"/>
-                                <materialDesign:RatingBar
+                                    <materialDesign:RatingBar
                                     Value="5"
                                     Margin="30 17 0 10"/>
-                            </WrapPanel>
-                        </Expander>
-                    </StackPanel>
+                                </WrapPanel>
+                            </Expander>
+                        </StackPanel>
+                    </Grid>
                 </Border>
                 
                 
