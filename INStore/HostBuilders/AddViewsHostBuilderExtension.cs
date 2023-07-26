@@ -20,26 +20,12 @@ namespace INStore.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddSingleton<MainWindow>(s => new MainWindow(CreatMainViewModel(s)));
+                services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
             });
 
             return host;
         }
 
-        private static object CreatMainViewModel(IServiceProvider s)
-        {
-            return new MainViewModel
-                (
-                    s.GetRequiredService< ILogger <MainViewModel>>(),
-                    s.GetRequiredService<INavigator>(),
-                    s.GetRequiredService<IINStoreViewModelFactory>(),
-                    s.GetRequiredService<ISnackbarMessageQueue>(),
-                    s.GetRequiredService<ILanguageSetter>(),
-                    s.GetRequiredService<IAuthenticators>(),
-                    s.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-                    s.GetRequiredService<ViewModelDelegateRenavigator<MyStoreViewModel>>(),
-                    s.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>()
-                );
-        }
+       
     }
 }

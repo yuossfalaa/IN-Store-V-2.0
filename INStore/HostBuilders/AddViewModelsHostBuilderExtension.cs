@@ -22,73 +22,35 @@ namespace INStore.HostBuilders
         {
             host.ConfigureServices(services => 
             {
-                services.AddTransient<MainViewModel>();
-
-                services.AddTransient(CreateHomeViewModel);
-                services.AddScoped(CreateRegisterViewModel);
-                services.AddScoped(CreateRegisterEmployeeViewModel);
-                services.AddScoped(CreateMyStoreViewModel);
-
-                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
-                services.AddScoped<CreateViewModel<RegisterViewModel>>(services => () => services.GetRequiredService<RegisterViewModel>());
-                services.AddScoped<CreateViewModel<RegisterEmployeeViewModel>>(services => () => services.GetRequiredService<RegisterEmployeeViewModel>());
-                services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
-                services.AddScoped<CreateViewModel<MyStoreViewModel>>(services => () => services.GetRequiredService<MyStoreViewModel>());
-
+                #region Main factory and Main View Model
                 services.AddSingleton<IINStoreViewModelFactory, INStoreViewModelFactory>();
+                services.AddTransient<MainViewModel>();
+                #endregion
+                #region Home View Model
+                services.AddTransient<HomeViewModel>();
+                services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
+                #endregion
+                #region Register View Model
+                services.AddTransient<RegisterViewModel>();
+                services.AddTransient<RegisterEmployeeViewModel>();
+                services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => services.GetRequiredService<RegisterViewModel>());
+                services.AddSingleton<CreateViewModel<RegisterEmployeeViewModel>>(services => () => services.GetRequiredService<RegisterEmployeeViewModel>());
+                services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
+                services.AddSingleton<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>();
+                #endregion
+                #region MyStore View Model
+                services.AddTransient<MyStoreViewModel>();
+                services.AddSingleton<ViewModelDelegateRenavigator<MyStoreViewModel>>();
+                services.AddSingleton<CreateViewModel<MyStoreViewModel>>(services => () => services.GetRequiredService<MyStoreViewModel>());
+                #endregion
+                #region Login View Model
+                services.AddTransient<LoginViewModel>();
+                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => services.GetRequiredService<LoginViewModel>());
                 services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
-                services.AddScoped<ViewModelDelegateRenavigator<RegisterViewModel>>();
-                services.AddScoped<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>();
-                services.AddScoped<ViewModelDelegateRenavigator<MyStoreViewModel>>();
+                #endregion
             });
             return host;
-        }
-
-        private static MyStoreViewModel CreateMyStoreViewModel(IServiceProvider services)
-        {
-            return new MyStoreViewModel();
-        }
-
-        private static RegisterEmployeeViewModel CreateRegisterEmployeeViewModel(IServiceProvider services)
-        {
-            return new RegisterEmployeeViewModel
-                (
-                services.GetRequiredService<ILogger<RegisterEmployeeViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-                services.GetRequiredService<IInRegistrationUser>(),
-                services.GetRequiredService<IAuthenticators>(),
-                services.GetRequiredService<ISnackbarMessageQueue>()
-                );
-        }
-
-        private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
-        {
-            return new RegisterViewModel
-                (
-                services.GetRequiredService<ILogger<RegisterViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterEmployeeViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-                services.GetRequiredService<IInRegistrationUser>()
-                ) ;
-        }
-
-        private static HomeViewModel CreateHomeViewModel(IServiceProvider services)
-        {
-            return new HomeViewModel();
-        }
-
-        private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
-        {
-            return new LoginViewModel
-                (
-                services.GetRequiredService<ILogger<LoginViewModel>>(),
-                services.GetRequiredService<IAuthenticators>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
-                services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
-                services.GetRequiredService<ISnackbarMessageQueue>()
-                );
         }
     }
 

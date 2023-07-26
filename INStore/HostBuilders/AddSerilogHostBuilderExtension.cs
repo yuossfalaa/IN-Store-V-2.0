@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace INStore.HostBuilders
 {
@@ -26,15 +27,15 @@ namespace INStore.HostBuilders
             string LoggingPath = "";
             try
             {
-                LoggingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
+                LoggingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //%appdata%
                 LoggingPath = LoggingPath + @"\IN Store\Logs";
                 System.IO.Directory.CreateDirectory(LoggingPath);
                 LoggingPath += @"\INStore - .txt";
 
             }
-            catch (Exception ConnectionStringAssemblerFailed)
+            catch (Exception LoggingPathAssemblerFailed)
             {
-
+                MessageBox.Show(LoggingPathAssemblerFailed.Message, "Logging Path Assembler Failed",MessageBoxButton.OK,MessageBoxImage.Error);
             }
             return LoggingPath;
 

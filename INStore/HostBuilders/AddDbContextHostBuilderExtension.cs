@@ -1,4 +1,5 @@
 ﻿using INStore.EntityFramework;
+using INStore.State.Registers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,20 +26,8 @@ namespace INStore.HostBuilders
         }
         private static string ConnectionStringAssembler()
         {
-            string connectionstring = "";
-            try
-            {
-                connectionstring = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData\Roaming
-                connectionstring = connectionstring + @"\IN Store\Data";
-                System.IO.Directory.CreateDirectory(connectionstring);
-                connectionstring = "Data Source = " + connectionstring + "\\INStore.db";
-
-            }
-            catch (Exception ConnectionStringAssemblerFailed)
-            {
-
-            }
-            return connectionstring;
+            IRegister registerApi = new Register();
+            return registerApi.GetDBConnectionString();
 
 
         }
