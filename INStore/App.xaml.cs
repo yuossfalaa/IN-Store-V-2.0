@@ -9,6 +9,7 @@ using INStore.HostBuilders;
 
 namespace INStore
 {
+    // Last Migration = > add-Migration InitialCreate_0.1
     public partial class App : Application
     {
         private readonly IHost _host;
@@ -26,7 +27,8 @@ namespace INStore
                   .AddDbContext()
                   .AddServices()
                   .AddViews()
-                  .AddViewModels();
+                  .AddViewModels()
+                  .UseDefaultServiceProvider(options => options.ValidateScopes = false);
         }
         private async Task DbContextCreator()
         {

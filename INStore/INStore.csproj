@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Images\ICON.ico</ApplicationIcon>
+
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <UserSecretsId>a69820fd-64d6-4f20-ad69-4b6c0aa97b08</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,16 +31,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.1.2" />
-    <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
+    <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.32.0" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-    <PackageReference Include="Serilog" Version="2.12.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="NuGet.CommandLine" Version="6.6.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="squirrel.windows" Version="1.9.0" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
   </ItemGroup>
 
@@ -76,4 +86,23 @@
     <Folder Include="UserControls\MyStore\Commands\" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<NugetTools>$(PkgNuGet_CommandLine)\tools</NugetTools>
+		<SquirrelTools>$(Pkgsquirrel_windows)\tools</SquirrelTools>
+
+		<Version>0.2.0</Version>
+
+		<NuspecFile>$(SolutionDir)INStore\ReleaseSpec.nuspec</NuspecFile>
+	</PropertyGroup>
+
+	<Target Name="GenerateRelease" AfterTargets="AfterBuild" Condition="$(Configuration) == Release">
+		<XmlPeek XmlInputPath="$(NuspecFile)" Query="/package/metadata/id/text()">
+			<Output TaskParameter="Result" ItemName="ID" />
+		</XmlPeek>
+
+		<Exec Command="$(NugetTools)\NuGet pack &quot;$(NuspecFile)&quot; -Version $(Version) -Properties Configuration=Release -OutputDirectory &quot;$(SolutionDir)Deployment\GeneratedNugets&quot;" />
+
+		<Exec Command="$(SquirrelTools)\Squirrel.exe --releasify &quot;$(SolutionDir)Deployment\GeneratedNugets\@(ID).$(Version).nupkg&quot; --releaseDir=&quot;$(SolutionDir)Deployment\Releases&quot;" />
+	</Target>
+	
 </Project>

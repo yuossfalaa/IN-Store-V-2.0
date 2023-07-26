@@ -24,6 +24,10 @@ namespace INStore.Domain.Services.AuthenticationService
             {
                 throw new UserNotFoundException(UserName);
             }
+            if (StoredUser.PasswordHash == null)
+            {
+                throw new WrongPasswordExcption();
+            }
             PasswordVerificationResult passwordResult = _passwordhasher.VerifyHashedPassword(StoredUser.PasswordHash, Password);
             if (passwordResult != PasswordVerificationResult.Success)
             {
@@ -35,6 +39,7 @@ namespace INStore.Domain.Services.AuthenticationService
         public async Task<RegistrationResult> Registre(string UserName, string Password, string AdminPassword, AccountState accountState, Employee employee)
         {
             RegistrationResult result = RegistrationResult.Success;
+
             string HashedPassword = _passwordhasher.HashPassword(Password);
             string HashedAdminPassword = _passwordhasher.HashPassword(AdminPassword);
 
@@ -63,7 +68,7 @@ namespace INStore.Domain.Services.AuthenticationService
                     PasswordHash = HashedPassword,
                     AdminPasswordHash = HashedAdminPassword,
                     AccountState = accountState,
-                    employee = employee
+                    Employee = employee
 
                 };
                 await _userService.Create(user);

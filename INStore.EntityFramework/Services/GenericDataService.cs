@@ -40,11 +40,12 @@ namespace INStore.EntityFramework.Services
             }
         }
 
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll(bool IncludeDeletedItems)
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
                 List<T> entities  = await context.Set<T>().ToListAsync();
+                if (!IncludeDeletedItems) entities = new List<T>(entities.Where(e => e.IsDeleted == false)); 
                 return entities;
             }
         }

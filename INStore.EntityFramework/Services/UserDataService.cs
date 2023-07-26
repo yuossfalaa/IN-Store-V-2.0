@@ -39,16 +39,23 @@ namespace INStore.EntityFramework.Services
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                User entity = await context.Set<User>().FirstOrDefaultAsync((e) => e.Id == id);
+                User entity = await context.Set<User>()
+                    .Include(u => u.Employee)
+                    .Include(u => u.Settings)
+                    .FirstOrDefaultAsync((e) => e.Id == id);
                 return entity;
             }
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<User>> GetAll(bool IncludeDeletedItems)
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                List<User> entities = await context.Set<User>().ToListAsync();
+                List<User> entities = await context.Set<User>()
+                    .Include(u => u.Employee)
+                    .Include(u => u.Settings)
+                    .ToListAsync();
+                if (!IncludeDeletedItems) entities = new List<User>(entities.Where(e => e.IsDeleted == false));
                 return entities;
             }
         }
@@ -57,7 +64,10 @@ namespace INStore.EntityFramework.Services
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                User entity = await context.Set<User>().FirstOrDefaultAsync((e) => e.UserName == username);
+                User entity = await context.Set<User>()
+                    .Include(u => u.Employee)
+                    .Include(u => u.Settings)
+                    .FirstOrDefaultAsync(e => e.UserName == username && e.IsDeleted == false);
                 return entity;
             }
         }
@@ -66,7 +76,10 @@ namespace INStore.EntityFramework.Services
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                User entity = await context.Set<User>().FirstOrDefaultAsync((e) => e.AdminPasswordHash == HashedAdminPassword);
+                User entity = await context.Set<User>()
+                    .Include(u => u.Employee)
+                    .Include(u => u.Settings)
+                    .FirstOrDefaultAsync((e) => e.AdminPasswordHash == HashedAdminPassword && e.IsDeleted == false);
                 return entity;
             }
         }

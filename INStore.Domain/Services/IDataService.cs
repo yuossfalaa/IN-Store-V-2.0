@@ -9,7 +9,7 @@ namespace INStore.Domain.Services
 {
     public interface IDataService<T>
     {
-        Task<List<T>> GetAll();
+        Task<List<T>> GetAll(bool IncludeDeletedItems);
         Task<T> Get(int id);
         Task<T> Create(T entity);
         Task<T> Update(int id,T entity);

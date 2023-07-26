@@ -3,6 +3,7 @@ using System;
 using INStore.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,12 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace INStore.EntityFramework.Migrations
 {
     [DbContext(typeof(INStoreDbContext))]
-    partial class INStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230704162548_InitialCreate_0.1")]
+    partial class InitialCreate_01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
             modelBuilder.Entity("INStore.Domain.Models.Customer", b =>
                 {
@@ -108,7 +111,7 @@ namespace INStore.EntityFramework.Migrations
                     b.Property<double>("ReceiptTotal")
                         .HasColumnType("REAL");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("paymentStatus")
@@ -400,7 +403,8 @@ namespace INStore.EntityFramework.Migrations
                     b.HasOne("INStore.Domain.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 

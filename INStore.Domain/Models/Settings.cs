@@ -2,16 +2,18 @@
 {
     public class Settings : DomainObject
     {
-        public bool? ChangeAccountinfo { get; set; }
-        public bool? AddDeleteItems { get; set; }
-        public bool? ViewMYStore { get; set; }
-        public bool? ViewEmployeeInfo { get; set; }
-        public bool? ViewVendorsAndCustomersInfo { get; set; }
-        public bool? ViewSettings { get; set; }
-        public bool? ViewDashboard { get; set; }
-        public bool? ViewTools { get; set; }
-        public bool? MakeRefund { get; set; }
-        public bool? CancelOrders { get; set; }
+        public bool ChangeAccountInfo { get; set; } = false;
+        public bool AddDeleteItems { get; set; } = false;
+        public bool ViewMyStore { get; set; } = false;
+        public bool ViewEmployeeInfo { get; set; } = false;
+        public bool ViewVendorsAndCustomersInfo { get; set; } = false;
+        public bool ViewSettings { get; set; } = false;
+        public bool ViewDashboard { get; set; } = false;
+        public bool ViewTools { get; set; } = false;
+        public bool MakeRefund { get; set; } = false;
+        public bool CancelOrders { get; set; } = false;
+        public int UserId { get; set; }
+        public User User { get; set; }
 
     }
 }

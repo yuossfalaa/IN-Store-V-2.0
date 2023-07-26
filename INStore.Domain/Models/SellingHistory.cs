@@ -2,14 +2,11 @@
 {
     public class SellingHistory : DomainObject
     {
-        public Receipts? Receipt { get; set; }
-        public string? ItemName { get; set; }
-        public int? ItemNumber { get; set; }
-        public double? ItemSellingPrice { get; set; }
-        public double? ItemTotalCost { get; set; }
-        
-       
-     
-
+        public int ReceiptID { get; set; }
+        public Receipts Receipt { get; set; }
+        public string ItemName { get; set; } = "";
+        public int ItemNumber { get; set; } = 0;
+        public double ItemSellingPrice { get; set; } = 0.0;
+        public double ItemTotalCost { get; set; } =  0.0;
     }
 }

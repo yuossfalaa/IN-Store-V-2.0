@@ -2,9 +2,10 @@
 {
     public class Vendor : DomainObject
     {
-        public string? VendorName {get; set;}
-        public string? VendorPhoneNumber { get; set;}    
-        public string? VendorAddress { get; set;}    
-        public string? VendorType { get; set;}    
+        public string VendorName {get; set;} = "";
+        public string VendorPhoneNumber { get; set;} = "";
+        public string VendorAddress { get; set;} = "";
+        public int? VendorTypeId { get; set;}
+        public VendorType? VendorType { get; set;}
     }
 }
