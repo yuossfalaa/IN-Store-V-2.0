@@ -45,8 +45,8 @@ namespace INStore.State.Authenticators
                 inRegistrationUser.RegisteringUser.UserName,
                 inRegistrationUser.RegisteringUser.PasswordHash, 
                 inRegistrationUser.RegisteringUser.AdminPasswordHash,
-                (AccountState)inRegistrationUser.RegisteringUser.AccountState,
-                inRegistrationUser.RegisteringUser.employee
+                inRegistrationUser.RegisteringUser.AccountState,
+                inRegistrationUser.RegisteringUser.Employee
                 );
         }
 

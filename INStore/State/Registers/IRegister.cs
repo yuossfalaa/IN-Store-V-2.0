@@ -6,5 +6,7 @@ namespace INStore.State.Registers
     {
         CultureInfo GetLanguage();
         void SetLanguage(CultureInfo Culture);
+        string GetDBConnectionString();
+        string SetDBConnectionString(string DBConnectionString);
     }
 }

@@ -13,7 +13,7 @@ namespace INStore.State.UserStore
         public InRegistrationUser()
         {
             RegisteringUser = new User();
-            RegisteringUser.employee = new Employee();
+            RegisteringUser.Employee = new Employee();
         }
     }
 }
