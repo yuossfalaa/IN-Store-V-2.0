@@ -8,5 +8,9 @@ namespace INStore.State.Registers
         void SetLanguage(CultureInfo Culture);
         string GetDBConnectionString();
         string SetDBConnectionString(string DBConnectionString);
+        string GetLoggingLocation();
+        string SetLoggingLocation();
+        string ReturnLoggingFolderLocation();
+
     }
 }

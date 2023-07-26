@@ -1,17 +1,11 @@
 ﻿using INStore.Factories;
-using INStore.State.Authenticators;
 using INStore.State.Navigators;
-using INStore.State.UserStore;
 using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.MyStore.ViewModels;
-using INStore.UserControls.MyStore.Views;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
 
 
 namespace INStore.HostBuilders

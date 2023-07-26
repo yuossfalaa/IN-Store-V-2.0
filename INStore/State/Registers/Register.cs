@@ -1,13 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Data.Sqlite;
 using System.Windows;
+using System.IO;
 
 namespace INStore.State.Registers
 {
@@ -90,8 +87,32 @@ namespace INStore.State.Registers
             //return it
             return dbConnectionString;
         }
-
         #endregion
+        #region Logging Location
+        public string GetLoggingLocation()
+        {
+            string LoggingPath = (string)Rig.GetValue("LoggingLocation");
+            if (LoggingPath == null)
+            {
+                LoggingPath = SetLoggingLocation();
+            }
+            return LoggingPath;
+
+        }
+
+        public string SetLoggingLocation()
+        {
+            string LoggingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); 
+            LoggingPath = LoggingPath + @"\IN Store\Logs";
+            System.IO.Directory.CreateDirectory(LoggingPath);
+            LoggingPath += @"\INStore - .txt";
+            Rig.SetValue("LoggingLocation", LoggingPath);
+            return LoggingPath;
+        }
+
+        public string ReturnLoggingFolderLocation() => Path.GetDirectoryName(GetLoggingLocation());
+        #endregion
+
 
     }
 }
