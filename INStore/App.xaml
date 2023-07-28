@@ -40,6 +40,12 @@
             <DataTemplate DataType="{x:Type MyStoreViewModel:MyStoreViewModel}">
                 <MyStoreView:MyStore/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type MyStoreViewModel:AddItemViewModel}">
+                <MyStoreView:AddEditStoreItemView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type MyStoreViewModel:EditItemViewModel}">
+                <MyStoreView:AddEditStoreItemView />
+            </DataTemplate>
 
 
         </ResourceDictionary>
