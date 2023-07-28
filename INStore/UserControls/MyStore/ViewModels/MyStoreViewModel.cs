@@ -1,76 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Input;
+using ArrayToExcel;
 using GalaSoft.MvvmLight.Command;
+using INStore.Domain.ExportingModels;
+using INStore.Domain.Models;
+using INStore.Domain.Services;
+using INStore.State.FloatingWindow;
+using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
-using MaterialDesignThemes.Wpf;
+using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
+
 namespace INStore.UserControls.MyStore.ViewModels
 {
     public class MyStoreViewModel : ViewModelBase
     {
-        public ICommand EditCommand { get;set; }
-        public ICommand FinishEditCommand { get;set; }
-        private Visibility textBlockVisabilty;
+        #region Private Vars
+        private readonly IStoreItemsService _storeItemsService;
+        public readonly ILogger<MyStoreViewModel> _MyStoreViewModelLogger;
+        private readonly FloatingWindow _floatingWindow;
+        #endregion
+        #region Public Vars
+        private ObservableCollection<StoreItems> _StoreItemsCollection;
 
-        public Visibility TextBlockVisabilty
+        public ObservableCollection<StoreItems> StoreItemsCollections
         {
-            get { return textBlockVisabilty; }
-            set { textBlockVisabilty = value; OnPropertyChanged(nameof(TextBlockVisabilty)); }
+            get { return _StoreItemsCollection; }
+            set { _StoreItemsCollection = value; OnPropertyChanged(nameof(StoreItemsCollections)); }
         }
-        private Visibility textVisabilty;
+        private StoreItems _NewStoreItem;
 
-        public Visibility TextVisabilty
+        public StoreItems NewStoreItem
         {
-            get { return textVisabilty; }
-            set { textVisabilty = value; OnPropertyChanged(nameof(TextVisabilty)); }
+            get { return _NewStoreItem; }
+            set { _NewStoreItem = value; OnPropertyChanged(nameof(NewStoreItem)); }
         }
-        private string text;
-
-        public string Text
+        private string _StoreItemProp;
+                
+        public string StoreItemProp
         {
-            get { return text; }
-            set { text = value; OnPropertyChanged(nameof(Text)); }
-
-        }
-        private PackIconKind editsaveIcon;
-
-        public PackIconKind EditSaveIcon
-        {
-            get { return editsaveIcon; }
-            set { editsaveIcon = value; OnPropertyChanged(nameof(EditSaveIcon)); }
+            get { return _StoreItemProp; }
+            set { _StoreItemProp = value; OnPropertyChanged(nameof(StoreItemProp)); }
         }
 
+        #endregion
+        #region Commands
+        public ICommand GetAllStoreItemsCommand { get; set; }
+        public ICommand SearchStoreItemCommand { get; set; }
+        public ICommand DeleteStoreItemCommand { get; set; }
+        public ICommand OpenEditItemStoreItemCommand { get; set; }
+        public ICommand OpenAddItemStoreItemCommand { get; set; }
+        public ICommand ExportStoreItemCommand { get; set; }
+        public ICommand ImportStoreItemCommand { get; set; }
 
-        public MyStoreViewModel()
+        #endregion
+
+        public MyStoreViewModel(IStoreItemsService storeItemsService, FloatingWindow floatingWindow, ILogger<MyStoreViewModel> myStoreViewModelLogger)
         {
-            EditCommand = new RelayCommand(EditTextBox);
-            FinishEditCommand = new RelayCommand(FinishEditTextBox);
-            TextBlockVisabilty = Visibility.Visible;
-            TextVisabilty = Visibility.Collapsed;
-            Text = " Before Edit";
-            EditSaveIcon = PackIconKind.PencilOutline;
+            _storeItemsService = storeItemsService;
+            _floatingWindow = floatingWindow;
+            _MyStoreViewModelLogger = myStoreViewModelLogger;
+            //initialize Commands
+            SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, this);
+            DeleteStoreItemCommand = new DeleteStoreItem(_storeItemsService, this);
+            OpenEditItemStoreItemCommand = new RelayCommand<StoreItems>(OpenEditItemStoreItemFunc);
+            OpenAddItemStoreItemCommand = new RelayCommand(OpenAddItemStoreItemFunc);
+            ExportStoreItemCommand = new RelayCommand(ExportStoreItemFunc);
+            //Load Data
+            GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, this);
+            GetAllStoreItemsCommand.Execute(null);
+            _MyStoreViewModelLogger.Log(LogLevel.Information, "MyStoreViewModel Initialized");
+            
 
         }
 
-        private void FinishEditTextBox()
+
+        #region Private Methods
+        private void ExportStoreItemFunc()
         {
-            TextBlockVisabilty = Visibility.Visible;
-            TextVisabilty = Visibility.Collapsed;
-            EditSaveIcon = PackIconKind.PencilOutline;
+            var sfd = new SaveFileDialog { Filter = "Excel Files|*.xlsx", FileName = "IN Store ( My Store Items )", AddExtension = true };
+            if (sfd.ShowDialog().Value)
+            {
+                string dirPath = sfd.FileName;
+                var ExcelFile = PrepareExportingItems().ToExcel();
+                File.WriteAllBytes(dirPath, ExcelFile);
+            }
+        }
+        private ObservableCollection<ExportingStoreItems> PrepareExportingItems()
+        {
+            ObservableCollection<ExportingStoreItems> items = new ObservableCollection<ExportingStoreItems>();
+            foreach (var item in StoreItemsCollections)
+            {
+                items.Add(new ExportingStoreItems
+                {
+                    Item_Name = item.Item.ItemName,
+                    Item_Description = item.Item.ItemDescription,
+                    Item_BarCode = item.Item.ItemBarCode,
+                    Item_Selling_Price = item.Item.ItemSellingPrice,
+                    Item_Purchasing_Price = item.Item.ItemPurchasingPrice,
+                    Item_Number_InStore = item.ItemNumberInStore,
+                    Item_Number_InStock = item.ItemNumberInStock
+                });
+            }
+            return items;
+        }
+        private void OpenAddItemStoreItemFunc()
+        {
+            _floatingWindow.FloatingWindowControl = new AddItemViewModel(_storeItemsService, this);
+            MaterialDesignThemes.Wpf.DialogHost.OpenDialogCommand.Execute(null, null);
+            _MyStoreViewModelLogger.Log(LogLevel.Information, "AddItemViewModel Initialized");
 
         }
 
-        private void EditTextBox()
+        private void OpenEditItemStoreItemFunc(StoreItems items)
         {
-            TextBlockVisabilty = Visibility.Collapsed;
-            TextVisabilty = Visibility.Visible;
-            EditSaveIcon = PackIconKind.ContentSaveOutline;
-
-
+            if (items != null)
+            {
+                _floatingWindow.FloatingWindowControl = new EditItemViewModel(_storeItemsService, this, items);
+                MaterialDesignThemes.Wpf.DialogHost.OpenDialogCommand.Execute(null, null);
+                _MyStoreViewModelLogger.Log(LogLevel.Information, "EditItemViewModel Initialized");
+            }
+        
         }
+        #endregion
     }
 }
