@@ -28,7 +28,13 @@ namespace INStore.EntityFramework.Services
 
         public async Task<bool> Delete(User entity)
         {
-            return await _nonQueryDataService.Delete(entity);
+            using (INStoreDbContext context = _contextFactory.CreateDbContext())
+            {
+                entity.IsDeleted = true;
+                context.Set<User>().Update(entity);
+                await context.SaveChangesAsync();
+                return true;
+            }
         }
         public async Task<User> Update(int id, User entity)
         {
@@ -51,11 +57,22 @@ namespace INStore.EntityFramework.Services
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                List<User> entities = await context.Set<User>()
+                List<User> entities = new List<User>();
+                if (!IncludeDeletedItems)
+                {
+                    entities = await context.Set<User>()
+                        .Where(e => e.IsDeleted == false)
+                        .Include(u => u.Employee)
+                        .Include(u => u.Settings)
+                        .ToListAsync();
+                }
+                else
+                {
+                    entities = await context.Set<User>()
                     .Include(u => u.Employee)
                     .Include(u => u.Settings)
                     .ToListAsync();
-                if (!IncludeDeletedItems) entities = new List<User>(entities.Where(e => e.IsDeleted == false));
+                }
                 return entities;
             }
         }
