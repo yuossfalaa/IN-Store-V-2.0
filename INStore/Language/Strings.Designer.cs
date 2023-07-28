@@ -61,6 +61,87 @@ namespace INStore.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Image.
+        /// </summary>
+        internal static string AddEditStoreItemViewAddImage {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewAddImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barcode.
+        /// </summary>
+        internal static string AddEditStoreItemViewBareCode {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewBareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string AddEditStoreItemViewDescription {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IN Stock.
+        /// </summary>
+        internal static string AddEditStoreItemViewINStock {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewINStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IN Store.
+        /// </summary>
+        internal static string AddEditStoreItemViewINStore {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewINStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Name.
+        /// </summary>
+        internal static string AddEditStoreItemViewProductName {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Price.
+        /// </summary>
+        internal static string AddEditStoreItemViewPurchasePrice {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewPurchasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string AddEditStoreItemViewSave {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selling Price.
+        /// </summary>
+        internal static string AddEditStoreItemViewSellingPrice {
+            get {
+                return ResourceManager.GetString("AddEditStoreItemViewSellingPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         internal static string GeneralFlowDirection {
@@ -102,6 +183,105 @@ namespace INStore.Language {
         internal static string LoginViewUsername {
             get {
                 return ResourceManager.GetString("LoginViewUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add   .
+        /// </summary>
+        internal static string MyStoreAdd {
+            get {
+                return ResourceManager.GetString("MyStoreAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barcode.
+        /// </summary>
+        internal static string MyStoreBareCode {
+            get {
+                return ResourceManager.GetString("MyStoreBareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string MyStoreDelete {
+            get {
+                return ResourceManager.GetString("MyStoreDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string MyStoreEdit {
+            get {
+                return ResourceManager.GetString("MyStoreEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string MyStoreExport {
+            get {
+                return ResourceManager.GetString("MyStoreExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string MyStoreImport {
+            get {
+                return ResourceManager.GetString("MyStoreImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IN Stock.
+        /// </summary>
+        internal static string MyStoreINStock {
+            get {
+                return ResourceManager.GetString("MyStoreINStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IN Store.
+        /// </summary>
+        internal static string MyStoreINStore {
+            get {
+                return ResourceManager.GetString("MyStoreINStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Price.
+        /// </summary>
+        internal static string MyStorePurchasePrice {
+            get {
+                return ResourceManager.GetString("MyStorePurchasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to search Products.
+        /// </summary>
+        internal static string MyStoresearchProducts {
+            get {
+                return ResourceManager.GetString("MyStoresearchProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selling Price.
+        /// </summary>
+        internal static string MyStoreSellingPrice {
+            get {
+                return ResourceManager.GetString("MyStoreSellingPrice", resourceCulture);
             }
         }
         
