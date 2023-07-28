@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEditStoreItemViewAddImage" xml:space="preserve">
+    <value>إضافة صورة</value>
+  </data>
+  <data name="AddEditStoreItemViewBareCode" xml:space="preserve">
+    <value>الباركود</value>
+  </data>
+  <data name="AddEditStoreItemViewDescription" xml:space="preserve">
+    <value>وصف</value>
+  </data>
+  <data name="AddEditStoreItemViewINStock" xml:space="preserve">
+    <value>في المخزن</value>
+  </data>
+  <data name="AddEditStoreItemViewINStore" xml:space="preserve">
+    <value>في المتجر</value>
+  </data>
+  <data name="AddEditStoreItemViewProductName" xml:space="preserve">
+    <value>اسم المنتج</value>
+  </data>
+  <data name="AddEditStoreItemViewPurchasePrice" xml:space="preserve">
+    <value>سعر الشراء</value>
+  </data>
+  <data name="AddEditStoreItemViewSave" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="AddEditStoreItemViewSellingPrice" xml:space="preserve">
+    <value>سعر البيع</value>
+  </data>
   <data name="GeneralFlowDirection" xml:space="preserve">
     <value>RightToLeft</value>
   </data>
@@ -131,6 +158,39 @@
   </data>
   <data name="LoginViewUsername" xml:space="preserve">
     <value>اسم المستخدم</value>
+  </data>
+  <data name="MyStoreAdd" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="MyStoreBareCode" xml:space="preserve">
+    <value>الباركود</value>
+  </data>
+  <data name="MyStoreDelete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="MyStoreEdit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="MyStoreExport" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="MyStoreImport" xml:space="preserve">
+    <value>استيراد</value>
+  </data>
+  <data name="MyStoreINStock" xml:space="preserve">
+    <value>في المخزن</value>
+  </data>
+  <data name="MyStoreINStore" xml:space="preserve">
+    <value>في المتجر</value>
+  </data>
+  <data name="MyStorePurchasePrice" xml:space="preserve">
+    <value>سعر الشراء</value>
+  </data>
+  <data name="MyStoresearchProducts" xml:space="preserve">
+    <value>البحث عن المنتجات</value>
+  </data>
+  <data name="MyStoreSellingPrice" xml:space="preserve">
+    <value>سعر البيع</value>
   </data>
   <data name="NavigationBarAbout" xml:space="preserve">
     <value>حول</value>
