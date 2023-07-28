@@ -7,9 +7,15 @@
     <SolidColorBrush x:Key="PrimarytButtonColor" Color="#BE1E2D"/>
     <SolidColorBrush x:Key="SecondaryButtonColor" Color="#333333"/>
     <SolidColorBrush x:Key="BackgroundBorderBrush" Color="Black" Opacity="0.6"/>
-    <SolidColorBrush x:Key="MenuBorderBrush" Color="Black" Opacity="0.7"/>
+    <SolidColorBrush x:Key="MenuBorderBrush" Color="Black" Opacity="0.95"/>
     <SolidColorBrush x:Key="BorderBorderBrush" Color="Black" Opacity="0.9"/>
-    
+    <SolidColorBrush x:Key="ColoreZoneBackGroundd"
+                     Color="Black"
+                     Opacity="0.55" />
+    <SolidColorBrush x:Key="AddEditColoreZoneBackGround"
+                     Color="Black"
+                     Opacity="1" />
+
     <!--Primary Brushs-->
     <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#808080" />
     <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White"/>
