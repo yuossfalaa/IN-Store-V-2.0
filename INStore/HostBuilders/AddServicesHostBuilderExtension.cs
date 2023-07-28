@@ -25,6 +25,7 @@ namespace INStore.HostBuilders
                 services.AddSingleton<IAuthenticators, Authenticators>();
                 services.AddSingleton<ISnackbarMessageQueue, SnackbarMessageQueue>();
                 services.AddSingleton<IRegister, Register>();
+                services.AddSingleton<IStoreItemsService, StoreItemsDataService>();
             });
             return host;
         }
