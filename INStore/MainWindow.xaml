@@ -3,128 +3,164 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:lex ="http://wpflocalizeextension.codeplex.com"
-        xmlns:local="clr-namespace:INStore" 
-        xmlns:ViewModels="clr-namespace:INStore.ViewModels" 
-        xmlns:Converters="clr-namespace:INStore.Converters" 
-        xmlns:NavigationBar="clr-namespace:INStore.UserControls.NavigationBar.View" 
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        xmlns:local="clr-namespace:INStore"
+        xmlns:ViewModels="clr-namespace:INStore.ViewModels"
+        xmlns:Converters="clr-namespace:INStore.Converters"
+        xmlns:NavigationBar="clr-namespace:INStore.UserControls.NavigationBar.View"
         xmlns:Controls="clr-namespace:INStore.Themes.Controls"
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="INStore"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
-        Title="IN Store" Height="720" Width="1280" 
-        WindowStartupLocation="CenterScreen"
-        WindowState="Maximized" 
+        Title="IN Store"
+        Height="720"
+        Width="1280"
+        MinHeight="640"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
         WindowStyle="None"
         Background="{x:Null}"
         UseLayoutRounding="True">
+    <!--MinWidth="1280"-->
 
     <Window.Resources>
-        <Converters:CurrentViewModelToVisibilityConverter x:Key="CurrentViewModelToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
-        <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToLogoutVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
-        <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToNavigationBarVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <Converters:CurrentViewModelToVisibilityConverter x:Key="CurrentViewModelToVisibilityConverter"
+                                                          TrueValue="Visible"
+                                                          FalseValue="Collapsed" />
+        <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToLogoutVisibilityConverter"
+                                                                TrueValue="Visible"
+                                                                FalseValue="Collapsed" />
+        <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToNavigationBarVisibilityConverter"
+                                                                TrueValue="Visible"
+                                                                FalseValue="Collapsed" />
     </Window.Resources>
-    <Grid >
-        <Border>
-            <Image Source="\Resources\Images\INstore Background - Solid.jpg" Stretch="Fill"/>
-        </Border>
-        <Border VerticalAlignment="Top" HorizontalAlignment="Right" 
-                Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToVisibilityConverter}}">
-            <materialDesign:TransitioningContent Visibility="{Binding LogoVisibilty}">
-                <materialDesign:TransitioningContent.OpeningEffects >
-                    <materialDesign:TransitionEffect Kind="SlideInFromTop"/>
-                    <materialDesign:TransitionEffect Kind="SlideInFromRight"/>
-                </materialDesign:TransitioningContent.OpeningEffects>
-                <Image Source="\Resources\Images\INstore Background - Logo.png"  Margin="0 -500 -700 0" Stretch="UniformToFill"/>
-            </materialDesign:TransitioningContent>
-        </Border>
-        <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <NavigationBar:NavigationBar  
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Grid.Row="1"
-                    Grid.RowSpan="2"
-                    Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
-                    Margin="0,0,20,10"/>
-            <StackPanel Margin="10,0,0,5" Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Left">
-                <Label Content="IN" 
-                    FontFamily="{StaticResource Avatarock}" 
-                    Foreground="#D2714E" 
-                    FontSize="50"/>
-                <Label Content="Store" 
-                    FontFamily="{StaticResource Avatarock}" 
-                    Foreground="#844742" 
-                    FontSize="50"/>
-            </StackPanel>
-            <StatusBar Grid.Row="0" 
-                       Background="Transparent"
-                       HorizontalAlignment="Stretch"
-                       VerticalAlignment="Stretch"
-                       MouseMove="TriggerMoveWindow"/>
-            <StackPanel Height="40" HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                    Margin="0,5,10,0"
-                    Orientation="Horizontal"
-                    Grid.Row="0" >
-                <ToggleButton  Height="30" Width="30" Margin="0,5,20,0" 
-                    Style="{StaticResource MaterialDesignActionToggleButton}"
-                    Foreground="Black"  
-                    Background="Wheat"
-                    IsChecked="{Binding IsEnglish}"
-                    ToolTip="MaterialDesignActionLightToggleButton"
-                    Content="{materialDesign:PackIcon Kind= Earth, Size=25}"
-                    materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=AbjadArabic ,Size=25}" />
+    <Grid>
+        <materialDesign:DialogHost HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   CloseOnClickAway="True"
+                                   DialogBackground="{StaticResource AddEditColoreZoneBackGround}"
+                                   OverlayBackground="Black">
+            <materialDesign:DialogHost.DialogContent>
+                <ContentControl Content="{Binding CurrentFloatingWindowViewModel}"
+                                FlowDirection="{lex:Loc Key=GeneralFlowDirection}"/>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Border>
+                    <Image Source="\Resources\Images\INstore Background - Solid.jpg"
+                           Stretch="Fill" />
+                </Border>
+                <Border VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToVisibilityConverter}}">
+                    <materialDesign:TransitioningContent Visibility="{Binding LogoVisibilty}">
+                        <materialDesign:TransitioningContent.OpeningEffects>
+                            <materialDesign:TransitionEffect Kind="SlideInFromTop" />
+                            <materialDesign:TransitionEffect Kind="SlideInFromRight" />
+                        </materialDesign:TransitioningContent.OpeningEffects>
+                        <Image Source="\Resources\Images\INstore Background - Logo.png"
+                               Margin="0 -500 -700 0"
+                               Stretch="UniformToFill" />
+                    </materialDesign:TransitioningContent>
+                </Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="10,0,0,5"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                        <Label Content="IN"
+                               FontFamily="{StaticResource Avatarock}"
+                               Foreground="#D2714E"
+                               FontSize="50" />
+                        <Label Content="Store"
+                               FontFamily="{StaticResource Avatarock}"
+                               Foreground="#844742"
+                               FontSize="50" />
+                    </StackPanel>
+                    <StatusBar Grid.Row="0"
+                               Background="Transparent"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               MouseMove="TriggerMoveWindow" />
+                    <StackPanel Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="0,5,10,0"
+                                Orientation="Horizontal"
+                                Grid.Row="0">
+                        <ToggleButton  Height="30"
+                                       Width="30"
+                                       Margin="0,5,20,0"
+                                       Style="{StaticResource MaterialDesignActionToggleButton}"
+                                       Foreground="Black"
+                                       Background="Wheat"
+                                       IsChecked="{Binding IsEnglish}"
+                                       ToolTip="MaterialDesignActionLightToggleButton"
+                                       Content="{materialDesign:PackIcon Kind= Earth, Size=25}"
+                                       materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=AbjadArabic ,Size=25}" />
 
-                <Button Height="30" Width="30" Margin="20,5,0,0" 
-                     Style="{StaticResource MaterialDesignIconForegroundButton}" 
-                        Foreground="{StaticResource DefaultButtonColor}"
-                        Click="MinimizeWindow">
-                    <materialDesign:PackIcon Kind="Minus" Height="25" Width="25"  />
-                </Button>
-                <Button Height="30" Width="30" Margin="20,5,0,0"  
-                    Style="{StaticResource MaterialDesignIconForegroundButton}" 
-                        Foreground="{StaticResource DefaultButtonColor}"
-                    Click="MaximizeWindow" >
-                    <materialDesign:PackIcon Kind="WindowMaximize" Height="25" Width="25" x:Name="MaximizeWindowPackIcon"/>
-                </Button>
-                <Button Height="30" Width="30" Margin="20,5,0,0" 
-                    Style="{StaticResource MaterialDesignIconForegroundButton}" 
-                        Foreground="{StaticResource DefaultButtonColor}"
-                    Click="CloseApplication">
-                    <materialDesign:PackIcon Kind="Close" Height="25" Width="25" />
-                </Button>
-            </StackPanel>
-            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"  FlowDirection="{lex:Loc Key=GeneralFlowDirection}"/>
-            <StackPanel Height="40" HorizontalAlignment="Left"
-                    Margin="0,0,0,10"
-                    Orientation="Horizontal" Grid.Row="2">
-                <Button Height="30" Width="30" Margin="10,0,0,0" 
-                     Style="{StaticResource MaterialDesignIconForegroundButton}"
-                       Foreground="{StaticResource DefaultButtonColor}"
-                       Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToLogoutVisibilityConverter}  }"
-                        Command="{Binding logoutCommand}">
-                    
-                    <materialDesign:PackIcon Kind="Logout" Height="25" Width="25"  />
-                </Button>
+                        <Button Height="30"
+                                Width="30"
+                                Margin="20,5,0,0"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                Foreground="{StaticResource DefaultButtonColor}"
+                                Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToLogoutVisibilityConverter}  }"
+                                Command="{Binding logoutCommand}"
+                                ToolTip="Logout">
 
-            </StackPanel>
-            <NavigationBar:NavigationBar  
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Grid.Row="1"
-                    Grid.RowSpan="2"
-                    Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
-                    Margin="0,0,20,10"/>
+                            <materialDesign:PackIcon Kind="Logout"
+                                                     Height="25"
+                                                     Width="25" />
+                        </Button>
 
-        </Grid>
-        <materialDesign:Snackbar MessageQueue="{Binding MyMessageQueue}"/>
+                        <Button Height="30"
+                                Width="30"
+                                Margin="20,5,0,0"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                Foreground="{StaticResource DefaultButtonColor}"
+                                Click="MinimizeWindow">
+                            <materialDesign:PackIcon Kind="Minus"
+                                                     Height="25"
+                                                     Width="25" />
+                        </Button>
+                        <Button Height="30"
+                                Width="30"
+                                Margin="20,5,0,0"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                Foreground="{StaticResource DefaultButtonColor}"
+                                Click="MaximizeWindow">
+                            <materialDesign:PackIcon Kind="WindowMaximize"
+                                                     Height="25"
+                                                     Width="25"
+                                                     x:Name="MaximizeWindowPackIcon" />
+                        </Button>
+                        <Button Height="30"
+                                Width="30"
+                                Margin="20,5,0,0"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                Foreground="{StaticResource DefaultButtonColor}"
+                                Click="CloseApplication">
+                            <materialDesign:PackIcon Kind="Close"
+                                                     Height="25"
+                                                     Width="25" />
+                        </Button>
+                    </StackPanel>
+                    <Grid Grid.Row="1"
+                          FlowDirection="{lex:Loc Key=GeneralFlowDirection}">
+                        <ContentControl Content="{Binding CurrentViewModel}"
+                                        FlowDirection="{lex:Loc Key=GeneralFlowDirection}" />
+                        <NavigationBar:NavigationBar VerticalAlignment="Bottom"
+                                                     HorizontalAlignment="Right"
+                                                     Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
+                                                     Margin="0,0,30,5" />
+                    </Grid>
+                </Grid>
+                <materialDesign:Snackbar MessageQueue="{Binding MyMessageQueue}" />
+            </Grid>
+        </materialDesign:DialogHost>
 
     </Grid>
 </Window>
