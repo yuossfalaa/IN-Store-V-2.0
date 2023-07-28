@@ -2,6 +2,7 @@
 using INStore.Factories;
 using INStore.Language;
 using INStore.State.Authenticators;
+using INStore.State.FloatingWindow;
 using INStore.State.Navigators;
 using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.MyStore.ViewModels;
@@ -26,6 +27,7 @@ namespace INStore.ViewModels
         private readonly IRenavigator loginRenavigator;
         private readonly IRenavigator myStoreRenavigator;
         private readonly IRenavigator homeRenavigator;
+        public   FloatingWindow FloatingWindowControl;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private Visibility _logoVisibilty;
         private bool _IsEnglish;
@@ -60,6 +62,7 @@ namespace INStore.ViewModels
             }
         }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
+        public ViewModelBase CurrentFloatingWindowViewModel => FloatingWindowControl.FloatingWindowControl;
         #endregion
         #region Commands
         public ICommand UpdateCurrentViewModelCommand { get; }
@@ -75,7 +78,8 @@ namespace INStore.ViewModels
             IAuthenticators authenticators,
             ViewModelDelegateRenavigator<LoginViewModel> loginRenavigator,
             ViewModelDelegateRenavigator<MyStoreViewModel> myStoreRenavigator,
-            ViewModelDelegateRenavigator<HomeViewModel> HomeRenavigator)
+            ViewModelDelegateRenavigator<HomeViewModel> HomeRenavigator,
+            FloatingWindow floatingWindow)
         {
 
             //Fields
@@ -89,10 +93,12 @@ namespace INStore.ViewModels
             this.myStoreRenavigator = myStoreRenavigator;
             homeRenavigator = HomeRenavigator;
             _IsEnglish = _languageSetter.IsArabic();
+            FloatingWindowControl = floatingWindow;
 
 
             //Events
             _navigator.StateChanged += Navigator_StateChanged;
+            FloatingWindowControl.StateChanged += FloatingWindowControl_StateChanged;
             OnPropertyChanged(nameof(IsEnglish));
 
             //commands
@@ -105,11 +111,12 @@ namespace INStore.ViewModels
             dispatcherTimerInit();
             _MainViewModelLogger.Log(LogLevel.Information, "MainViewModel Initialized");
         }
-
-
-
-
         #region Private Functions
+        private void FloatingWindowControl_StateChanged()
+        {
+            OnPropertyChanged(nameof(CurrentFloatingWindowViewModel));
+
+        }
         private void Navigator_StateChanged()
         {
             _MainViewModelLogger.Log(LogLevel.Information, "CurrentViewModel Changed To => " + CurrentViewModel.ToString());
