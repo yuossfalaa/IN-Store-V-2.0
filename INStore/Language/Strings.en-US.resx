@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEditStoreItemViewAddImage" xml:space="preserve">
+    <value>Add Image</value>
+  </data>
+  <data name="AddEditStoreItemViewBareCode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="AddEditStoreItemViewDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AddEditStoreItemViewINStock" xml:space="preserve">
+    <value>IN Stock</value>
+  </data>
+  <data name="AddEditStoreItemViewINStore" xml:space="preserve">
+    <value>IN Store</value>
+  </data>
+  <data name="AddEditStoreItemViewProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="AddEditStoreItemViewPurchasePrice" xml:space="preserve">
+    <value>Purchase Price</value>
+  </data>
+  <data name="AddEditStoreItemViewSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="AddEditStoreItemViewSellingPrice" xml:space="preserve">
+    <value>Selling Price</value>
+  </data>
   <data name="GeneralFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
   </data>
@@ -131,6 +158,39 @@
   </data>
   <data name="LoginViewUsername" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="MyStoreAdd" xml:space="preserve">
+    <value>Add   </value>
+  </data>
+  <data name="MyStoreBareCode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="MyStoreDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MyStoreEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="MyStoreExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="MyStoreImport" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="MyStoreINStock" xml:space="preserve">
+    <value>IN Stock</value>
+  </data>
+  <data name="MyStoreINStore" xml:space="preserve">
+    <value>IN Store</value>
+  </data>
+  <data name="MyStorePurchasePrice" xml:space="preserve">
+    <value>Purchase Price</value>
+  </data>
+  <data name="MyStoresearchProducts" xml:space="preserve">
+    <value>search Products</value>
+  </data>
+  <data name="MyStoreSellingPrice" xml:space="preserve">
+    <value>Selling Price</value>
   </data>
   <data name="NavigationBarAbout" xml:space="preserve">
     <value>About</value>
