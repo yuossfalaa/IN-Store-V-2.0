@@ -35,7 +35,7 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
         public ICommand RegisterCommand { get; set; }
 
         public LoginViewModel(ILogger<LoginViewModel> loginViewModelLogger, IAuthenticators authenticators,
-            ViewModelDelegateRenavigator<HomeViewModel> loginRenavigator, ViewModelDelegateRenavigator<RegisterViewModel> registerRenavigator, 
+            ViewModelDelegateRenavigator<HomeViewModel> loginRenavigator, ViewModelDelegateRenavigator<RegisterViewModel> registerRenavigator,
             ISnackbarMessageQueue snackbarMessageQueue, IInRegistrationUser inRegistrationUser)
         {
             _Authenticators = authenticators;
@@ -53,6 +53,10 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
 
             _LoginViewModelLogger.Log(LogLevel.Information, "LoginViewModel Initialized");
 
+#if DEBUG
+            CurrentUser.UserName = "admin";
+            CurrentUser.PasswordHash = "admin";
+#endif
         }
 
 
