@@ -10,6 +10,5 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings" >
     <Grid>
         <TextBlock Text="Home" />
-       
     </Grid>
 </UserControl>
