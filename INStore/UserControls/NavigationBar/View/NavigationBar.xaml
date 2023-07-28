@@ -1,77 +1,73 @@
 ﻿<UserControl x:Class="INStore.UserControls.NavigationBar.View.NavigationBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:INStore.UserControls.NavigationBar.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:lex ="http://wpflocalizeextension.codeplex.com"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="INStore"
-             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
-             >
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings">
     <Grid>
-        <materialDesign:PopupBox
-            Style="{StaticResource  MaterialDesignMultiFloatingActionDarkPopupBox}"
-            materialDesign:PopupMode="MouseOverEager" 
-            Width="110" Height="110">
-            <materialDesign:PopupBox.ToggleContent >
-                    <Image Source="\Resources\Images\Navigation Bar Logo.png"  
-                           Width="85" Height="85" 
-                           RenderOptions.BitmapScalingMode="HighQuality" />
+        <materialDesign:PopupBox Style="{StaticResource  MaterialDesignMultiFloatingActionDarkPopupBox}"
+                                 Width="110"
+                                 Height="110">
+
+            <materialDesign:PopupBox.ToggleContent>
+                <Image Source="\Resources\Images\Navigation Bar Logo.png"
+                       Width="85"
+                       Height="85"
+                       RenderOptions.BitmapScalingMode="HighQuality" />
             </materialDesign:PopupBox.ToggleContent>
             <materialDesign:PopupBox.ToggleCheckedContent>
-                <Image Source="\Resources\Images\Navigation Bar Logo.png"  
-                           Width="85" Height="85" 
-                           RenderOptions.BitmapScalingMode="HighQuality" />
+                <Image Source="\Resources\Images\Navigation Bar Logo.png"
+                       Width="85"
+                       Height="85"
+                       RenderOptions.BitmapScalingMode="HighQuality" />
             </materialDesign:PopupBox.ToggleCheckedContent>
             <materialDesign:PopupBox.Resources>
-                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Black" Opacity="0.7"   />
+                <SolidColorBrush x:Key="PrimaryHueDarkBrush"
+                                 Color="Black"
+                                 Opacity="1" />
             </materialDesign:PopupBox.Resources>
-            <Border Background="{StaticResource MenuBorderBrush}" CornerRadius="15" >
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Content="{lex:Loc Key=NavigationBarHome}"
-                        BorderThickness="0" 
-                        FontSize="18"
-                        Margin="0 15 0 15"
-                        FontFamily="{StaticResource MainFont}"
-                        Command="{Binding HomeRenavigatCommand}"
-                       />
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Content="{lex:Loc Key=NavigationBarDashboard}"
-                        BorderThickness="0" 
-                        FontSize="18"
-                        Margin="0 0 0 15"
-                        FontFamily="{StaticResource MainFont}"
-                       />
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Content="{lex:Loc Key=NavigationBarMyStore}"
-                        BorderThickness="0" 
-                        FontSize="18"
-                        Margin="0 0 0 15"
-                        FontFamily="{StaticResource MainFont}"
-                        Command="{Binding MyStoreRenavigatCommand}"
-                       />
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Content="{lex:Loc Key=NavigationBarTools}"
-                        BorderThickness="0" 
-                        FontSize="18"
-                        Margin="0 0 0 15"
-                        FontFamily="{StaticResource MainFont}"
-                       />
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Content="{lex:Loc Key=NavigationBarAbout}"
-                        BorderThickness="0" 
-                        FontSize="18"
-                        Margin="0 0 0 15"
-                        FontFamily="{StaticResource MainFont}"
-                       />
+            
+            <Border Background="{StaticResource MenuBorderBrush}"
+                    CornerRadius="15">
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{lex:Loc Key=NavigationBarHome}"
+                            BorderThickness="0"
+                            FontSize="18"
+                            Margin="0 10 0 10"
+                            FontFamily="{StaticResource MainFont}"
+                            Command="{Binding HomeRenavigatCommand}" />
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{lex:Loc Key=NavigationBarDashboard}"
+                            BorderThickness="0"
+                            FontSize="18"
+                            Margin="0 0 0 10"
+                            FontFamily="{StaticResource MainFont}" />
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{lex:Loc Key=NavigationBarMyStore}"
+                            BorderThickness="0"
+                            FontSize="18"
+                            Margin="0 0 0 10"
+                            FontFamily="{StaticResource MainFont}"
+                            Command="{Binding MyStoreRenavigatCommand}" />
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{lex:Loc Key=NavigationBarTools}"
+                            BorderThickness="0"
+                            FontSize="18"
+                            Margin="0 0 0 10"
+                            FontFamily="{StaticResource MainFont}" />
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{lex:Loc Key=NavigationBarAbout}"
+                            BorderThickness="0"
+                            FontSize="18"
+                            Margin="0 0 0 10"
+                            FontFamily="{StaticResource MainFont}" />
                 </StackPanel>
             </Border>
         </materialDesign:PopupBox>
