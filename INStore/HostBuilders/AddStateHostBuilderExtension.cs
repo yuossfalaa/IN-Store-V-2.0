@@ -1,4 +1,5 @@
 ﻿using INStore.Language;
+using INStore.State.FloatingWindow;
 using INStore.State.Navigators;
 using INStore.State.UserStore;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ namespace INStore.HostBuilders
                 services.AddSingleton<IUserStore, UserStore>();
                 services.AddSingleton<IInRegistrationUser, InRegistrationUser>();
                 services.AddSingleton<ILanguageSetter, LanguageSetter>();
+                services.AddSingleton<FloatingWindow, FloatingWindow>();
             });
             return host;
         }
