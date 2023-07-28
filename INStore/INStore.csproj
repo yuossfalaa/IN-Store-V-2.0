@@ -16,6 +16,7 @@
     <None Remove="Resources\Fonts\Century_Gothic.ttf" />
     <None Remove="Resources\Fonts\gothicb.ttf" />
     <None Remove="Resources\Images\ICON.ico" />
+    <None Remove="Resources\Images\image-custom.png" />
     <None Remove="Resources\Images\INstore Background - Logo.png" />
     <None Remove="Resources\Images\INstore Background - Solid.jpg" />
     <None Remove="Resources\Images\Navigation Bar Logo.png" />
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ArrayToExcel" Version="2.2.2" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
@@ -62,6 +64,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\ICON.ico" />
+    <Resource Include="Resources\Images\image-custom.png" />
     <Resource Include="Resources\Images\INstore Background - Logo.png" />
     <Resource Include="Resources\Images\INstore Background - Solid.jpg" />
     <Resource Include="Resources\Images\Navigation Bar Logo.png" />
@@ -80,10 +83,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UserControls\MyStore\Commands\" />
   </ItemGroup>
 
 	<PropertyGroup>
