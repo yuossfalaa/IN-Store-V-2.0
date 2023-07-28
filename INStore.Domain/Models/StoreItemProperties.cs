@@ -5,11 +5,13 @@ namespace INStore.Domain.Models
     {
         public string ItemName { get; set; } = "";
         public string ItemDescription { get; set; } = "";
-        public string ItemBarCode { get; set; } = "";
+        public string ItemBarCode { get; set; } = "0";
         public double ItemSellingPrice { get; set; } = 0.0;
         public double ItemPurchasingPrice { get; set; } = 0.0;
+        public byte[] Image { get; set; } = {0};
         public int StoreItemId { get; set; }
         public StoreItems StoreItem { get; set; }
+
 
     }
 }
