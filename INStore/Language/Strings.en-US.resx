@@ -144,8 +144,26 @@
   <data name="AddEditStoreItemViewSellingPrice" xml:space="preserve">
     <value>Selling Price</value>
   </data>
+  <data name="AddItemViewModelAutoFill" xml:space="preserve">
+    <value>AutoFill</value>
+  </data>
+  <data name="AddStoreItemTheSameBarcodeExist" xml:space="preserve">
+    <value>The Same Barcode Exist</value>
+  </data>
   <data name="GeneralFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
+  </data>
+  <data name="LoginCommandNotFound" xml:space="preserve">
+    <value> Not Found</value>
+  </data>
+  <data name="LoginCommandTheUser" xml:space="preserve">
+    <value>The User : </value>
+  </data>
+  <data name="LoginCommandWelcomeBack" xml:space="preserve">
+    <value>Welcome Back </value>
+  </data>
+  <data name="LoginCommandWrongPassword" xml:space="preserve">
+    <value>Wrong Password</value>
   </data>
   <data name="LoginViewLogin" xml:space="preserve">
     <value>Login</value>
@@ -206,6 +224,12 @@
   </data>
   <data name="NavigationBarTools" xml:space="preserve">
     <value>Tools</value>
+  </data>
+  <data name="RegisterCommandUsernameAlreadyExists" xml:space="preserve">
+    <value>Username Already Exists</value>
+  </data>
+  <data name="RegisterCommandWrongAdminPassword" xml:space="preserve">
+    <value>Wrong Admin Password</value>
   </data>
   <data name="RegisterEmployeeViewBack" xml:space="preserve">
     <value>Go back</value>

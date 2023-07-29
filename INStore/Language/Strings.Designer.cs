@@ -142,11 +142,74 @@ namespace INStore.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AutoFill.
+        /// </summary>
+        internal static string AddItemViewModelAutoFill {
+            get {
+                return ResourceManager.GetString("AddItemViewModelAutoFill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string AddItemViewModelSave {
+            get {
+                return ResourceManager.GetString("AddItemViewModelSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Same Barcode Exist.
+        /// </summary>
+        internal static string AddStoreItemTheSameBarcodeExist {
+            get {
+                return ResourceManager.GetString("AddStoreItemTheSameBarcodeExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         internal static string GeneralFlowDirection {
             get {
                 return ResourceManager.GetString("GeneralFlowDirection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Not Found.
+        /// </summary>
+        internal static string LoginCommandNotFound {
+            get {
+                return ResourceManager.GetString("LoginCommandNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The User : .
+        /// </summary>
+        internal static string LoginCommandTheUser {
+            get {
+                return ResourceManager.GetString("LoginCommandTheUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome Back .
+        /// </summary>
+        internal static string LoginCommandWelcomeBack {
+            get {
+                return ResourceManager.GetString("LoginCommandWelcomeBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong Password.
+        /// </summary>
+        internal static string LoginCommandWrongPassword {
+            get {
+                return ResourceManager.GetString("LoginCommandWrongPassword", resourceCulture);
             }
         }
         
@@ -327,6 +390,24 @@ namespace INStore.Language {
         internal static string NavigationBarTools {
             get {
                 return ResourceManager.GetString("NavigationBarTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username Already Exists.
+        /// </summary>
+        internal static string RegisterCommandUsernameAlreadyExists {
+            get {
+                return ResourceManager.GetString("RegisterCommandUsernameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong Admin Password.
+        /// </summary>
+        internal static string RegisterCommandWrongAdminPassword {
+            get {
+                return ResourceManager.GetString("RegisterCommandWrongAdminPassword", resourceCulture);
             }
         }
         

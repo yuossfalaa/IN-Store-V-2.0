@@ -144,8 +144,26 @@
   <data name="AddEditStoreItemViewSellingPrice" xml:space="preserve">
     <value>سعر البيع</value>
   </data>
+  <data name="AddItemViewModelAutoFill" xml:space="preserve">
+    <value>ملء تلقائي</value>
+  </data>
+  <data name="AddStoreItemTheSameBarcodeExist" xml:space="preserve">
+    <value>نفس الباركود موجود</value>
+  </data>
   <data name="GeneralFlowDirection" xml:space="preserve">
     <value>RightToLeft</value>
+  </data>
+  <data name="LoginCommandNotFound" xml:space="preserve">
+    <value> غير موجود  </value>
+  </data>
+  <data name="LoginCommandTheUser" xml:space="preserve">
+    <value>المستخدم : </value>
+  </data>
+  <data name="LoginCommandWelcomeBack" xml:space="preserve">
+    <value>مرحبًا </value>
+  </data>
+  <data name="LoginCommandWrongPassword" xml:space="preserve">
+    <value>كلمة مرور خاطئة</value>
   </data>
   <data name="LoginViewLogin" xml:space="preserve">
     <value>تسجيل الدخول</value>
@@ -206,6 +224,12 @@
   </data>
   <data name="NavigationBarTools" xml:space="preserve">
     <value>الأدوات</value>
+  </data>
+  <data name="RegisterCommandUsernameAlreadyExists" xml:space="preserve">
+    <value>اسم المستخدم موجود بالفعل</value>
+  </data>
+  <data name="RegisterCommandWrongAdminPassword" xml:space="preserve">
+    <value>كلمة مرور المشرف خاطئة</value>
   </data>
   <data name="RegisterEmployeeViewBack" xml:space="preserve">
     <value>عُد</value>
