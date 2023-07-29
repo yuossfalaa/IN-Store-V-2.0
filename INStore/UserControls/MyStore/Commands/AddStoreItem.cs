@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using DocumentFormat.OpenXml.Presentation;
 using INStore.Commands;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
+using INStore.Language;
 using INStore.UserControls.MyStore.ViewModels;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
-using SharpCompress.Common;
 
 namespace INStore.UserControls.MyStore.Commands
 {
@@ -31,6 +30,11 @@ namespace INStore.UserControls.MyStore.Commands
         {
             try
             {
+                if (await TheSameBarcodeExist())
+                {
+                    _myStoreViewModel._SnackbarMessageQueue.Enqueue(LocalizedStrings.Instance["AddStoreItemTheSameBarcodeExist"]);
+                    return;
+                }
                 if (_AddItemViewModel.StoreItem !=null )
                 {
                     if (_AddItemViewModel.StoreItem.Item.Image.Length == 1)
@@ -48,6 +52,15 @@ namespace INStore.UserControls.MyStore.Commands
             {
                 _myStoreViewModel._MyStoreViewModelLogger.LogError(ex.Message);
             }
+        }
+        private  async Task<bool> TheSameBarcodeExist()
+        {
+            List<StoreItems> HavethesameBarcode = await _storeItemsService.Get(_AddItemViewModel.StoreItem.Item.ItemBarCode);
+            if ( HavethesameBarcode.Where(a=> a.Item.ItemBarCode == _AddItemViewModel.StoreItem.Item.ItemBarCode).Count() >=  1)
+            {
+                return true;
+            }
+            return false;
         }
         private byte[] ImageToByteArray(BitmapImage imageIn)
         {
