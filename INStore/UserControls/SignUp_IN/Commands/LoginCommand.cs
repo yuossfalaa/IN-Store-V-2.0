@@ -1,6 +1,7 @@
 ﻿using INStore.Commands;
 using INStore.Domain.Exceptions;
 using INStore.Domain.Models;
+using INStore.Language;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using INStore.UserControls.SignUp_IN.ViewModels;
@@ -34,18 +35,18 @@ namespace INStore.UserControls.SignUp_IN.Commands
             {
                 await _authenticators.Login(_loginviewModel.CurrentUser.UserName, _loginviewModel.CurrentUser.PasswordHash);
                 _Logger.LogInformation("successful login");
-                snackbarMessageQueue.Enqueue("Welcome Back " + _authenticators.CurrentUser.Employee.EmployeeName );
+                snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["LoginCommandWelcomeBack"] + _authenticators.CurrentUser.Employee.EmployeeName );
                 _renavigator.Renavigate();
             }
             catch (UserNotFoundException userNotFound)
-            { 
-                snackbarMessageQueue.Enqueue("The User : " + userNotFound.Username +" Not Found");
+            {
+                snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["LoginCommandTheUser"] + userNotFound.Username + LocalizedStrings.Instance["LoginCommandNotFound"]);
                 _Logger.LogTrace("The User : " + userNotFound.Username + " Not Found");
 
             }
             catch (WrongPasswordExcption wrongPassword)
             {
-                snackbarMessageQueue.Enqueue("Wrong Password");
+                snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["LoginCommandWrongPassword"]);
                 _Logger.LogTrace("Wrong Password");
 
             }
