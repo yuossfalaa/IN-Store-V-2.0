@@ -32,28 +32,54 @@
                                             VerticalAlignment="Top"
                                             HorizontalAlignment="Right"
                                             Grid.Column="1"
-                                            Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
                                             Foreground="White"
+                                            Margin="0 5 5 0"
                                             ToolTip="{lex:Loc Key=MyStoreEdit}"
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenEditItemStoreItemCommand}"
                                             CommandParameter="{Binding}">
-                                        <materialDesign:PackIcon Kind="Edit"
-                                                                 Height="25"
-                                                                 Width="25" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <materialDesign:PackIcon Kind="Edit"
+                                                                     Height="20"
+                                                                     Width="20"
+                                                                     VerticalAlignment="Center"
+                                                                     HorizontalAlignment="Center"
+                                                                     Margin="0 0  10 0 " />
+                                            <TextBlock Text="{lex:Loc Key=MyStoreEdit}"
+                                                       FontFamily="{StaticResource MainFont}"
+                                                       FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center" />
+
+                                        </StackPanel>
                                     </Button>
                                     <Button Background="{x:Null}"
                                             BorderBrush="{x:Null}"
                                             VerticalAlignment="Bottom"
                                             HorizontalAlignment="Right"
                                             Grid.Column="1"
-                                            Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                                            Margin="0 0 0 15"
                                             Foreground="White"
                                             ToolTip="{lex:Loc Key=MyStoreDelete}"
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.DeleteStoreItemCommand}"
                                             CommandParameter="{Binding}">
-                                        <materialDesign:PackIcon Kind="Delete"
-                                                                 Height="25"
-                                                                 Width="25" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                                     Height="20"
+                                                                     Width="20"
+                                                                     VerticalAlignment="Center"
+                                                                     HorizontalAlignment="Center"
+                                                                     Margin="0 0  5 0 " />
+                                            <TextBlock Text="{lex:Loc Key=MyStoreDelete}"
+                                                       FontFamily="{StaticResource MainFont}"
+                                                       FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center" />
+
+                                        </StackPanel>
                                     </Button>
                                     <StackPanel HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch" Grid.Column="1">
@@ -69,11 +95,12 @@
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
                                                                          Foreground="White"
-                                                                         Padding="3"
+                                                                         Padding="0"
                                                                          UniformCornerRadius="6">
 
                                                         <Image Width="50"
                                                                Height="50"
+                                                               ClipToBounds="True"
                                                                Source="{Binding Path= Item.Image,UpdateSourceTrigger=PropertyChanged}"
                                                                RenderOptions.BitmapScalingMode="HighQuality"
                                                                Stretch="Fill" />
@@ -96,12 +123,14 @@
                                             </StackPanel>
                                             <WrapPanel VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Right"
-                                                       Margin="0 60 90 0"
+                                                       Margin="0 60 120 0"
                                                        Grid.Column="1">
                                                 <StackPanel Margin="10 0 10 0">
                                                     <TextBlock Margin="0 0 0 10"
                                                                FontSize="16"
                                                                Text="{lex:Loc Key=MyStoreBareCode}"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
                                                                Foreground="White"
                                                                FontFamily="{StaticResource MainFont}" />
                                                     <TextBlock FontSize="24"
@@ -123,6 +152,8 @@
                                                                FontSize="16"
                                                                Text="{lex:Loc Key=MyStoreSellingPrice}"
                                                                Foreground="White"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
                                                                FontFamily="{StaticResource MainFont}" />
                                                     <TextBlock FontSize="24"
                                                                FontWeight="SemiBold"
@@ -141,6 +172,8 @@
                                                 <StackPanel Margin="10 0 0 0">
                                                     <TextBlock Margin="0 0 0 10"
                                                                FontSize="16"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
                                                                Text="{lex:Loc Key=MyStorePurchasePrice}"
                                                                Foreground="White"
                                                                FontFamily="{StaticResource MainFont}" />
@@ -161,6 +194,8 @@
                                                 <StackPanel Margin="10 0 10 0">
                                                     <TextBlock Margin="0 0 0 10"
                                                                FontSize="16"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
                                                                Text="{lex:Loc Key=MyStoreINStore}"
                                                                Foreground="White"
                                                                FontFamily="{StaticResource MainFont}" />
@@ -181,6 +216,8 @@
                                                 <StackPanel Margin="10 0 0 0">
                                                     <TextBlock Margin="0 0 0 10"
                                                                FontSize="16"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
                                                                Text="{lex:Loc Key=MyStoreINStock}"
                                                                Foreground="White"
                                                                FontFamily="{StaticResource MainFont}" />
