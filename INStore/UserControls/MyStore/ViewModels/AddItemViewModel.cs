@@ -8,9 +8,11 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
+using INStore.Language;
 using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 
 namespace INStore.UserControls.MyStore.ViewModels
@@ -20,7 +22,7 @@ namespace INStore.UserControls.MyStore.ViewModels
         #region Private Vars
         private readonly IStoreItemsService _storeItemsService;
         private readonly MyStoreViewModel _myStoreViewModel;
-
+        private StoreItems _AutoFillstoreItem;
         #endregion
         #region Public Vars
 
@@ -34,6 +36,7 @@ namespace INStore.UserControls.MyStore.ViewModels
         #region Commands
         public ICommand AddImageToStoreItemCommand { get; set; }
         public ICommand AddStoreItemCommand { get; set; }
+        public ICommand AutoFillCommand { get; set; }
 
         #endregion
         public AddItemViewModel(IStoreItemsService storeItemsService, MyStoreViewModel myStoreViewModel)
@@ -42,10 +45,29 @@ namespace INStore.UserControls.MyStore.ViewModels
             _myStoreViewModel = myStoreViewModel;
             StoreItem = new StoreItems();
             AddImageToStoreItemCommand = new RelayCommand(AddImageToStoreItemFunc);
+            AutoFillCommand = new RelayCommand(AutoFillFunc);
             AddStoreItemCommand = new AddStoreItem(_storeItemsService, _myStoreViewModel, this);
 
         }
         #region Private Methods
+
+        private async void AutoFillFunc()
+        {
+            await Task.Run(async () =>
+            {
+                List<StoreItems> storeItems = await _storeItemsService.GetAll(true);
+                _AutoFillstoreItem = storeItems.LastOrDefault(a => a.IsDeleted == true && a.Item.ItemBarCode == StoreItem.Item.ItemBarCode);
+                if (_AutoFillstoreItem != null)
+                {
+                    StoreItem= _AutoFillstoreItem;
+                    OnPropertyChanged(nameof(StoreItem)); 
+                }
+            });
+
+        }
+
+      
+
         private void AddImageToStoreItemFunc()
         {
             try
