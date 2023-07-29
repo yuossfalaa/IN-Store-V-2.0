@@ -9,6 +9,7 @@ using INStore.Domain.Services;
 using INStore.State.FloatingWindow;
 using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
@@ -19,6 +20,7 @@ namespace INStore.UserControls.MyStore.ViewModels
         #region Private Vars
         private readonly IStoreItemsService _storeItemsService;
         public readonly ILogger<MyStoreViewModel> _MyStoreViewModelLogger;
+        public readonly ISnackbarMessageQueue _SnackbarMessageQueue;
         private readonly FloatingWindow _floatingWindow;
         #endregion
         #region Public Vars
@@ -56,11 +58,13 @@ namespace INStore.UserControls.MyStore.ViewModels
 
         #endregion
 
-        public MyStoreViewModel(IStoreItemsService storeItemsService, FloatingWindow floatingWindow, ILogger<MyStoreViewModel> myStoreViewModelLogger)
+        public MyStoreViewModel(IStoreItemsService storeItemsService, FloatingWindow floatingWindow, ILogger<MyStoreViewModel> myStoreViewModelLogger, ISnackbarMessageQueue snackbarMessageQueue)
         {
             _storeItemsService = storeItemsService;
             _floatingWindow = floatingWindow;
             _MyStoreViewModelLogger = myStoreViewModelLogger;
+            _SnackbarMessageQueue = snackbarMessageQueue;
+
             //initialize Commands
             SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, this);
             DeleteStoreItemCommand = new DeleteStoreItem(_storeItemsService, this);
@@ -71,8 +75,6 @@ namespace INStore.UserControls.MyStore.ViewModels
             GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, this);
             GetAllStoreItemsCommand.Execute(null);
             _MyStoreViewModelLogger.Log(LogLevel.Information, "MyStoreViewModel Initialized");
-            
-
         }
 
 
