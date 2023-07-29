@@ -22,18 +22,62 @@
                     BorderBrush="{x:Null}"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Right"
-                    Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
                     Foreground="White"
                     ToolTip="{lex:Loc Key=AddEditStoreItemViewSave}"
                     Margin="0 5 10 0"
-                    Grid.Column="2" >
-                <materialDesign:PackIcon Kind="ContentSaveAll"
-                                         Height="25"
-                                         Width="25" />
+                    Grid.Column="2">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="ContentSaveAll"
+                                             Height="20"
+                                             Width="20"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"
+                                             Margin="0 0  10 0 " />
+                    <TextBlock Text="{lex:Loc Key=AddItemViewModelSave}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" />
+
+                </StackPanel>
+
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:InvokeCommandAction Command="{Binding AddStoreItemCommand}" />
                         <i:InvokeCommandAction Command="{Binding EditStoreItemCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Foreground="White"
+                    ToolTip="{lex:Loc Key=AddEditStoreItemViewSave}"
+                    Margin="0 0 0 20"
+                    Grid.Column="2">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="AutoFix"
+                                             Height="20"
+                                             Width="20"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"
+                                             Margin="0 0  10 0 " />
+                    <TextBlock Text="{lex:Loc Key=AddItemViewModelAutoFill}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" />
+
+                </StackPanel>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding AutoFillCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
@@ -86,17 +130,20 @@
             </StackPanel>
             <WrapPanel VerticalAlignment="Bottom"
                        HorizontalAlignment="Right"
-                       Margin="0 0 90 20"
+                       Margin="0 0 130 20"
                        Grid.Column="2">
                 <StackPanel Margin="10 0 10 0">
                     <TextBlock Margin="0 0 0 10"
                                FontSize="16"
                                Text="{lex:Loc Key=AddEditStoreItemViewBareCode}"
                                Foreground="White"
-                               FontFamily="{StaticResource MainFont}" />
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource MainFont}">
+                    </TextBlock>
                     <TextBox FontSize="22"
                              FontWeight="SemiBold"
-                             VerticalAlignment="Center"
+                             VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"
                              HorizontalContentAlignment="Center"
                              materialDesign:HintAssist.Hint="0"
@@ -104,8 +151,8 @@
                              Text="{Binding StoreItem.Item.ItemBarCode}"
                              Foreground="White"
                              FontFamily="{StaticResource MainFont}"
-                             BorderBrush="White"
-                             MaxWidth="56" />
+                             BorderBrush="White">
+                    </TextBox>
                 </StackPanel>
                 <Border Background="White"
                         CornerRadius="1"
