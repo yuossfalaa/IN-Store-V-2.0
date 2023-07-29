@@ -23,6 +23,8 @@ namespace INStore.UserControls.MyStore.ViewModels
         #region Private Vars
         private readonly IStoreItemsService _storeItemsService;
         private readonly MyStoreViewModel _myStoreViewModel;
+        private StoreItems _AutoFillstoreItem;
+
         #endregion
         #region Public Vars
 
@@ -37,6 +39,7 @@ namespace INStore.UserControls.MyStore.ViewModels
         #region Commands
         public ICommand AddImageToStoreItemCommand { get; set; }
         public ICommand EditStoreItemCommand { get; set; }
+        public ICommand AutoFillCommand { get; set; }
 
         #endregion
 
@@ -47,9 +50,26 @@ namespace INStore.UserControls.MyStore.ViewModels
             StoreItem = new StoreItems();
             StoreItem = items;
             AddImageToStoreItemCommand = new RelayCommand(AddImageToStoreItemFunc);
+            AutoFillCommand = new RelayCommand(AutoFillFunc);
             EditStoreItemCommand = new EditStoreItem(_storeItemsService, _myStoreViewModel, this);
         }
         #region Private Methods
+        private async void AutoFillFunc()
+        {
+            await Task.Run(async () =>
+            {
+                List<StoreItems> storeItems = await _storeItemsService.GetAll(true);
+                _AutoFillstoreItem = null;
+                _AutoFillstoreItem = storeItems.LastOrDefault(a => a.IsDeleted == true && a.Item.ItemBarCode == StoreItem.Item.ItemBarCode);
+                if (_AutoFillstoreItem != null)
+                {
+                    StoreItem = _AutoFillstoreItem;
+                    OnPropertyChanged(nameof(StoreItem));
+                }
+            });
+
+        }
+
         private void AddImageToStoreItemFunc()
         {
             try
