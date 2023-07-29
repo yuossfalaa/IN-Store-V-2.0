@@ -1,4 +1,5 @@
 ﻿using INStore.Commands;
+using INStore.Language;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using INStore.State.UserStore;
@@ -6,9 +7,6 @@ using INStore.UserControls.SignUp_IN.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static INStore.Domain.Services.AuthenticationService.IAuthenticationService;
 
@@ -45,13 +43,13 @@ namespace INStore.UserControls.SignUp_IN.Commands
                 }
                 else if (result == RegistrationResult.AdminPasswordDoNotMatch)
                 {
-                    snackbarMessageQueue.Enqueue("Wrong Admin Password");
+                    snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["RegisterCommandWrongAdminPassword"]);
                     logger.LogTrace("Wrong Admin Password");
 
                 }
                 else if (result == RegistrationResult.UsernameAlreadyExists)
                 {
-                    snackbarMessageQueue.Enqueue("Username Already Exists");
+                    snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["RegisterCommandUsernameAlreadyExists"]);
                     logger.LogTrace("Username Already Exists");
 
                 }
