@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight.Command;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
 using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
@@ -63,8 +59,14 @@ namespace INStore.UserControls.MyStore.ViewModels
                 _AutoFillstoreItem = storeItems.LastOrDefault(a => a.IsDeleted == true && a.Item.ItemBarCode == StoreItem.Item.ItemBarCode);
                 if (_AutoFillstoreItem != null)
                 {
-                    StoreItem = _AutoFillstoreItem;
+                    StoreItem.Item.ItemSellingPrice = _AutoFillstoreItem.Item.ItemSellingPrice;
+                    StoreItem.Item.ItemPurchasingPrice = _AutoFillstoreItem.Item.ItemPurchasingPrice;
+                    StoreItem.Item.ItemName = _AutoFillstoreItem.Item.ItemName;
+                    StoreItem.Item.ItemDescription = _AutoFillstoreItem.Item.ItemDescription;
+                    StoreItem.Item.Image = _AutoFillstoreItem.Item.Image;
+
                     OnPropertyChanged(nameof(StoreItem));
+                    OnPropertyChanged(nameof(StoreItem.Item));
                 }
             });
 

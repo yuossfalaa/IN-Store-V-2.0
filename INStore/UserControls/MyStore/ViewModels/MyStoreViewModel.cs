@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Command;
 using INStore.Domain.ExportingModels;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
+using INStore.Services.StoreItemServices;
 using INStore.State.FloatingWindow;
 using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
@@ -66,13 +67,14 @@ namespace INStore.UserControls.MyStore.ViewModels
             _SnackbarMessageQueue = snackbarMessageQueue;
 
             //initialize Commands
-            SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, this);
+            SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, _MyStoreViewModelLogger, this, nameof(StoreItemsCollections));
             DeleteStoreItemCommand = new DeleteStoreItem(_storeItemsService, this);
             OpenEditItemStoreItemCommand = new RelayCommand<StoreItems>(OpenEditItemStoreItemFunc);
             OpenAddItemStoreItemCommand = new RelayCommand(OpenAddItemStoreItemFunc);
             ExportStoreItemCommand = new RelayCommand(ExportStoreItemFunc);
             //Load Data
-            GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, this);
+            StoreItemsCollections = new ObservableCollection<StoreItems>();
+            GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, _MyStoreViewModelLogger, this,nameof(StoreItemsCollections));
             GetAllStoreItemsCommand.Execute(null);
             _MyStoreViewModelLogger.Log(LogLevel.Information, "MyStoreViewModel Initialized");
         }

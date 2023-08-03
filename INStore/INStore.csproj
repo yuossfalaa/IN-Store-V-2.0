@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="ArrayToExcel" Version="2.2.2" />
+    <PackageReference Include="Dragablz" Version="0.0.3.234" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
@@ -40,7 +41,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.32.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.32.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="NuGet.CommandLine" Version="6.6.1">
       <PrivateAssets>all</PrivateAssets>
@@ -50,6 +51,7 @@
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
     <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="squirrel.windows" Version="1.9.0" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
   </ItemGroup>
 

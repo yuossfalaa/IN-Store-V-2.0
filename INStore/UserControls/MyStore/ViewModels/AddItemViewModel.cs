@@ -59,7 +59,14 @@ namespace INStore.UserControls.MyStore.ViewModels
                 _AutoFillstoreItem = storeItems.LastOrDefault(a => a.IsDeleted == true && a.Item.ItemBarCode == StoreItem.Item.ItemBarCode);
                 if (_AutoFillstoreItem != null)
                 {
-                    StoreItem= _AutoFillstoreItem;
+                    StoreItem.Item.ItemSellingPrice= _AutoFillstoreItem.Item.ItemSellingPrice;
+                    StoreItem.Item.ItemPurchasingPrice= _AutoFillstoreItem.Item.ItemPurchasingPrice;
+                    StoreItem.Item.ItemName= _AutoFillstoreItem.Item.ItemName;
+                    StoreItem.Item.ItemDescription= _AutoFillstoreItem.Item.ItemDescription;
+                    StoreItem.Item.Image= _AutoFillstoreItem.Item.Image;
+                    
+                    
+                    
                     OnPropertyChanged(nameof(StoreItem)); 
                 }
             });

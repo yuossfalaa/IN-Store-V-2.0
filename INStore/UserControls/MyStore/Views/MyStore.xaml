@@ -13,11 +13,16 @@
     <Grid VerticalAlignment="Top"
           HorizontalAlignment="Stretch">
         <ScrollViewer  Margin="20 20 180 0">
-            <ItemsControl x:Name="ThumbnailView"
+            <ItemsControl VirtualizingPanel.IsVirtualizing="True"
+                          VirtualizingPanel.VirtualizationMode="Recycling"
                           ItemsSource="{Binding StoreItemsCollections , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0 0 0 0">
+                        <materialDesign:TransitioningContent>
+                            <materialDesign:TransitioningContent.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="FadeIn"
+                                                                 Duration="0:0:0.6" />
+                            </materialDesign:TransitioningContent.OpeningEffects>
                             <Border Background="{StaticResource BackgroundBorderBrush }"
                                     CornerRadius="5"
                                     MaxHeight="180"
@@ -82,7 +87,8 @@
                                         </StackPanel>
                                     </Button>
                                     <StackPanel HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Stretch" Grid.Column="1">
+                                                VerticalAlignment="Stretch"
+                                                Grid.Column="1">
                                         <Grid Margin="0 5 0 10">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
@@ -91,7 +97,7 @@
                                             <StackPanel VerticalAlignment="Top"
                                                         HorizontalAlignment="Left"
                                                         Margin="10"
-                                                        Grid.Column="0">
+                                                        Grid.Column="0" Grid.ColumnSpan="2">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
                                                                          Foreground="White"
@@ -118,8 +124,9 @@
                                                            FontFamily="{StaticResource MainFont}"
                                                            Foreground="White"
                                                            TextWrapping="Wrap"
-                                                           MaxWidth="300"
-                                                           Text="{Binding Path=  Item.ItemDescription}"/>
+                                                           HorizontalAlignment="Left"
+                                                           MaxWidth="250" MaxHeight="70"
+                                                           Text="{Binding Path=  Item.ItemDescription}" />
                                             </StackPanel>
                                             <WrapPanel VerticalAlignment="Bottom"
                                                        HorizontalAlignment="Right"
@@ -234,149 +241,154 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                        </StackPanel>
+                        </materialDesign:TransitioningContent>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            
         </ScrollViewer>
-        <StackPanel  VerticalAlignment="Top"
-                     HorizontalAlignment="Right"
-                     Margin="0 20 10 0">
-            <materialDesign:ColorZone CornerRadius="5"
-                                      Mode="Custom"
-                                      Background="{StaticResource ColoreZoneBackGroundd}"
-                                      Margin="0 0 0 10"
-                                      Padding="0"
-                                      Width="160"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                <Grid VerticalAlignment="Center"
-                      HorizontalAlignment="Center">
-                    <materialDesign:PackIcon Kind="Arrow"
-                                             Width="30"
-                                             Height="30"
-                                             Margin="0 5 0 0"
-                                             Foreground="White">
+        <materialDesign:TransitioningContent>
+            <materialDesign:TransitioningContent.OpeningEffects>
+                <materialDesign:TransitionEffect Kind="SlideInFromRight"
+                                                 Duration="0:0:0.4" />
+            </materialDesign:TransitioningContent.OpeningEffects>
+            <StackPanel VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0 20 10 0">
+                <materialDesign:ColorZone CornerRadius="5"
+                                          Mode="Custom"
+                                          Background="{StaticResource ColoreZoneBackGroundd}"
+                                          Margin="0 0 0 10"
+                                          Padding="0"
+                                          Width="160"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Arrow"
+                                                 Width="30"
+                                                 Height="30"
+                                                 Margin="0 5 0 0"
+                                                 Foreground="White">
 
-                    </materialDesign:PackIcon>
-                    <TextBlock Text="{lex:Loc Key=NavigationBarMyStore}"
-                               Foreground="White"
-                               FontFamily="{StaticResource Avatarock}"
-                               FontSize="40"
-                               Margin="25 35 10 20"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Top" />
-                </Grid>
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone Mode="Standard"
-                                      Padding="8 4 8 4"
-                                      CornerRadius="5"
-                                      Panel.ZIndex="1"
-                                      Background="{StaticResource ColoreZoneBackGroundd}"
-                                      Margin="0 0 0 20"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    
-                    <materialDesign:PackIcon Kind="Search"
-                                             Opacity=".56"
-                                             Grid.Column="0"
-                                             VerticalAlignment="Center"
-                                             Foreground="White" />
-                    <TextBox Grid.Column="1"
-                             Margin="5 0 0 0"
-                             materialDesign:HintAssist.Hint="{lex:Loc Key=MyStoresearchProducts}"
-                             Text="{Binding StoreItemProp,UpdateSourceTrigger=PropertyChanged}"
-                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                             BorderThickness="0"
-                             MaxWidth="120"
-                             VerticalAlignment="Center"
-                             Foreground="White"
-                             FontSize="15" 
-                             FontFamily="{StaticResource MainFont}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding SearchStoreItemCommand}"
-                                                       CommandParameter="{Binding StoreItemProp}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
-                   
-                </Grid>
-            </materialDesign:ColorZone>
-            <materialDesign:ColorZone CornerRadius="5"
-                                      Mode="Custom"
-                                      Background="{StaticResource ColoreZoneBackGroundd}"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                <Grid>
-                    <StackPanel Margin="10">
-                        <Button Background="{x:Null}"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Height="50"
-                                Width="140"
-                                Margin="0 0 0 10"
-                                materialDesign:ButtonAssist.CornerRadius="10"
-                                Command="{Binding OpenAddItemStoreItemCommand}">
-                            <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                <materialDesign:PackIcon Margin="0 0 5 0"
-                                                         Kind="Add"
-                                                         Width="30"
-                                                         Height="30" />
-                                <TextBlock Text="{lex:Loc Key=MyStoreAdd}"
-                                           FontSize="20"
-                                           VerticalAlignment="Center" />
+                        </materialDesign:PackIcon>
+                        <TextBlock Text="{lex:Loc Key=NavigationBarMyStore}"
+                                   Foreground="White"
+                                   FontFamily="{StaticResource Avatarock}"
+                                   FontSize="40"
+                                   Margin="25 35 10 20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Top" />
+                    </Grid>
+                </materialDesign:ColorZone>
+                <materialDesign:ColorZone Mode="Standard"
+                                          Padding="8 4 8 4"
+                                          CornerRadius="5"
+                                          Panel.ZIndex="1"
+                                          Background="{StaticResource ColoreZoneBackGroundd}"
+                                          Margin="0 0 0 20"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                            </StackPanel>
-                        </Button>
-                        <Button Background="{x:Null}"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Height="50"
-                                Width="140"
-                                Margin="0 0 0 10"
-                                materialDesign:ButtonAssist.CornerRadius="10"
-                                Command="{Binding ExportStoreItemCommand}">
-                            <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                <materialDesign:PackIcon Margin="0 0 5 0"
-                                                         Kind="Upload"
-                                                         Width="30"
-                                                         Height="30" />
-                                <TextBlock Text="{lex:Loc Key=MyStoreExport}"
-                                           FontSize="20"
-                                           VerticalAlignment="Center" />
+                        <materialDesign:PackIcon Kind="Search"
+                                                 Opacity=".56"
+                                                 Grid.Column="0"
+                                                 VerticalAlignment="Center"
+                                                 Foreground="White" />
+                        <TextBox Grid.Column="1"
+                                 Margin="5 0 0 0"
+                                 materialDesign:HintAssist.Hint="{lex:Loc Key=MyStoresearchProducts}"
+                                 Text="{Binding StoreItemProp,UpdateSourceTrigger=PropertyChanged}"
+                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                 BorderThickness="0"
+                                 MaxWidth="120"
+                                 VerticalAlignment="Center"
+                                 Foreground="White"
+                                 FontSize="15"
+                                 FontFamily="{StaticResource MainFont}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchStoreItemCommand}"
+                                                           CommandParameter="{Binding StoreItemProp}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
 
-                            </StackPanel>
-                        </Button>
-                        <Button Background="{x:Null}"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Height="50"
-                                Width="140"
-                                materialDesign:ButtonAssist.CornerRadius="10"
-                                Visibility="Collapsed">
-                            <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                <materialDesign:PackIcon Margin="0 0 5 0"
-                                                         Kind="Download"
-                                                         Width="30"
-                                                         Height="30" />
-                                <TextBlock Text="{lex:Loc Key=MyStoreImport}"
-                                           FontSize="20"
-                                           VerticalAlignment="Center" />
+                    </Grid>
+                </materialDesign:ColorZone>
+                <materialDesign:ColorZone CornerRadius="5"
+                                          Mode="Custom"
+                                          Background="{StaticResource ColoreZoneBackGroundd}"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <Grid>
+                        <StackPanel Margin="10">
+                            <Button Background="{x:Null}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="50"
+                                    Width="140"
+                                    Margin="0 0 0 10"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    Command="{Binding OpenAddItemStoreItemCommand}">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon Margin="0 0 5 0"
+                                                             Kind="Add"
+                                                             Width="30"
+                                                             Height="30" />
+                                    <TextBlock Text="{lex:Loc Key=MyStoreAdd}"
+                                               FontSize="20"
+                                               VerticalAlignment="Center" />
 
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </materialDesign:ColorZone>
-        </StackPanel>
-        
-       
+                                </StackPanel>
+                            </Button>
+                            <Button Background="{x:Null}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="50"
+                                    Width="140"
+                                    Margin="0 0 0 10"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    Command="{Binding ExportStoreItemCommand}">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon Margin="0 0 5 0"
+                                                             Kind="Upload"
+                                                             Width="30"
+                                                             Height="30" />
+                                    <TextBlock Text="{lex:Loc Key=MyStoreExport}"
+                                               FontSize="20"
+                                               VerticalAlignment="Center" />
+
+                                </StackPanel>
+                            </Button>
+                            <Button Background="{x:Null}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="50"
+                                    Width="140"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon Margin="0 0 5 0"
+                                                             Kind="Download"
+                                                             Width="30"
+                                                             Height="30" />
+                                    <TextBlock Text="{lex:Loc Key=MyStoreImport}"
+                                               FontSize="20"
+                                               VerticalAlignment="Center" />
+
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:ColorZone>
+            </StackPanel>
+        </materialDesign:TransitioningContent>
+
+
     </Grid>
 </UserControl>
