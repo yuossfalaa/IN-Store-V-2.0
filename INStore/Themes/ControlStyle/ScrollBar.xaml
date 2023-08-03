@@ -26,7 +26,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
         <Setter Property="Foreground" >
             <Setter.Value>
-                <SolidColorBrush Color="Black"/>
+                <SolidColorBrush Color="White"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="Transparent" />
@@ -42,7 +42,7 @@
 
                         <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
                             <Track.Thumb>
-                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" Opacity="0.4" />
+                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" Opacity="0.3" />
                             </Track.Thumb>
                             <!--thump opacity-->
                             <Track.IncreaseRepeatButton>

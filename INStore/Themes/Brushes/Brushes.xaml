@@ -11,7 +11,7 @@
     <SolidColorBrush x:Key="BorderBorderBrush" Color="Black" Opacity="0.9"/>
     <SolidColorBrush x:Key="ColoreZoneBackGroundd"
                      Color="Black"
-                     Opacity="0.55" />
+                     Opacity="0.35" />
     <SolidColorBrush x:Key="AddEditColoreZoneBackGround"
                      Color="Black"
                      Opacity="0.85" />
