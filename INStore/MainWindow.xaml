@@ -67,6 +67,11 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
+                    <StatusBar Grid.Row="0"
+                               Background="Transparent"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               MouseMove="TriggerMoveWindow" />
                     <StackPanel Margin="10,0,0,5"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center"
@@ -79,12 +84,10 @@
                                FontFamily="{StaticResource Avatarock}"
                                Foreground="#844742"
                                FontSize="50" />
+                        <NavigationBar:NavigationBar Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
+                                                     Margin="20,5,0,0" IsEnabled="True"/>
                     </StackPanel>
-                    <StatusBar Grid.Row="0"
-                               Background="Transparent"
-                               HorizontalAlignment="Stretch"
-                               VerticalAlignment="Stretch"
-                               MouseMove="TriggerMoveWindow" />
+                  
                     <StackPanel Height="40"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
@@ -151,14 +154,16 @@
                     <Grid Grid.Row="1"
                           FlowDirection="{lex:Loc Key=GeneralFlowDirection}">
                         <ContentControl Content="{Binding CurrentViewModel}"
-                                        FlowDirection="{lex:Loc Key=GeneralFlowDirection}" />
-                        <NavigationBar:NavigationBar VerticalAlignment="Bottom"
+                                        FlowDirection="{lex:Loc Key=GeneralFlowDirection}" x:Name="ApplicationUserContols"/>
+                        <!--<NavigationBar:NavigationBar VerticalAlignment="Bottom"
                                                      HorizontalAlignment="Right"
                                                      Visibility="{Binding CurrentViewModel , Mode=OneWay,Converter={StaticResource CurrentViewModelToNavigationBarVisibilityConverter}}"
-                                                     Margin="0,0,30,5" />
+                                                     Margin="0,0,50,10" />-->
                     </Grid>
                 </Grid>
-                <materialDesign:Snackbar MessageQueue="{Binding MyMessageQueue}" />
+                <materialDesign:Snackbar MessageQueue="{Binding MyMessageQueue}"
+                                         VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5 5 330 5" />
+
             </Grid>
         </materialDesign:DialogHost>
 
