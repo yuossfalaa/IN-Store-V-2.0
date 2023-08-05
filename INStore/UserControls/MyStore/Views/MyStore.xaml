@@ -21,7 +21,7 @@
                         <materialDesign:TransitioningContent>
                             <materialDesign:TransitioningContent.OpeningEffects>
                                 <materialDesign:TransitionEffect Kind="FadeIn"
-                                                                 Duration="0:0:0.6" />
+                                                                 Duration="0:0:0.6"/>
                             </materialDesign:TransitioningContent.OpeningEffects>
                             <Border Background="{StaticResource BackgroundBorderBrush }"
                                     CornerRadius="5"
