@@ -83,8 +83,13 @@ namespace INStore.UserControls.MyStore.ViewModels
                     var filePath = dialog.FileName;
                     if (filePath != null)
                     {
-                        System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
-                        StoreItem.Item.Image = ImageToByteArray(image);
+                        using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                        {
+                            using (System.Drawing.Image original = System.Drawing.Image.FromStream(fs))
+                            {
+                                StoreItem.Item.Image = ImageToByteArray(original);
+                            }
+                        }
                     }
                 }
                 _myStoreViewModel._MyStoreViewModelLogger.Log(LogLevel.Information, "Image Added");
