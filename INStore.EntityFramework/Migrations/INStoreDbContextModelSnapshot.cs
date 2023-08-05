@@ -40,7 +40,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.Employee", b =>
@@ -83,7 +83,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.Receipts", b =>
@@ -126,7 +126,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Receipts");
+                    b.ToTable("Receipts", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.SellingHistory", b =>
@@ -158,7 +158,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasIndex("ReceiptID");
 
-                    b.ToTable("SellingHistory");
+                    b.ToTable("SellingHistory", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.Settings", b =>
@@ -208,7 +208,7 @@ namespace INStore.EntityFramework.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.Store", b =>
@@ -239,7 +239,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Store");
+                    b.ToTable("Store", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.StoreItemProperties", b =>
@@ -281,7 +281,7 @@ namespace INStore.EntityFramework.Migrations
                     b.HasIndex("StoreItemId")
                         .IsUnique();
 
-                    b.ToTable("StoreItemProperties");
+                    b.ToTable("StoreItemProperties", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.StoreItems", b =>
@@ -304,7 +304,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StoreItems");
+                    b.ToTable("StoreItems", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.User", b =>
@@ -342,7 +342,7 @@ namespace INStore.EntityFramework.Migrations
                     b.HasIndex("EmployeeId")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.Vendor", b =>
@@ -373,7 +373,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasIndex("VendorTypeId");
 
-                    b.ToTable("Vendors");
+                    b.ToTable("Vendors", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.VendorType", b =>
@@ -391,7 +391,7 @@ namespace INStore.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VendorTypes");
+                    b.ToTable("VendorTypes", (string)null);
                 });
 
             modelBuilder.Entity("INStore.Domain.Models.Receipts", b =>
