@@ -38,9 +38,9 @@ namespace INStore.Domain.Models
 
 
 
-        private ObservableCollection<SellingHistory> _SoldItems;
+        private ObservableCollection<SellingHistory> _SoldItems= new ObservableCollection<SellingHistory>();
 
-        public ObservableCollection<SellingHistory> SoldItems
+        public ObservableCollection<SellingHistory> SoldItems 
         {
             get { return _SoldItems; }
             set { _SoldItems = value; OnPropertyChanged(nameof(SoldItems)); }
