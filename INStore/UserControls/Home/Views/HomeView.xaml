@@ -10,7 +10,7 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz">
+             x:Name="HomeUSerContole" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*" />
@@ -25,6 +25,26 @@
             <StackPanel VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Margin="0 20 10 0">
+                <materialDesign:ColorZone CornerRadius="5"
+                                          Mode="Custom"
+                                          Margin="0 0 0 20"
+                                          Background="{StaticResource ColoreZoneBackGroundd}"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10">
+                            <TextBlock Text="Total : "
+                                       Foreground="White"
+                                       FontFamily="{StaticResource Avatarock}"
+                                       FontSize="40" />
+                            <TextBlock Text="{Binding Total}"
+                                       Foreground="White"
+                                       FontFamily="{StaticResource Avatarock}"
+                                       FontSize="35"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:ColorZone>
                 <materialDesign:ColorZone Mode="Standard"
                                           Padding="8 4 8 4"
                                           CornerRadius="5"
@@ -43,7 +63,7 @@
                                                  Grid.Column="0"
                                                  VerticalAlignment="Center"
                                                  Foreground="White" />
-                        <TextBox Grid.Column="1"
+                        <TextBox Grid.Column="1" x:Name="SearchBar"
                                  Margin="5 0 0 0"
                                  materialDesign:HintAssist.Hint="{lex:Loc Key=MyStoresearchProducts}"
                                  Text="{Binding StoreItemProp,UpdateSourceTrigger=PropertyChanged}"
@@ -98,64 +118,94 @@
                                           Mode="Custom"
                                           Margin="0 0 0 20"
                                           Background="{StaticResource ColoreZoneBackGroundd}"
-                                          materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                    <Grid>
-                        <StackPanel Margin="10">
-                            <materialDesign:Chip IsDeletable="True"
-                                                 FontSize="16"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 Style="{StaticResource MaterialDesignOutlineChip}"
-                                                 VerticalAlignment="Center"
-                                                 HorizontalAlignment="Center"
-                                                 Margin="0 0 0 10"
-                                                 FontFamily="{StaticResource MainFont}"
-                                                 Padding="0">
-                                <materialDesign:Chip.Content>
-                                    <StackPanel Orientation="Horizontal"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center">
-                                        <materialDesign:PackIcon Margin="0 0 5 0"
-                                                                 Kind="MonitorDashboard"
-                                                                 Width="30"
-                                                                 Height="30"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center" />
-                                        <TextBlock Text="Dashboard 1"
-                                                   Width="100"
-                                                   FontSize="16"
-                                                   VerticalAlignment="Center"
-                                                   TextWrapping="Wrap"
-                                                   HorizontalAlignment="Center"
-                                                   TextAlignment="Center" />
-                                    </StackPanel>
-                                </materialDesign:Chip.Content>
-
-                            </materialDesign:Chip>
-                            <Button Background="{x:Null}"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Height="50"
-                                    Margin="0 0 0 10"
-                                    materialDesign:ButtonAssist.CornerRadius="10"
-                                    Command="{Binding ExportStoreItemCommand}">
-                                <StackPanel Orientation="Horizontal"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
-                                    <materialDesign:PackIcon Margin="0 0 5 0"
-                                                             Kind="Add"
-                                                             Width="30"
-                                                             Height="30"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                          MaxHeight="300">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <ScrollViewer Grid.Row="0"
+                                      Margin="0 0 0 10">
+                            <ItemsControl VirtualizingPanel.IsVirtualizing="True"
+                                          VirtualizingPanel.VirtualizationMode="Recycling"
+                                          ItemsSource="{Binding SellerDashboards , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:Chip IsDeletable="True"
+                                                             FontSize="16"
+                                                             Foreground="White"
+                                                             Height="50"
+                                                             Style="{StaticResource MaterialDesignOutlineChip}"
+                                                             VerticalAlignment="Center"
                                                              HorizontalAlignment="Center"
-                                                             VerticalAlignment="Center" />
-                                    <TextBlock Text="New Dashboard"
-                                               FontSize="16"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               TextAlignment="Center" />
+                                                             Margin="0 0 0 10"
+                                                             FontFamily="{StaticResource MainFont}"
+                                                             Padding="0">
+                                            <materialDesign:Chip.Content>
+                                                <StackPanel Orientation="Horizontal"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <materialDesign:PackIcon Margin="0 0 5 0"
+                                                                             Kind="MonitorDashboard"
+                                                                             Width="30"
+                                                                             Height="30"
+                                                                             HorizontalAlignment="Center"
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="{Binding DashboardName}"
+                                                               Width="100"
+                                                               FontSize="16"
+                                                               VerticalAlignment="Center"
+                                                               TextWrapping="Wrap"
+                                                               HorizontalAlignment="Center"
+                                                               TextAlignment="Center" />
+                                                </StackPanel>
+                                            </materialDesign:Chip.Content>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="DeleteClick">
+                                                    <i:InvokeCommandAction Command="{Binding  RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.DeleteSellerDashboardCommand}"
+                                                                           CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:InvokeCommandAction Command="{Binding  RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.SelectedSellerDashboardChangedCommand}"
+                                                                           CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
 
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
+                                        </materialDesign:Chip>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <Button Background="{x:Null}"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Height="50"
+                                Grid.Row="1"
+                                VerticalAlignment="Bottom"
+                                materialDesign:ButtonAssist.CornerRadius="10"
+                                Command="{Binding ExportStoreItemCommand}">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Margin="0 0 5 0"
+                                                         Kind="Add"
+                                                         Width="30"
+                                                         Height="30"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center" />
+                                <TextBlock Text="New Dashboard"
+                                           FontSize="16"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           TextAlignment="Center" />
+
+                            </StackPanel>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding AddSellerDashboardCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
                     </Grid>
                 </materialDesign:ColorZone>
             </StackPanel>
@@ -164,7 +214,7 @@
                                   Padding="8 4 8 4"
                                   VerticalAlignment="Stretch"
                                   Grid.Column="0"
-                                  CornerRadius="5"
+                                  CornerRadius="15"
                                   Panel.ZIndex="1"
                                   Background="{StaticResource ColoreZoneBackGroundd}"
                                   Margin="10 20 10 10"
@@ -179,1040 +229,179 @@
                 </TabControl.Resources>
                 <TabItem Header="Thumbnail">
                     <ScrollViewer Margin="5">
-                        <WrapPanel>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
+                        <ItemsControl VirtualizingPanel.IsVirtualizing="True"
+                                      VirtualizingPanel.VirtualizationMode="Recycling"
+                                      ItemsSource="{Binding StoreItemsCollections , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <materialDesign:TransitioningContent>
+                                        <materialDesign:TransitioningContent.OpeningEffects>
+                                            <materialDesign:TransitionEffect Kind="FadeIn"
+                                                                             Duration="0:0:0.6" />
+                                        </materialDesign:TransitioningContent.OpeningEffects>
+                                        <Grid Width="100"
+                                              Height="165"
+                                              Margin="20 30 0 0"
+                                              RenderOptions.BitmapScalingMode="HighQuality">
+                                            <Button Width="100"
+                                                    Height="165"
+                                                    Padding="0"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
+                                                        Path=DataContext.AddStoreItemToReceiptCommand}"
+                                                    CommandParameter="{Binding}"
+                                                    RenderOptions.BitmapScalingMode="HighQuality">
+                                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+                                                                     Foreground="White"
+                                                                     Width="100"
+                                                                     Height="165"
+                                                                     Padding="0"
+                                                                     UniformCornerRadius="6">
 
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
+                                                    <StackPanel Margin="0 15 0 5">
+                                                        <materialDesign:Card Background="Black"
+                                                                             Foreground="White"
+                                                                             Width="90"
+                                                                             Height="90"
+                                                                             Padding="0"
+                                                                             UniformCornerRadius="10"
+                                                                             Margin="0 0 0 5"
+                                                                             materialDesign:ElevationAssist.Elevation="Dp1">
+                                                            <Image Width="90"
+                                                                   Height="90"
+                                                                   ClipToBounds="True"
+                                                                   Source="{Binding Path= Item.Image,UpdateSourceTrigger=PropertyChanged}"
+                                                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                                                   Stretch="Fill" />
+                                                        </materialDesign:Card>
 
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Margin="10">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                     Foreground="White"
-                                                     Width="100"
-                                                     Height="150"
-                                                     Padding="0"
-                                                     Margin="10 10 0 0"
-                                                     UniformCornerRadius="6">
-
-                                    <StackPanel Margin="0 15 0 0">
-                                        <materialDesign:PackIcon Kind="Image"
-                                                                 Width="90"
-                                                                 Height="90"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Foreground="Black" />
-                                        <TextBlock Text="Product"
-                                                   Foreground="Black"
-                                                   FontSize="20"
-                                                   HorizontalAlignment="Center" />
-
-
-                                    </StackPanel>
-
-                                </materialDesign:Card>
-                                <Border CornerRadius="5"
-                                        Margin="0 0 0 0"
-                                        Background="#34a853"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Padding="5">
-                                    <TextBlock Text="325"
-                                               Foreground="White"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                        </WrapPanel>
+                                                        <TextBlock Text="{Binding Path= Item.ItemName}"
+                                                                   Foreground="Black"
+                                                                   FontSize="20"
+                                                                   FontFamily="{StaticResource MainFont}"
+                                                                   TextWrapping="Wrap"
+                                                                   TextAlignment="Center"
+                                                                   MaxWidth="180"
+                                                                   Margin="3"
+                                                                   VerticalAlignment="Stretch"
+                                                                   HorizontalAlignment="Stretch" />
+                                                    </StackPanel>
+                                                </materialDesign:Card>
+                                            </Button>
+                                            <Border CornerRadius="5"
+                                                    Margin="-15 -20 0 0"
+                                                    Background="#d2714e"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Padding="5"
+                                                    MinWidth="40">
+                                                <TextBlock Text="{Binding Item.ItemSellingPrice}"
+                                                           Foreground="White"
+                                                           FontSize="16"
+                                                           FontFamily="{StaticResource MainFont}"
+                                                           HorizontalAlignment="Center" />
+                                            </Border>
+                                        </Grid>
+                                    </materialDesign:TransitioningContent>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="List">
                     <ScrollViewer VerticalAlignment="Top"
                                   Margin="5">
-                        <StackPanel Margin="0 10 0 0 ">
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black" Grid.Column="0"/>
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}" BorderBrush="Black"  Grid.Column="3" HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                                                 Foreground="White"
-                                                 Height="50"
-                                                 HorizontalAlignment="Stretch"
-                                                 Padding="0"
-                                                 Margin="10"
-                                                 UniformCornerRadius="6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Image"
-                                                             Width="40"
-                                                             Height="40"
-                                                             Margin="10 0 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             VerticalAlignment="Center"
-                                                             Foreground="Black"
-                                                             Grid.Column="0" />
-                                    <TextBlock Text="Product"
-                                               Foreground="Black"
-                                               FontSize="20"
-                                               Margin="20 0 0 0"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1" />
-                                    <Border CornerRadius="10"
-                                            Background="#34a853"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Margin="50 0 0 0"
-                                            Padding="5"
-                                            Grid.Column="2">
-                                        <TextBlock Text="325"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center" />
-                                    </Border>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            BorderBrush="Black"
-                                            Grid.Column="3"
-                                            HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="Add"
-                                                                 Foreground="Black"
-                                                                 Width="30"
-                                                                 Height="30" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-                        </StackPanel>
-                        
+                        <ItemsControl VirtualizingPanel.IsVirtualizing="True"
+                                      VirtualizingPanel.VirtualizationMode="Recycling"
+                                      ItemsSource="{Binding StoreItemsCollections , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <materialDesign:TransitioningContent>
+                                        <materialDesign:TransitioningContent.OpeningEffects>
+                                            <materialDesign:TransitionEffect Kind="FadeIn"
+                                                                             Duration="0:0:0.6" />
+                                        </materialDesign:TransitioningContent.OpeningEffects>
+                                        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+                                                             Foreground="White"
+                                                             Height="50"
+                                                             HorizontalAlignment="Stretch"
+                                                             Padding="0"
+                                                             Margin="10"
+                                                             UniformCornerRadius="6">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <materialDesign:Card Background="Black"
+                                                                     Foreground="White"
+                                                                     Width="40"
+                                                                     Height="40"
+                                                                     Margin="10 0 0 0"
+                                                                     HorizontalAlignment="Left"
+                                                                     VerticalAlignment="Center"
+                                                                     Padding="0"
+                                                                     UniformCornerRadius="5"
+                                                                     materialDesign:ElevationAssist.Elevation="Dp2">
+                                                    <Image Width="40"
+                                                           Height="40"
+                                                           ClipToBounds="True"
+                                                           Source="{Binding Path= Item.Image,UpdateSourceTrigger=PropertyChanged}"
+                                                           RenderOptions.BitmapScalingMode="HighQuality"
+                                                           Stretch="Fill" />
+                                                </materialDesign:Card>
+                                                <Viewbox Stretch="Uniform"
+                                                         Margin="20 3 0 3"
+                                                         VerticalAlignment="Center"
+                                                         StretchDirection="DownOnly"
+                                                         Grid.Column="1">
+                                                    <TextBlock Text="{Binding Path= Item.ItemName}"
+                                                               Foreground="Black"
+                                                               FontSize="18"
+                                                               FontFamily="{StaticResource MainFont}"
+                                                               MaxWidth="200"
+                                                               TextWrapping="Wrap" />
+                                                </Viewbox>
+                                                <Border CornerRadius="10"
+                                                        Background="#d2714e"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Margin="50 0 0 0"
+                                                        Padding="5"
+                                                        MinWidth="50"
+                                                        Grid.Column="2">
+                                                    <TextBlock Text="{Binding Item.ItemSellingPrice}"
+                                                               Foreground="White"
+                                                               FontSize="16"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="{StaticResource MainFont}"
+                                                               HorizontalAlignment="Center" />
+                                                </Border>
+                                                <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                        BorderBrush="Black"
+                                                        Grid.Column="3"
+                                                        HorizontalAlignment="Right"
+                                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
+                                                        Path=DataContext.AddStoreItemToReceiptCommand}"
+                                                        CommandParameter="{Binding}">
+                                                    <materialDesign:PackIcon Kind="Add"
+                                                                             Foreground="Black"
+                                                                             Width="30"
+                                                                             Height="30" />
+                                                </Button>
+                                            </Grid>
+                                        </materialDesign:Card>
+                                    </materialDesign:TransitioningContent>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
@@ -1221,7 +410,7 @@
                                   Padding="8 4 8 4"
                                   VerticalAlignment="Stretch"
                                   Grid.Column="1"
-                                  CornerRadius="5"
+                                  CornerRadius="15"
                                   Panel.ZIndex="1"
                                   Background="{StaticResource ColoreZoneBackGroundd}"
                                   Margin="10 20 20 10"
@@ -1232,787 +421,189 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Label  Content="Dashboard 1"
+                <Label  Content="{Binding CurrentSellerDashboard.DashboardName}"
                         FontSize="24"
                         FontFamily="{StaticResource MainFont}"
                         HorizontalAlignment="Center"
                         Foreground="White"
-                        Margin="0 5 0 0" Grid.Row="0" />
+                        Margin="0 5 0 0"
+                        Grid.Row="0" />
                 <ScrollViewer Grid.Row="1">
-                    <StackPanel >
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right" VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom" Margin="0 0 10 7" Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-                                
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
+                    <ItemsControl VirtualizingPanel.IsVirtualizing="True"
+                                  VirtualizingPanel.VirtualizationMode="Recycling"
+                                  ItemsSource="{Binding CurrentSellerDashboard.Receipt.SoldItems , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card Background="White"
+                                                     Foreground="White"
+                                                     Height="100"
+                                                     HorizontalAlignment="Stretch"
+                                                     Padding="0"
+                                                     Margin="10"
+                                                     UniformCornerRadius="6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="4*" />
+                                            <ColumnDefinition Width="0.7*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Viewbox Stretch="Uniform"
+                                                 Margin="10 0 0 0"
+                                                 VerticalAlignment="Center"
+                                                 StretchDirection="DownOnly"
+                                                 Grid.Column="0">
+                                            <TextBlock Text="{Binding ItemName}"
+                                                       Foreground="Black"
+                                                       FontSize="20"
+                                                       Width="110"
+                                                       VerticalAlignment="Center"
+                                                       FontWeight="Bold"
+                                                       TextWrapping="WrapWithOverflow" />
+                                        </Viewbox>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                BorderBrush="Black"
+                                                Grid.Column="2"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
+                                                        Path=DataContext.DeleteReceiptItemCommand}"
+                                                CommandParameter="{Binding}">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                                     Foreground="Black"
+                                                                     Width="30"
+                                                                     Height="30" />
+                                        </Button>
+                                        <StackPanel Grid.Column="1"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Margin="0 0 10 0"
+                                                    Orientation="Horizontal">
+                                            <StackPanel>
+                                                <TextBlock Text="Quantity"
+                                                           Foreground="Black"
+                                                           FontSize="16"
+                                                           Margin="0 0 0 5" />
+                                                <TextBox Text="{Binding ItemNumber,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                         HorizontalAlignment="Center"
+                                                         Foreground="Black"
+                                                         FontSize="16"  TextWrapping="Wrap" MinWidth="30" TextAlignment="Center" MaxWidth="50">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="TextChanged">
+                                                            <i:InvokeCommandAction 
+                                                                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
+                                                        Path=DataContext.EditStoreItemInReceiptCommand}"
+                                                                                    CommandParameter="{Binding}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </TextBox>
+                                            </StackPanel>
+                                            <Border Background="Black"
+                                                    CornerRadius="1"
+                                                    Height="50"
+                                                    Width="2"
+                                                    Opacity="0.2"
+                                                    Margin="10 0 10 0" />
+                                            <StackPanel>
+                                                <TextBlock Text="Price"
+                                                           Foreground="Black"
+                                                           FontSize="16"
+                                                           Margin="0 0 0 5" />
+                                                <TextBox Text="{Binding ItemSellingPrice,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                           HorizontalAlignment="Center"
+                                                           Foreground="Black"
+                                                           FontSize="16"
+                                                           TextWrapping="Wrap"
+                                                         MaxWidth="50"
+                                                         MinWidth="30"
+                                                         TextAlignment="Center">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="TextChanged">
+                                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
+                                                        Path=DataContext.EditStoreItemInReceiptCommand}"
+                                                                                   CommandParameter="{Binding}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
 
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
+                                                </TextBox>
+                                            </StackPanel>
+                                            <Border Background="Black"
+                                                    CornerRadius="1"
+                                                    Height="50"
+                                                    Width="2"
+                                                    Opacity="0.2"
+                                                    Margin="10 0 10 0" />
+                                            <StackPanel>
+                                                <TextBlock Text="Total"
+                                                           Foreground="Black"
+                                                           FontSize="16"
+                                                           Margin="0 0 0 10" />
+                                                <TextBlock Text="{Binding ItemTotalCost}"
+                                                           HorizontalAlignment="Center"
+                                                           Foreground="Black"
+                                                           FontSize="16"
+                                                           TextWrapping="Wrap"
+                                                           MaxWidth="50" />
+                                            </StackPanel>
+                                        </StackPanel>
 
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-
-                            </Grid>
-                        </materialDesign:Card>
-                        <materialDesign:Card Background="White"
-                                             Foreground="White"
-                                             Height="100"
-                                             HorizontalAlignment="Stretch"
-                                             Padding="0"
-                                             Margin="10"
-                                             UniformCornerRadius="6">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3.5*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Product"
-                                           Foreground="Black"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Margin="20 10 0 0"
-                                           VerticalAlignment="Top"
-                                           TextWrapping="Wrap"
-                                           Grid.Column="0" />
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top">
-                                    <materialDesign:PackIcon Kind="Add"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                        BorderBrush="Black"
-                                        Grid.Column="2"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom">
-                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground="Black"
-                                                             Width="30"
-                                                             Height="30" />
-                                </Button>
-                                <StackPanel Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Margin="0 0 10 7"
-                                            Orientation="Horizontal">
-                                    <StackPanel>
-                                        <TextBlock Text="Quantity"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Price"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="10"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                    <Border Background="Black"
-                                            CornerRadius="1"
-                                            Height="50"
-                                            Width="2"
-                                            Opacity="0.2"
-                                            Margin="10 0 10 0" />
-                                    <StackPanel>
-                                        <TextBlock Text="Total"
-                                                   Foreground="Black"
-                                                   FontSize="16"
-                                                   Margin="0 0 0 10" />
-                                        <TextBlock Text="100"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="Black"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-
-                            </Grid>
-                        </materialDesign:Card>
-                    </StackPanel>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
                 <Grid Grid.Row="2">
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Margin="0 20 0 5">
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          Margin="0 20 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
                         <Button Content="Cancel"
-                                Margin="0 0 20 0"
+                                Margin="0 0 10 0"
                                 Foreground="White"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 MinHeight="40"
                                 FontSize="18"
                                 FontFamily="{StaticResource MainFont}"
-                                BorderThickness="2"
-                                BorderBrush="{StaticResource SecondaryButtonColor}"
+                                BorderThickness="0.5"
+                                BorderBrush="White"
                                 Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
-                                />
-                        <Button Content="Create Order"
-                                BorderThickness="0"
-                                Foreground="White"
+                                Command="{Binding ClearStoreItemInReceiptCommand}"/>
+                        <Button BorderThickness="0"
                                 MinHeight="40"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="1"
+                                Margin="0 0 10 0"
+                                IsDefault="True"
+                                Background="#808080"
+                                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock Text="Create Order"
+                                           FontSize="18"
+                                           Foreground="White"
+                                           FontFamily="{StaticResource MainFont}" />
+                            </Viewbox>
+                        </Button>
+                        <Button Content="Pay Now"
+                                BorderThickness="0"
+                                MinHeight="40"
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                Foreground="White"
                                 FontSize="18"
-                                Margin="0 0 20 0"
                                 IsDefault="True"
                                 Background="{StaticResource PrimarytButtonColor}"
                                 FontFamily="{StaticResource MainFont}"
                                 Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}">
                         </Button>
-                        <Button Content="Pay Now"
-                                BorderThickness="0"
-                                MinHeight="40"
-                                Foreground="White"
-                                FontSize="18"
-                                IsDefault="True"
-                                Background="#34a853"
-                                FontFamily="{StaticResource MainFont}"
-                                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}">
-                        </Button>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
 
             </Grid>
