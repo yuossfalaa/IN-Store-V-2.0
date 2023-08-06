@@ -590,13 +590,18 @@
                                 Margin="0 0 10 0"
                                 IsDefault="True"
                                 Background="#808080"
-                                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}">
+                                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" x:Name="OrderButton">
                             <Viewbox StretchDirection="DownOnly">
                                 <TextBlock Text="Create Order"
                                            FontSize="18"
                                            Foreground="White"
                                            FontFamily="{StaticResource MainFont}" />
                             </Viewbox>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding CreateReceiptCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
                         <Button Content="Pay Now"
                                 BorderThickness="0"
@@ -607,9 +612,15 @@
                                 Foreground="White"
                                 FontSize="18"
                                 IsDefault="True"
+                                x:Name="PayButton"
                                 Background="{StaticResource PrimarytButtonColor}"
                                 FontFamily="{StaticResource MainFont}"
                                 Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding PayReceiptCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
                     </Grid>
                 </Grid>
