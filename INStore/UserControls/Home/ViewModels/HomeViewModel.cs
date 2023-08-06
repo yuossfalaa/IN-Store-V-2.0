@@ -10,6 +10,7 @@ using INStore.Services.ReceiptsServices;
 using INStore.Services.StoreItemServices;
 using INStore.State.FloatingWindow;
 using INStore.State.SellerDashbords;
+using INStore.State.UserStore;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -26,6 +27,7 @@ namespace INStore.UserControls.Home.ViewModels
         private readonly FloatingWindow _floatingWindow;
         private readonly SellerDashboardsState _sellerDashboardsState;
         private readonly IReceiptService _receiptService;
+        private readonly IUserStore _userStore;
         #endregion
         #region Public Vars
         private ObservableCollection<StoreItems> _StoreItemsCollection;
@@ -86,11 +88,13 @@ namespace INStore.UserControls.Home.ViewModels
         public ICommand AddStoreItemToReceiptCommand { get; set; }
         public ICommand EditStoreItemInReceiptCommand { get; set; }
         public ICommand ClearStoreItemInReceiptCommand { get; set; }
+        public ICommand PayReceiptCommand { get; set; }
+        public ICommand CreateReceiptCommand { get; set; }
         #endregion
 
         public HomeViewModel(IStoreItemsService storeItemsService, ILogger<HomeViewModel> homeViewModelLogger,
             ISnackbarMessageQueue snackbarMessageQueue, FloatingWindow floatingWindow,
-            SellerDashboardsState sellerDashboardsState, IReceiptService receiptService)
+            SellerDashboardsState sellerDashboardsState, IReceiptService receiptService, IUserStore userStore)
         {
             #region Passed Vars
             _storeItemsService = storeItemsService;
@@ -99,6 +103,7 @@ namespace INStore.UserControls.Home.ViewModels
             _floatingWindow = floatingWindow;
             _sellerDashboardsState = sellerDashboardsState;
             _receiptService = receiptService;
+            _userStore = userStore;
             #endregion
             #region Init Vars
             Total = "0";
@@ -114,6 +119,8 @@ namespace INStore.UserControls.Home.ViewModels
             AddSellerDashboardCommand = new RelayCommand(AddSellerDashboardFunc);
             ClearStoreItemInReceiptCommand = new RelayCommand(ClearStoreItemInReceiptFunc);
             EditStoreItemInReceiptCommand = new RelayCommand<SellingHistory>(EditStoreItemInReceiptFunc);
+            PayReceiptCommand = new RelayCommand(PayReceiptFunc);
+            CreateReceiptCommand = new RelayCommand(CreateReceiptFunc);
             SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, _HomeViewModelLogger, this, nameof(StoreItemsCollections));
             #endregion
             #region Load Data
@@ -121,7 +128,7 @@ namespace INStore.UserControls.Home.ViewModels
             GetAllStoreItemsCommand.Execute(null);
             CalcTotal();
             #endregion
-            _HomeViewModelLogger.Log(LogLevel.Information, "HomeViewModel Initialized");   
+            _HomeViewModelLogger.Log(LogLevel.Information, "HomeViewModel Initialized");
         }
         #region Public Methods
         public async void CalcTotal()
@@ -140,6 +147,32 @@ namespace INStore.UserControls.Home.ViewModels
         }
         #endregion
         #region Private Methods
+        private async void CreateReceiptFunc()
+        {
+            PrepareReceiptFunc();
+            if (CurrentSellerDashboard.Receipt.Id == 0)
+            {
+                await _receiptService.CreateReceipt(CurrentSellerDashboard.Receipt);
+            }
+            else
+            {
+                await _receiptService.UpdateReceipt(CurrentSellerDashboard.Receipt);
+            }
+            ClearStoreItemInReceiptFunc();
+
+        }
+        private async void PayReceiptFunc()
+        {
+            PrepareReceiptFunc();
+            await _receiptService.PayReceipt(CurrentSellerDashboard.Receipt);
+            ClearStoreItemInReceiptFunc();
+        }
+        private void PrepareReceiptFunc()
+        {
+            CurrentSellerDashboard.Receipt.ReceiptTotal = Double.Parse(Total);
+            CurrentSellerDashboard.Receipt.ReceiptDate = DateTime.Now;
+            CurrentSellerDashboard.Receipt.User = _userStore.CurrentUser;
+        }
         private void ClearStoreItemInReceiptFunc()
         {
             CurrentSellerDashboard.Receipt = new Receipts();
