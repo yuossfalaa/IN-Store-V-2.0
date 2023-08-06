@@ -1,6 +1,7 @@
 ﻿using INStore.Domain.Services;
 using INStore.Domain.Services.AuthenticationService;
 using INStore.EntityFramework.Services;
+using INStore.Services.ReceiptsServices;
 using INStore.State.Authenticators;
 using INStore.State.Registers;
 using INStore.State.UserStore;
@@ -26,6 +27,8 @@ namespace INStore.HostBuilders
                 services.AddSingleton<ISnackbarMessageQueue, SnackbarMessageQueue>();
                 services.AddSingleton<IRegister, Register>();
                 services.AddSingleton<IStoreItemsService, StoreItemsDataService>();
+                services.AddSingleton<IReceiptsDataService, ReceiptsDataService>();
+                services.AddSingleton<IReceiptService, ReceiptService>();
             });
             return host;
         }
