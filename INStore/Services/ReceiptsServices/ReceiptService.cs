@@ -13,8 +13,6 @@ namespace INStore.Services.ReceiptsServices
         private readonly ISnackbarMessageQueue _SnackbarMessageQueue;
         private readonly IReceiptsDataService _receiptsService;
         public ILogger<HomeViewModel> _Logger;
-
-
         public ReceiptService(ISnackbarMessageQueue snackbarMessageQueue, IReceiptsDataService receiptsService, ILogger<HomeViewModel> homeViewModelLogger)
         {
             _SnackbarMessageQueue = snackbarMessageQueue;
@@ -24,22 +22,23 @@ namespace INStore.Services.ReceiptsServices
 
         public async Task PayReceipt(Receipts receipts)
         {
+            receipts.paymentStatus = PaymentStatus.Paid;
             if (receipts.Id == 0)
             {
-                await CreateAndPayReceipt(receipts);
+                await CreateReceipt(receipts);
             }
             else
             {
-                await UpdateAndPayReceipt(receipts);
+                await UpdateReceipt(receipts);
             }
 
             _SnackbarMessageQueue.Enqueue("Order Paid");
         }
-        private async Task CreateAndPayReceipt(Receipts receipts)
+        public async Task CreateReceipt(Receipts receipts)
         {
             try
             {
-                receipts.paymentStatus = PaymentStatus.Paid;
+                receipts = ExtractReceiptInfo(receipts);
                 await _receiptsService.Create(receipts);
                 _Logger.LogInformation("Order Created and Paid");
             }
@@ -47,25 +46,13 @@ namespace INStore.Services.ReceiptsServices
             {
                 _Logger.LogError(ex.Message);
             }
-           
-        }
-        private async Task UpdateAndPayReceipt(Receipts receipts)
-        {
-            try
-            {
-                receipts.paymentStatus = PaymentStatus.Paid;
-                await _receiptsService.Update(receipts.Id, receipts);
-                _Logger.LogInformation("Order Updated and Paid");
-            }
-            catch (Exception ex)
-            {
-                _Logger.LogError(ex.Message);
-            }
+
         }
         public async Task RefundReceipt(Receipts receipts)
         {
             try
             {
+                receipts = ExtractReceiptInfo(receipts);
                 receipts.status = Status.Refunded;
                 await _receiptsService.Update(receipts.Id, receipts);
                 _SnackbarMessageQueue.Enqueue("Order Refunded");
@@ -81,6 +68,7 @@ namespace INStore.Services.ReceiptsServices
         {
             try
             {
+                receipts = ExtractReceiptInfo(receipts);
                 await _receiptsService.Update(receipts.Id, receipts);
                 _SnackbarMessageQueue.Enqueue("Order Updated");
                 _Logger.LogInformation("Order Updated ");
@@ -89,6 +77,20 @@ namespace INStore.Services.ReceiptsServices
             {
                 _Logger.LogError(ex.Message);
             }
+        }
+        private Receipts ExtractReceiptInfo(Receipts receipts)
+        {
+            if (receipts.User != null)
+            {
+                receipts.UserID = receipts.User.Id;
+                receipts.User = null;
+            }
+            if (receipts.Customer != null)
+            {
+                receipts.CustomerId = receipts.Customer.Id;
+                receipts.Customer = null;
+            }
+            return receipts;
         }
     }
 }
