@@ -6,9 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DocumentFormat.OpenXml.ExtendedProperties;
-using DocumentFormat.OpenXml.Vml;
 using INStore.UserControls.Home.ViewModels;
-using INStore.UserControls.MyStore.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
 using Squirrel;
@@ -21,11 +19,12 @@ namespace INStore.UserControls.Home.Views
     /// </summary>
     public partial class HomeView : UserControl
     {
-        private UpdateManager manager ;
+        private UpdateManager manager;
         private StringBuilder stringBuilder = new StringBuilder();
         private DispatcherTimer timer;
-        public   ILogger<HomeViewModel> _HomeViewModelLogger;
-        public   ISnackbarMessageQueue _SnackbarMessageQueue;
+        public ILogger<HomeViewModel> _HomeViewModelLogger;
+        public ISnackbarMessageQueue _SnackbarMessageQueue;
+
         public HomeView()
         {
             InitializeComponent();
@@ -34,13 +33,14 @@ namespace INStore.UserControls.Home.Views
             // Initialize the timer
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromMicroseconds(200);
             timer.Tick += Timer_Tick;
-            
+
         }
         #region Process Key Down 
         public void PreviewKeyDownFunc(object sender, KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.F2) SearchBar.Focus();
+            CheckKeys(e);
             // Start the timer on key press
             timer.Stop();
             timer.Start();
@@ -48,7 +48,12 @@ namespace INStore.UserControls.Home.Views
             char keyChar = KeyToChar(e.Key);
             stringBuilder.Append(keyChar);
         }
+        private void CheckKeys(KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control) SearchBar.Focus();
+            if (e.Key == System.Windows.Input.Key.F2) System.Diagnostics.Process.Start("calc");
 
+        }
         private void Timer_Tick(object? sender, EventArgs e)
         {
             // Timer elapsed, add the accumulated string and clear the string builder
@@ -57,7 +62,6 @@ namespace INStore.UserControls.Home.Views
             if (!string.IsNullOrEmpty(accumulatedString))
             {
 
-                MessageBox.Show(accumulatedString);
 
                 // Clear the string builder
                 stringBuilder.Clear();
@@ -89,8 +93,6 @@ namespace INStore.UserControls.Home.Views
             return '\0'; // Default return value for unsupported keys
         }
         #endregion
-
-
         #region Update Func
         private async void HomeView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -99,8 +101,8 @@ namespace INStore.UserControls.Home.Views
             _HomeViewModelLogger = homeViewModel._HomeViewModelLogger;
             _SnackbarMessageQueue = homeViewModel._SnackbarMessageQueue;
             await UpdateApplication();
-           
-          
+
+
         }
         private async Task UpdateApplication()
         {
@@ -128,21 +130,16 @@ namespace INStore.UserControls.Home.Views
                             _SnackbarMessageQueue.Enqueue("Update Failed !!");
                             _HomeViewModelLogger.LogError(ex.Message);
                         }
-                        
+
                     }
 
                 }
                 catch (Exception ex)
                 {
-                     _HomeViewModelLogger.LogError(ex.Message);
+                    _HomeViewModelLogger.LogError(ex.Message);
                 }
             });
-        } 
+        }
         #endregion
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    System.Diagnostics.Process.Start("calc");
-
-        //}
     }
 }
