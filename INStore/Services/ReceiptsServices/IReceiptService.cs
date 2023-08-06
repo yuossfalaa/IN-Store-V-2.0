@@ -8,5 +8,6 @@ namespace INStore.Services.ReceiptsServices
         Task PayReceipt(Receipts receipts);
         Task RefundReceipt(Receipts receipts);
         Task UpdateReceipt(Receipts receipts);
+        Task CreateReceipt(Receipts receipts);
     }
 }
