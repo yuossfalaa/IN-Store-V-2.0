@@ -134,6 +134,7 @@ namespace INStore.UserControls.Home.ViewModels
         private void ClearStoreItemInReceiptFunc()
         {
             CurrentSellerDashboard.Receipt = new Receipts();
+            CalcTotal();
         }
         private void EditStoreItemInReceiptFunc(SellingHistory history)
         {
