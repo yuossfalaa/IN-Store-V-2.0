@@ -3,14 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using DocumentFormat.OpenXml.Spreadsheet;
 using GalaSoft.MvvmLight.Command;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
+using INStore.Services.ReceiptsServices;
 using INStore.Services.StoreItemServices;
 using INStore.State.FloatingWindow;
 using INStore.State.SellerDashbords;
-using INStore.UserControls.MyStore.ViewModels;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -26,6 +25,7 @@ namespace INStore.UserControls.Home.ViewModels
         public readonly ISnackbarMessageQueue _SnackbarMessageQueue;
         private readonly FloatingWindow _floatingWindow;
         private readonly SellerDashboardsState _sellerDashboardsState;
+        private readonly IReceiptService _receiptService;
         #endregion
         #region Public Vars
         private ObservableCollection<StoreItems> _StoreItemsCollection;
@@ -88,16 +88,25 @@ namespace INStore.UserControls.Home.ViewModels
         public ICommand ClearStoreItemInReceiptCommand { get; set; }
         #endregion
 
-        public HomeViewModel(IStoreItemsService storeItemsService, ILogger<HomeViewModel> homeViewModelLogger, ISnackbarMessageQueue snackbarMessageQueue, FloatingWindow floatingWindow, SellerDashboardsState sellerDashboardsState)
+        public HomeViewModel(IStoreItemsService storeItemsService, ILogger<HomeViewModel> homeViewModelLogger,
+            ISnackbarMessageQueue snackbarMessageQueue, FloatingWindow floatingWindow,
+            SellerDashboardsState sellerDashboardsState, IReceiptService receiptService)
         {
+            #region Passed Vars
             _storeItemsService = storeItemsService;
             _HomeViewModelLogger = homeViewModelLogger;
             _SnackbarMessageQueue = snackbarMessageQueue;
             _floatingWindow = floatingWindow;
             _sellerDashboardsState = sellerDashboardsState;
+            _receiptService = receiptService;
+            #endregion
+            #region Init Vars
             Total = "0";
             SellerDashboards = _sellerDashboardsState.SellerDashboards;
             CurrentSellerDashboard = SellerDashboards[0];
+            StoreItemsCollections = new ObservableCollection<StoreItems>();
+            #endregion
+            #region Init Command
             DeleteSellerDashboardCommand = new RelayCommand<SellerDashboard>(DeleteSellerDashboardFunc);
             SelectedSellerDashboardChangedCommand = new RelayCommand<SellerDashboard>(SelectedSellerDashboardChangedFunc);
             AddStoreItemToReceiptCommand = new RelayCommand<StoreItems>(AddStoreItemToReceiptFunc);
@@ -106,16 +115,15 @@ namespace INStore.UserControls.Home.ViewModels
             ClearStoreItemInReceiptCommand = new RelayCommand(ClearStoreItemInReceiptFunc);
             EditStoreItemInReceiptCommand = new RelayCommand<SellingHistory>(EditStoreItemInReceiptFunc);
             SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, _HomeViewModelLogger, this, nameof(StoreItemsCollections));
-            //Load Data
-            StoreItemsCollections = new ObservableCollection<StoreItems>();
+            #endregion
+            #region Load Data
             GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, _HomeViewModelLogger, this, nameof(StoreItemsCollections));
             GetAllStoreItemsCommand.Execute(null);
-            _HomeViewModelLogger.Log(LogLevel.Information, "HomeViewModel Initialized");
             CalcTotal();
+            #endregion
+            _HomeViewModelLogger.Log(LogLevel.Information, "HomeViewModel Initialized");   
         }
-
-    
-
+        #region Public Methods
         public async void CalcTotal()
         {
             await Task.Run(async () =>
@@ -130,6 +138,7 @@ namespace INStore.UserControls.Home.ViewModels
             });
 
         }
+        #endregion
         #region Private Methods
         private void ClearStoreItemInReceiptFunc()
         {
