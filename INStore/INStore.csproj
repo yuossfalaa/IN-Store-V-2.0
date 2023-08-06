@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\INStore.Domain\INStore.Domain.csproj" />
     <ProjectReference Include="..\INStore.EntityFramework\INStore.EntityFramework.csproj" />
   </ItemGroup>
