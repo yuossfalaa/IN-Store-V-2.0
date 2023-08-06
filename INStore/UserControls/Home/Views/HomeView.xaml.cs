@@ -24,8 +24,8 @@ namespace INStore.UserControls.Home.Views
         private UpdateManager manager;
         private StringBuilder stringBuilder = new StringBuilder();
         private DispatcherTimer timer;
-        public ILogger<HomeViewModel> _HomeViewModelLogger;
-        public ISnackbarMessageQueue _SnackbarMessageQueue;
+        private ILogger<HomeViewModel> _HomeViewModelLogger;
+        private ISnackbarMessageQueue _SnackbarMessageQueue;
         private HomeViewModel homeViewModel;
         public HomeView()
         {
@@ -106,24 +106,30 @@ namespace INStore.UserControls.Home.Views
         }
         private char KeyToChar(Key key)
         {
-            KeyConverter converter = new KeyConverter();
-            string keyString = converter.ConvertToString(key);
-
-            if (keyString.Length == 1) // Single character
+            try
             {
-                char character = keyString[0];
+                KeyConverter converter = new KeyConverter();
+                string keyString = converter.ConvertToString(key);
 
-                if (Char.IsLetterOrDigit(character)) // Letters and digits
-                    return character;
+                if (keyString.Length == 1) // Single character
+                {
+                    char character = keyString[0];
+
+                    if (Char.IsLetterOrDigit(character)) // Letters and digits
+                        return character;
+                }
+                else if ((key >= Key.NumPad0 && key <= Key.NumPad9) || (key >= Key.D0 && key <= Key.D9)) // Numpad numbers and regular number keys
+                {
+                    if (key >= Key.D0 && key <= Key.D9)
+                        return (char)('0' + (key - Key.D0));
+                    else
+                        return (char)('0' + (key - Key.NumPad0));
+                }
             }
-            else if ((key >= Key.NumPad0 && key <= Key.NumPad9) || (key >= Key.D0 && key <= Key.D9)) // Numpad numbers and regular number keys
+            catch (Exception ex)
             {
-                if (key >= Key.D0 && key <= Key.D9)
-                    return (char)('0' + (key - Key.D0));
-                else
-                    return (char)('0' + (key - Key.NumPad0));
+                _HomeViewModelLogger.LogError(ex.Message);
             }
-
             return '\0'; // Default return value for unsupported keys
         }
         #endregion
@@ -135,8 +141,6 @@ namespace INStore.UserControls.Home.Views
             _HomeViewModelLogger = homeViewModel._HomeViewModelLogger;
             _SnackbarMessageQueue = homeViewModel._SnackbarMessageQueue;
             await UpdateApplication();
-
-
         }
         private async Task UpdateApplication()
         {
