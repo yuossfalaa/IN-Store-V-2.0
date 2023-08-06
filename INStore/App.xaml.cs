@@ -6,12 +6,16 @@ using Serilog;
 using System.Threading.Tasks;
 using System.Windows;
 using INStore.HostBuilders;
+using Squirrel;
+using Application = System.Windows.Application;
 
 namespace INStore
 {
     // Last Migration = > add-Migration InitialCreate_0.1
     public partial class App : Application
     {
+        private UpdateManager manager;
+
         private readonly IHost _host;
         public App()
         {
@@ -43,6 +47,19 @@ namespace INStore
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            try
+            {
+                manager = await UpdateManager
+                        .GitHubUpdateManager(@"https://github.com/yuossfalaa/INStore-Updates");
+                SquirrelAwareApp.HandleEvents(
+                                onInitialInstall: v => manager.CreateShortcutForThisExe(),
+                                onAppUpdate: v => manager.CreateShortcutForThisExe(),
+                                onAppUninstall: v => manager.RemoveShortcutForThisExe());
+            }
+            catch
+            {
+
+            }
             DbContextCreator();
             await _host.StartAsync();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
