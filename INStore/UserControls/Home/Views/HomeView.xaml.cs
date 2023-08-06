@@ -84,8 +84,11 @@ namespace INStore.UserControls.Home.Views
             }
             #endregion
             #region F's Shortcuts
-            if (e.Key == System.Windows.Input.Key.F12) System.Diagnostics.Process.Start("calc");
             if (e.Key == System.Windows.Input.Key.F1) SearchBar.Focus();
+            if (e.Key == System.Windows.Input.Key.F2) OrderButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            if (e.Key == System.Windows.Input.Key.F3) PayButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            if (e.Key == System.Windows.Input.Key.F12) System.Diagnostics.Process.Start("calc");
+
             #endregion
         }
         private void Timer_Tick(object? sender, EventArgs e)
