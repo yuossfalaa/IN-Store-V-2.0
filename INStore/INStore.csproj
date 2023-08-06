@@ -6,11 +6,10 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Images\ICON.ico</ApplicationIcon>
-
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <UserSecretsId>a69820fd-64d6-4f20-ad69-4b6c0aa97b08</UserSecretsId>
+	  <SelfContained>true</SelfContained>
+	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	  <UserSecretsId>a69820fd-64d6-4f20-ad69-4b6c0aa97b08</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Resources\Fonts\Avatarock.ttf" />
     <None Remove="Resources\Fonts\Century_Gothic.ttf" />
@@ -101,7 +100,7 @@
 
 		<Exec Command="$(NugetTools)\NuGet pack &quot;$(NuspecFile)&quot; -Version $(Version) -Properties Configuration=Release -OutputDirectory &quot;$(SolutionDir)Deployment\GeneratedNugets&quot;" />
 
-		<Exec Command="$(SquirrelTools)\Squirrel.exe --releasify &quot;$(SolutionDir)Deployment\GeneratedNugets\@(ID).$(Version).nupkg&quot; --releaseDir=&quot;$(SolutionDir)Deployment\Releases&quot;" />
+		<Exec Command="$(SquirrelTools)\Squirrel.exe --releasify &quot;$(SolutionDir)Deployment\GeneratedNugets\@(ID).$(Version).nupkg&quot; --releaseDir &quot;$(SolutionDir)Deployment\Releases&quot; --setupIcon &quot;$(SolutionDir)Deployment\ICON.ico&quot; --icon &quot;$(SolutionDir)Deployment\ICON.ico&quot;" />
 	</Target>
 	
 </Project>
