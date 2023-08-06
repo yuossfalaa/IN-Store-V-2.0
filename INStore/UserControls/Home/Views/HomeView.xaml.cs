@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -6,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DocumentFormat.OpenXml.ExtendedProperties;
+using DocumentFormat.OpenXml.Office2016.Excel;
 using INStore.UserControls.Home.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -24,7 +26,7 @@ namespace INStore.UserControls.Home.Views
         private DispatcherTimer timer;
         public ILogger<HomeViewModel> _HomeViewModelLogger;
         public ISnackbarMessageQueue _SnackbarMessageQueue;
-
+        private HomeViewModel homeViewModel;
         public HomeView()
         {
             InitializeComponent();
@@ -50,9 +52,41 @@ namespace INStore.UserControls.Home.Views
         }
         private void CheckKeys(KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control) SearchBar.Focus();
-            if (e.Key == System.Windows.Input.Key.F2) System.Diagnostics.Process.Start("calc");
-
+            #region Ctrl Shortcuts
+            if (e.Key == System.Windows.Input.Key.D && Keyboard.Modifiers == ModifierKeys.Control) AddSellerDashboardButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            if (e.Key == System.Windows.Input.Key.W && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                int index = homeViewModel.SellerDashboards.IndexOf(homeViewModel.CurrentSellerDashboard);
+                if (index == 0) homeViewModel.CurrentSellerDashboard = homeViewModel.SellerDashboards.Last();
+                else
+                {
+                    index = index - 1;
+                    homeViewModel.CurrentSellerDashboard = homeViewModel.SellerDashboards[index];
+                }
+            }
+            if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                int index = homeViewModel.SellerDashboards.IndexOf(homeViewModel.CurrentSellerDashboard);
+                if (index == homeViewModel.SellerDashboards.Count() - 1) homeViewModel.CurrentSellerDashboard = homeViewModel.SellerDashboards.First();
+                else
+                {
+                    index = index + 1;
+                    homeViewModel.CurrentSellerDashboard = homeViewModel.SellerDashboards[index];
+                }
+            }
+            #endregion
+            #region Shift Shortcuts
+            if (e.Key == System.Windows.Input.Key.C && Keyboard.Modifiers == ModifierKeys.Shift) CancelButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            if (e.Key == System.Windows.Input.Key.Tab && Keyboard.Modifiers == ModifierKeys.Shift)
+            {
+               if ( TabControl.SelectedIndex == 0) TabControl.SelectedIndex =1;
+               else TabControl.SelectedIndex = 0;
+            }
+            #endregion
+            #region F's Shortcuts
+            if (e.Key == System.Windows.Input.Key.F12) System.Diagnostics.Process.Start("calc");
+            if (e.Key == System.Windows.Input.Key.F1) SearchBar.Focus();
+            #endregion
         }
         private void Timer_Tick(object? sender, EventArgs e)
         {
@@ -97,7 +131,7 @@ namespace INStore.UserControls.Home.Views
         private async void HomeView_Loaded(object sender, RoutedEventArgs e)
         {
             //get Dependences
-            HomeViewModel homeViewModel = (HomeViewModel)this.DataContext;
+            homeViewModel = (HomeViewModel)this.DataContext;
             _HomeViewModelLogger = homeViewModel._HomeViewModelLogger;
             _SnackbarMessageQueue = homeViewModel._SnackbarMessageQueue;
             await UpdateApplication();
