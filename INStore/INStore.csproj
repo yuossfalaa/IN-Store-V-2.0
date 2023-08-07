@@ -88,11 +88,15 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UserControls\Orders\Commands\" />
+  </ItemGroup>
+
 	<PropertyGroup>
 		<NugetTools>$(PkgNuGet_CommandLine)\tools</NugetTools>
 		<SquirrelTools>$(Pkgsquirrel_windows)\tools</SquirrelTools>
 
-		<Version>0.2.0</Version>
+		<Version>0.3.0</Version>
 
 		<NuspecFile>$(SolutionDir)INStore\ReleaseSpec.nuspec</NuspecFile>
 	</PropertyGroup>
