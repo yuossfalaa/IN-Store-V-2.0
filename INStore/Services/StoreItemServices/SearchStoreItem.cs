@@ -13,7 +13,7 @@ namespace INStore.Services.StoreItemServices
     public class SearchStoreItem : AsyncCommandBase
     {
         private readonly IStoreItemsService _storeItemsService;
-        public readonly ILogger<object> ViewModelLogger;
+        private readonly ILogger<object> ViewModelLogger;
         private readonly ViewModelBase _viewModel;
         private readonly string _collectionPropertyName;
 
