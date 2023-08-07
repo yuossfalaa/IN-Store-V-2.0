@@ -4,13 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using INStore.Commands;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
 using INStore.Services.ReceiptsServices;
 using INStore.Services.StoreItemServices;
 using INStore.State.FloatingWindow;
+using INStore.State.Navigators;
 using INStore.State.SellerDashbords;
 using INStore.State.UserStore;
+using INStore.UserControls.Orders.ViewModel;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -28,6 +31,7 @@ namespace INStore.UserControls.Home.ViewModels
         private readonly SellerDashboardsState _sellerDashboardsState;
         private readonly IReceiptService _receiptService;
         private readonly IUserStore _userStore;
+        private readonly IRenavigator _Ordernavigation;
         #endregion
         #region Public Vars
         private ObservableCollection<StoreItems> _StoreItemsCollection;
@@ -90,11 +94,11 @@ namespace INStore.UserControls.Home.ViewModels
         public ICommand ClearStoreItemInReceiptCommand { get; set; }
         public ICommand PayReceiptCommand { get; set; }
         public ICommand CreateReceiptCommand { get; set; }
+        public ICommand OrderNavigationCommand { get; set; }
         #endregion
-
         public HomeViewModel(IStoreItemsService storeItemsService, ILogger<HomeViewModel> homeViewModelLogger,
             ISnackbarMessageQueue snackbarMessageQueue, FloatingWindow floatingWindow,
-            SellerDashboardsState sellerDashboardsState, IReceiptService receiptService, IUserStore userStore)
+            SellerDashboardsState sellerDashboardsState, IReceiptService receiptService, IUserStore userStore, ViewModelDelegateRenavigator<OrdersViewModel> ordernavigation)
         {
             #region Passed Vars
             _storeItemsService = storeItemsService;
@@ -104,6 +108,7 @@ namespace INStore.UserControls.Home.ViewModels
             _sellerDashboardsState = sellerDashboardsState;
             _receiptService = receiptService;
             _userStore = userStore;
+            _Ordernavigation = ordernavigation;
             #endregion
             #region Init Vars
             Total = "0";
@@ -122,6 +127,7 @@ namespace INStore.UserControls.Home.ViewModels
             PayReceiptCommand = new RelayCommand(PayReceiptFunc);
             CreateReceiptCommand = new RelayCommand(CreateReceiptFunc);
             SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, _HomeViewModelLogger, this, nameof(StoreItemsCollections));
+            OrderNavigationCommand = new RenavigateCommand(_Ordernavigation);
             #endregion
             #region Load Data
             GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, _HomeViewModelLogger, this, nameof(StoreItemsCollections));
@@ -149,6 +155,11 @@ namespace INStore.UserControls.Home.ViewModels
         #region Private Methods
         private async void CreateReceiptFunc()
         {
+            if (CurrentSellerDashboard.Receipt.SoldItems.Count ==0)
+            {
+                _SnackbarMessageQueue.Enqueue("Add Something to start");
+                return;
+            }
             PrepareReceiptFunc();
             if (CurrentSellerDashboard.Receipt.Id == 0)
             {
@@ -163,6 +174,11 @@ namespace INStore.UserControls.Home.ViewModels
         }
         private async void PayReceiptFunc()
         {
+            if (CurrentSellerDashboard.Receipt.SoldItems.Count == 0)
+            {
+                _SnackbarMessageQueue.Enqueue("Add Something to start");
+                return;
+            }
             PrepareReceiptFunc();
             await _receiptService.PayReceipt(CurrentSellerDashboard.Receipt);
             ClearStoreItemInReceiptFunc();
