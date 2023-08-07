@@ -22,31 +22,16 @@ namespace INStore.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            if (value.ToString() == typeof(LoginViewModel).ToString())
-            {
-                return TrueValue;
-            }
-            else if (value.ToString() == typeof(RegisterViewModel).ToString())
-            {
-                return TrueValue;
-            }
-            else if (value.ToString() == typeof(RegisterEmployeeViewModel).ToString())
-            {
-                return TrueValue;
-            }
-            else if (value.ToString() == typeof(HomeViewModel).ToString())
-            {
-                return TrueValue;
-            }
-            else if (value.ToString() == typeof(MyStoreViewModel).ToString())
-            {
-                return TrueValue;
-            }
-            else
-            {
-                return FalseValue;
+            //if (value.ToString() == typeof(HomeViewModel).ToString())
+            //{
+            //    return FalseValue;
+            //}
+            //else
+            //{
+            //    return TrueValue;
 
-            }
+            //}
+            return TrueValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
