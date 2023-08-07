@@ -2,6 +2,7 @@
 using INStore.State.Navigators;
 using INStore.UserControls.Home.ViewModels;
 using INStore.UserControls.MyStore.ViewModels;
+using INStore.UserControls.Orders.ViewModel;
 using INStore.UserControls.SignUp_IN.ViewModels;
 using INStore.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,11 @@ namespace INStore.HostBuilders
                 services.AddTransient<HomeViewModel>();
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
+                #endregion
+                #region Orders View Model
+                services.AddTransient<OrdersViewModel>();
+                services.AddSingleton<CreateViewModel<OrdersViewModel>>(services => () => services.GetRequiredService<OrdersViewModel>());
+                services.AddSingleton<ViewModelDelegateRenavigator<OrdersViewModel>>();
                 #endregion
                 #region Register View Model
                 services.AddTransient<RegisterViewModel>();
