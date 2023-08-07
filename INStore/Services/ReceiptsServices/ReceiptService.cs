@@ -40,6 +40,7 @@ namespace INStore.Services.ReceiptsServices
             {
                 receipts = ExtractReceiptInfo(receipts);
                 await _receiptsService.Create(receipts);
+                _SnackbarMessageQueue.Enqueue("Order Created");
                 _Logger.LogInformation("Order Created and Paid");
             }
             catch (Exception ex)
