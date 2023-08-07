@@ -6,8 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using DocumentFormat.OpenXml.ExtendedProperties;
-using DocumentFormat.OpenXml.Office2016.Excel;
 using INStore.UserControls.Home.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -87,8 +85,8 @@ namespace INStore.UserControls.Home.Views
             if (e.Key == System.Windows.Input.Key.F1) SearchBar.Focus();
             if (e.Key == System.Windows.Input.Key.F2) OrderButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             if (e.Key == System.Windows.Input.Key.F3) PayButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            if (e.Key == System.Windows.Input.Key.F11) OrdersWindowButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             if (e.Key == System.Windows.Input.Key.F12) System.Diagnostics.Process.Start("calc");
-
             #endregion
         }
         private void Timer_Tick(object? sender, EventArgs e)
