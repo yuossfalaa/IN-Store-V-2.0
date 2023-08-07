@@ -27,7 +27,7 @@ namespace INStore.EntityFramework.Services
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
-                entity.IsDeleted =true;
+                entity.IsDeleted = true;
                 context.Set<StoreItems>().Update(entity);
                 await context.SaveChangesAsync();
                 return true;
@@ -66,13 +66,12 @@ namespace INStore.EntityFramework.Services
                 return entities;
             }
         }
-
         public async Task<List<StoreItems>> Get(string StoreItemProp)
         {
             using (INStoreDbContext context = _contextFactory.CreateDbContext())
             {
                 List<StoreItems> entity = await context.Set<StoreItems>()
-                    .Where((e) => 
+                    .Where((e) =>
                         e.IsDeleted == false &&
                         (e.Item.ItemName.ToLower().Contains(StoreItemProp.ToLower()) ||
                         e.Item.ItemBarCode.ToLower().Contains(StoreItemProp.ToLower())))
@@ -81,6 +80,6 @@ namespace INStore.EntityFramework.Services
                 return entity;
             }
         }
-       
+
     }
 }
