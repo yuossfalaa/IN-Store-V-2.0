@@ -9,6 +9,7 @@
         xmlns:Converters="clr-namespace:INStore.Converters"
         xmlns:NavigationBar="clr-namespace:INStore.UserControls.NavigationBar.View"
         xmlns:Controls="clr-namespace:INStore.Themes.Controls"
+        xmlns:HelpPopUp="clr-namespace:INStore.UserControls.HelpPopUp.View"
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="INStore"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -31,6 +32,9 @@
                                                                 TrueValue="Visible"
                                                                 FalseValue="Collapsed" />
         <Converters:CurrentViewModelToLogoutVisibilityConverter x:Key="CurrentViewModelToNavigationBarVisibilityConverter"
+                                                                TrueValue="Visible"
+                                                                FalseValue="Collapsed" />
+        <Converters:CurrentViewModelToHelpVisibilityConverter x:Key="CurrentViewModelToHelpVisibilityConverter"
                                                                 TrueValue="Visible"
                                                                 FalseValue="Collapsed" />
     </Window.Resources>
@@ -96,7 +100,7 @@
                                 Grid.Row="0">
                         <ToggleButton  Height="30"
                                        Width="30"
-                                       Margin="0,5,20,0"
+                                       Margin="0,5,0,0"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
                                        Foreground="Black"
                                        Background="Wheat"
@@ -104,10 +108,11 @@
                                        ToolTip="MaterialDesignActionLightToggleButton"
                                        Content="{materialDesign:PackIcon Kind= Earth, Size=25}"
                                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=AbjadArabic ,Size=25}" />
-
+                        <HelpPopUp:HelpPopUp Margin="20,5,0,0"
+                                             Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToHelpVisibilityConverter}  }" />
                         <Button Height="30"
                                 Width="30"
-                                Margin="20,5,0,0"
+                                Margin="20,5,20,0"
                                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                                 Foreground="{StaticResource DefaultButtonColor}"
                                 Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource CurrentViewModelToLogoutVisibilityConverter}  }"
@@ -118,7 +123,6 @@
                                                      Height="25"
                                                      Width="25" />
                         </Button>
-
                         <Button Height="30"
                                 Width="30"
                                 Margin="20,5,0,0"
