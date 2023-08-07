@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -150,6 +151,16 @@ namespace INStore.UserControls.Home.ViewModels
                 Total = TotalDouble.ToString();
             });
 
+        }
+        public async Task GetByBarcode(string Barcode)
+        {
+            await Task.Run(async () => 
+            {
+                List<StoreItems> storeItemsList = await _storeItemsService.Get(Barcode);
+                StoreItems storeItem  =  storeItemsList.FirstOrDefault(a => a.Item.ItemBarCode == Barcode);
+                if (storeItem == null) return;
+                AddStoreItemToReceiptFunc(storeItem);
+            });
         }
         #endregion
         #region Private Methods
