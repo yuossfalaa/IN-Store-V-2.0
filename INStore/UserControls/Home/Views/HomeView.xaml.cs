@@ -19,33 +19,43 @@ namespace INStore.UserControls.Home.Views
     /// </summary>
     public partial class HomeView : UserControl
     {
+        #region Private Vars
         private UpdateManager manager;
         private StringBuilder stringBuilder = new StringBuilder();
-        private DispatcherTimer timer;
+        private DispatcherTimer BarCodeInputTimer;
         private ILogger<HomeViewModel> _HomeViewModelLogger;
         private ISnackbarMessageQueue _SnackbarMessageQueue;
         private HomeViewModel homeViewModel;
+        #endregion
         public HomeView()
         {
             InitializeComponent();
             // Initialize Loaded Event
             Loaded += HomeView_Loaded;
             // Initialize the timer
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(5);
-            timer.Interval = TimeSpan.FromMicroseconds(200);
-            timer.Tick += Timer_Tick;
+            BarCodeInputTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            BarCodeInputTimer.Tick += BarcodeInputTimer_Tick;
 
         }
+
         #region Process Key Down 
         public void PreviewKeyDownFunc(object sender, KeyEventArgs e)
         {
+            //Disable Tab Key Navigation
+            if (e.Key == Key.Tab)
+            {
+                e.Handled = true;
+            }
+            //Check pre Made keys
             CheckKeys(e);
             // Start the timer on key press
-            timer.Stop();
-            timer.Start();
+            BarCodeInputTimer.Stop();
+            BarCodeInputTimer.Start();
             // Add the captured character to the string builder
-            char keyChar = KeyToChar(e.Key);
+            char? keyChar = KeyToChar(e.Key);
             stringBuilder.Append(keyChar);
         }
         private void CheckKeys(KeyEventArgs e)
@@ -89,7 +99,7 @@ namespace INStore.UserControls.Home.Views
             if (e.Key == System.Windows.Input.Key.F12) System.Diagnostics.Process.Start("calc");
             #endregion
         }
-        private void Timer_Tick(object? sender, EventArgs e)
+        private async void BarcodeInputTimer_Tick(object? sender, EventArgs e)
         {
             // Timer elapsed, add the accumulated string and clear the string builder
             string accumulatedString = stringBuilder.ToString();
@@ -97,15 +107,15 @@ namespace INStore.UserControls.Home.Views
             if (!string.IsNullOrEmpty(accumulatedString))
             {
 
-
+                await homeViewModel.GetByBarcode(accumulatedString);
                 // Clear the string builder
                 stringBuilder.Clear();
             }
 
             // Stop the timer
-            timer.Stop();
+            BarCodeInputTimer.Stop();
         }
-        private char KeyToChar(Key key)
+        private char? KeyToChar(Key key)
         {
             try
             {
@@ -131,7 +141,7 @@ namespace INStore.UserControls.Home.Views
             {
                 _HomeViewModelLogger.LogError(ex.Message);
             }
-            return '\0'; // Default return value for unsupported keys
+            return null; // Default return value for unsupported keys
         }
         #endregion
         #region Update Func
