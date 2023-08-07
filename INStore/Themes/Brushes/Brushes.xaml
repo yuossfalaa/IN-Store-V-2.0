@@ -11,6 +11,8 @@
     <SolidColorBrush x:Key="MenuBorderBrush"
                      Color="#333333"
                      Opacity="0.96"/>
+    <SolidColorBrush x:Key="MenuBorderBrush2"
+                     Color="#333333"/>
     <SolidColorBrush x:Key="BorderBorderBrush"
                      Color="#333333" Opacity="0.9"/>
     <SolidColorBrush x:Key="ColoreZoneBackGroundd"
