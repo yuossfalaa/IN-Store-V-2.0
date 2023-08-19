@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
-using INStore.UserControls.MyStore.Commands;
+using INStore.Language;
 using INStore.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
 namespace INStore.UserControls.MyStore.ViewModels
 {
-    public class EditItemViewModel : ViewModelBase
+    public partial class EditItemViewModel : ViewModelBase
     {
         #region Private Vars
         private readonly IStoreItemsService _storeItemsService;
@@ -23,34 +23,20 @@ namespace INStore.UserControls.MyStore.ViewModels
 
         #endregion
         #region Public Vars
-
-        private StoreItems _StoreItem;
-
-        public StoreItems StoreItem
-        {
-            get { return _StoreItem; }
-            set { _StoreItem = value; OnPropertyChanged(nameof(StoreItem)); }
-        }
+        [ObservableProperty]
+        StoreItems storeItem;
         #endregion
-        #region Commands
-        public ICommand AddImageToStoreItemCommand { get; set; }
-        public ICommand EditStoreItemCommand { get; set; }
-        public ICommand AutoFillCommand { get; set; }
-
-        #endregion
-
         public EditItemViewModel(IStoreItemsService storeItemsService, MyStoreViewModel myStoreViewModel, StoreItems items)
         {
             _storeItemsService = storeItemsService;
             _myStoreViewModel = myStoreViewModel;
             StoreItem = new StoreItems();
             StoreItem = items;
-            AddImageToStoreItemCommand = new RelayCommand(AddImageToStoreItemFunc);
-            AutoFillCommand = new RelayCommand(AutoFillFunc);
-            EditStoreItemCommand = new EditStoreItem(_storeItemsService, _myStoreViewModel, this);
-        }
+
+         }
         #region Private Methods
-        private async void AutoFillFunc()
+        [RelayCommand]
+        private async void AutoFill()
         {
             await Task.Run(async () =>
             {
@@ -71,8 +57,8 @@ namespace INStore.UserControls.MyStore.ViewModels
             });
 
         }
-
-        private void AddImageToStoreItemFunc()
+        [RelayCommand]
+        private void AddImageToStoreItem()
         {
             try
             {
@@ -99,6 +85,33 @@ namespace INStore.UserControls.MyStore.ViewModels
                 _myStoreViewModel._MyStoreViewModelLogger.LogError(ex.Message);
             }
         }
+        [RelayCommand]
+        public async Task EditStoreItem()
+        {
+
+            if (await TheSameBarcodeExist())
+            {
+                _myStoreViewModel._SnackbarMessageQueue.Enqueue(LocalizedStrings.Instance["AddStoreItemTheSameBarcodeExist"]);
+                return;
+            }
+
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    await _storeItemsService.Update(StoreItem.Id, StoreItem);
+                    _myStoreViewModel.GetAllStoreItemsCommand.Execute(null);
+                });
+
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+
+            }
+            catch (Exception ex)
+            {
+                _myStoreViewModel._MyStoreViewModelLogger.LogError(ex.Message);
+            }
+        }
+
         private byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
             try
@@ -115,7 +128,16 @@ namespace INStore.UserControls.MyStore.ViewModels
 
             }
         }
-       
+        private async Task<bool> TheSameBarcodeExist()
+        {
+            List<StoreItems> HavethesameBarcode = await _storeItemsService.Get(StoreItem.Item.ItemBarCode);
+            if (HavethesameBarcode.Where(a => a.Id != StoreItem.Id && a.Item.ItemBarCode == StoreItem.Item.ItemBarCode).Count() >= 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
         #endregion
 
 
