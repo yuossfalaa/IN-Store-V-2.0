@@ -29,8 +29,11 @@ namespace INStore.Services.StoreItemServices
         {
             try
             {
-                List<StoreItems> storeItems = await _storeItemsService.GetAll(false);
-                await LoadData(storeItems);
+                await Task.Run(async () =>
+                {
+                    List<StoreItems> storeItems = await _storeItemsService.GetAll(false);
+                    await LoadData(storeItems);
+                });
                 ViewModelLogger.Log(LogLevel.Information, "All Store Items Loaded");
             }
             catch (Exception ex)
