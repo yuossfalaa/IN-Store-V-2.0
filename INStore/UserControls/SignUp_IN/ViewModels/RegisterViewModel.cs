@@ -1,4 +1,5 @@
-﻿using INStore.Commands;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using INStore.Commands;
 using INStore.Domain.Models;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
@@ -9,25 +10,16 @@ using System.Windows.Input;
 
 namespace INStore.UserControls.SignUp_IN.ViewModels
 {
-    public class RegisterViewModel : ViewModelBase
+    public partial class RegisterViewModel : ViewModelBase
     {
+        #region Private Vars
         private readonly ILogger<RegisterViewModel> _RegisterViewModelLogger;
-        private readonly IRenavigator RegisterEmployeeRenavigator;
-        private readonly IRenavigator _loginRenavigator;
         private readonly IInRegistrationUser _InRegistrationUser;
+        #endregion
 
-        private User _currentUser;
+        [ObservableProperty]
+        User currentUser;
 
-        public User CurrentUser
-        {
-            get { return _currentUser; }
-            set
-            {
-                _currentUser = value;
-                _InRegistrationUser.RegisteringUser = _currentUser;
-                OnPropertyChanged(nameof(CurrentUser));
-            }
-        }
         private bool _IsEmployee;
 
         public bool IsEmployee
@@ -37,7 +29,7 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
             { 
                 _IsEmployee = value;
                 OnPropertyChanged(nameof(IsEmployee));
-                if (IsEmployee) _currentUser.AccountState = AccountState.Employee;
+                if (IsEmployee) currentUser.AccountState = AccountState.Employee;
             }
         }
         private bool _IsAdmin;
@@ -49,7 +41,7 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
             { 
                 _IsAdmin = value;
                 OnPropertyChanged(nameof(IsAdmin));
-                if (IsAdmin) _currentUser.AccountState = AccountState.Admin;
+                if (IsAdmin) currentUser.AccountState = AccountState.Admin;
             }
         }
 
@@ -64,8 +56,6 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
             LoginRenavigatCommand = new RenavigateCommand(loginRenavigator);
             RegisterEmployeeRenavigatcommand = new RenavigateCommand(registerEmployeeRenavigator);
             _RegisterViewModelLogger = registerViewModelLogger;
-            RegisterEmployeeRenavigator = registerEmployeeRenavigator;
-            _loginRenavigator = loginRenavigator;
             _InRegistrationUser = inRegistrationUser;
             CurrentUser = _InRegistrationUser.RegisteringUser;
 
