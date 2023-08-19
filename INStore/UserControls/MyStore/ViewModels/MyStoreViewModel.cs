@@ -1,14 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ArrayToExcel;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using INStore.Domain.ExportingModels;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
 using INStore.Services.StoreItemServices;
 using INStore.State.FloatingWindow;
-using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
@@ -16,7 +18,7 @@ using Microsoft.Win32;
 
 namespace INStore.UserControls.MyStore.ViewModels
 {
-    public class MyStoreViewModel : ViewModelBase
+    public partial class MyStoreViewModel : ViewModelBase
     {
         #region Private Vars
         private readonly IStoreItemsService _storeItemsService;
@@ -25,40 +27,20 @@ namespace INStore.UserControls.MyStore.ViewModels
         private readonly FloatingWindow _floatingWindow;
         #endregion
         #region Public Vars
-        private ObservableCollection<StoreItems> _StoreItemsCollection;
+        [ObservableProperty]
+        ObservableCollection<StoreItems> storeItemsCollections;
 
-        public ObservableCollection<StoreItems> StoreItemsCollections
-        {
-            get { return _StoreItemsCollection; }
-            set { _StoreItemsCollection = value; OnPropertyChanged(nameof(StoreItemsCollections)); }
-        }
-        private StoreItems _NewStoreItem;
+        [ObservableProperty]
+        StoreItems newStoreItem;
 
-        public StoreItems NewStoreItem
-        {
-            get { return _NewStoreItem; }
-            set { _NewStoreItem = value; OnPropertyChanged(nameof(NewStoreItem)); }
-        }
-        private string _StoreItemProp;
-                
-        public string StoreItemProp
-        {
-            get { return _StoreItemProp; }
-            set { _StoreItemProp = value; OnPropertyChanged(nameof(StoreItemProp)); }
-        }
+        [ObservableProperty]
+        string storeItemProp;
 
         #endregion
         #region Commands
         public ICommand GetAllStoreItemsCommand { get; set; }
         public ICommand SearchStoreItemCommand { get; set; }
-        public ICommand DeleteStoreItemCommand { get; set; }
-        public ICommand OpenEditItemStoreItemCommand { get; set; }
-        public ICommand OpenAddItemStoreItemCommand { get; set; }
-        public ICommand ExportStoreItemCommand { get; set; }
-        public ICommand ImportStoreItemCommand { get; set; }
-
         #endregion
-
         public MyStoreViewModel(IStoreItemsService storeItemsService, FloatingWindow floatingWindow, ILogger<MyStoreViewModel> myStoreViewModelLogger, ISnackbarMessageQueue snackbarMessageQueue)
         {
             _storeItemsService = storeItemsService;
@@ -68,20 +50,15 @@ namespace INStore.UserControls.MyStore.ViewModels
 
             //initialize Commands
             SearchStoreItemCommand = new SearchStoreItem(_storeItemsService, _MyStoreViewModelLogger, this, nameof(StoreItemsCollections));
-            DeleteStoreItemCommand = new DeleteStoreItem(_storeItemsService, this);
-            OpenEditItemStoreItemCommand = new RelayCommand<StoreItems>(OpenEditItemStoreItemFunc);
-            OpenAddItemStoreItemCommand = new RelayCommand(OpenAddItemStoreItemFunc);
-            ExportStoreItemCommand = new RelayCommand(ExportStoreItemFunc);
-            //Load Data
+             //Load Data
             StoreItemsCollections = new ObservableCollection<StoreItems>();
             GetAllStoreItemsCommand = new GetAllStoreItems(_storeItemsService, _MyStoreViewModelLogger, this,nameof(StoreItemsCollections));
             GetAllStoreItemsCommand.Execute(null);
             _MyStoreViewModelLogger.Log(LogLevel.Information, "MyStoreViewModel Initialized");
         }
-
-
         #region Private Methods
-        private void ExportStoreItemFunc()
+        [RelayCommand]
+        private void ExportStoreItem()
         {
             var sfd = new SaveFileDialog { Filter = "Excel Files|*.xlsx", FileName = "IN Store ( My Store Items )", AddExtension = true };
             if (sfd.ShowDialog().Value)
@@ -109,7 +86,9 @@ namespace INStore.UserControls.MyStore.ViewModels
             }
             return items;
         }
-        private void OpenAddItemStoreItemFunc()
+
+        [RelayCommand]
+        private void OpenAddItemStoreItem()
         {
             _floatingWindow.FloatingWindowControl = new AddItemViewModel(_storeItemsService, this);
             MaterialDesignThemes.Wpf.DialogHost.OpenDialogCommand.Execute(null, null);
@@ -117,7 +96,8 @@ namespace INStore.UserControls.MyStore.ViewModels
 
         }
 
-        private void OpenEditItemStoreItemFunc(StoreItems items)
+        [RelayCommand]
+        private void OpenEditItemStoreItem(StoreItems items)
         {
             if (items != null)
             {
@@ -126,6 +106,24 @@ namespace INStore.UserControls.MyStore.ViewModels
                 _MyStoreViewModelLogger.Log(LogLevel.Information, "EditItemViewModel Initialized");
             }
         
+        }
+        [RelayCommand]
+        public async Task DeleteStoreItem(StoreItems storeItems)
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    if (storeItems != null) await _storeItemsService.Delete(storeItems);
+                    GetAllStoreItemsCommand.Execute(null);
+                });
+
+                _MyStoreViewModelLogger.Log(LogLevel.Information, "Delete Store Items Done");
+            }
+            catch (Exception ex)
+            {
+                _MyStoreViewModelLogger.LogError(ex.Message);
+            }
         }
         #endregion
     }
