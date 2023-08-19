@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
+using System.Windows.Media.Imaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
 using INStore.Language;
-using INStore.UserControls.MyStore.Commands;
 using INStore.ViewModels;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 
 namespace INStore.UserControls.MyStore.ViewModels
 {
-    public class AddItemViewModel : ViewModelBase
+    public partial class AddItemViewModel : ViewModelBase
     {
         #region Private Vars
         private readonly IStoreItemsService _storeItemsService;
@@ -25,33 +23,19 @@ namespace INStore.UserControls.MyStore.ViewModels
         private StoreItems _AutoFillstoreItem;
         #endregion
         #region Public Vars
-
-        private StoreItems _StoreItem;
-        public StoreItems StoreItem
-        {
-            get { return _StoreItem; }
-            set { _StoreItem = value; OnPropertyChanged(nameof(StoreItem)); }
-        }
-        #endregion
-        #region Commands
-        public ICommand AddImageToStoreItemCommand { get; set; }
-        public ICommand AddStoreItemCommand { get; set; }
-        public ICommand AutoFillCommand { get; set; }
-
+        [ObservableProperty]
+        StoreItems storeItem;
         #endregion
         public AddItemViewModel(IStoreItemsService storeItemsService, MyStoreViewModel myStoreViewModel)
         {
             _storeItemsService = storeItemsService;
             _myStoreViewModel = myStoreViewModel;
             StoreItem = new StoreItems();
-            AddImageToStoreItemCommand = new RelayCommand(AddImageToStoreItemFunc);
-            AutoFillCommand = new RelayCommand(AutoFillFunc);
-            AddStoreItemCommand = new AddStoreItem(_storeItemsService, _myStoreViewModel, this);
-
+ 
         }
         #region Private Methods
-
-        private async void AutoFillFunc()
+        [RelayCommand]
+        private async void AutoFill()
         {
             await Task.Run(async () =>
             {
@@ -72,10 +56,8 @@ namespace INStore.UserControls.MyStore.ViewModels
             });
 
         }
-
-      
-
-        private void AddImageToStoreItemFunc()
+        [RelayCommand]
+        private void AddImageToStoreItem()
         {
             try
             {
@@ -99,6 +81,68 @@ namespace INStore.UserControls.MyStore.ViewModels
             catch(Exception ex)
             {
                 _myStoreViewModel._MyStoreViewModelLogger.LogError(ex.Message);
+
+            }
+        }
+        [RelayCommand]
+        public async Task AddStoreItem()
+        {
+            try
+            {
+                if (await TheSameBarcodeExist())
+                {
+                    _myStoreViewModel._SnackbarMessageQueue.Enqueue(LocalizedStrings.Instance["AddStoreItemTheSameBarcodeExist"]);
+                    return;
+                }
+                if (StoreItem != null)
+                {
+                    await Task.Run(async () =>
+                    {
+                        if (StoreItem.Item.Image.Length == 1)
+                        {
+                            BitmapImage image = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/image-custom.png"));
+                            StoreItem.Item.Image = ImageToByteArray(image);
+                        }
+
+                        await _storeItemsService.Create(StoreItem);
+                    });
+
+                }
+                _myStoreViewModel.GetAllStoreItemsCommand.Execute(null);
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+            }
+            catch (Exception ex)
+            {
+                _myStoreViewModel._MyStoreViewModelLogger.LogError(ex.Message);
+            }
+        }
+        private async Task<bool> TheSameBarcodeExist()
+        {
+            List<StoreItems> HavethesameBarcode = await _storeItemsService.Get(StoreItem.Item.ItemBarCode);
+            if (HavethesameBarcode.Where(a => a.Item.ItemBarCode == StoreItem.Item.ItemBarCode).Count() >= 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        private byte[] ImageToByteArray(BitmapImage imageIn)
+        {
+            try
+            {
+                byte[] data;
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(imageIn));
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    data = ms.ToArray();
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+                _myStoreViewModel._MyStoreViewModelLogger.LogError(ex.Message);
+                return null;
 
             }
         }
