@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using DocumentFormat.OpenXml.Presentation;
 using INStore.UserControls.Home.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
