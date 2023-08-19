@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using INStore.Commands;
 using INStore.Domain.Models;
 using INStore.Domain.Services;
+using INStore.UserControls.Home.ViewModels;
 using INStore.ViewModels;
 using Microsoft.Extensions.Logging;
 
