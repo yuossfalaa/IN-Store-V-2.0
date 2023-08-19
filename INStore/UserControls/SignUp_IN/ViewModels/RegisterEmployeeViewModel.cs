@@ -1,44 +1,39 @@
-﻿using INStore.Commands;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using INStore.Commands;
 using INStore.Domain.Models;
+using INStore.Language;
 using INStore.State.Authenticators;
 using INStore.State.Navigators;
 using INStore.State.UserStore;
-using INStore.UserControls.SignUp_IN.Commands;
 using INStore.ViewModels;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Logging;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static INStore.Domain.Services.AuthenticationService.IAuthenticationService;
 
 namespace INStore.UserControls.SignUp_IN.ViewModels
 {
-    public class RegisterEmployeeViewModel : ViewModelBase
+    public partial class RegisterEmployeeViewModel : ViewModelBase
     {
+        #region Private Vars
         private readonly ILogger<RegisterEmployeeViewModel> _RegisterEmployeeViewModelLogger;
         private readonly IRenavigator RegisterRenavigator;
         private readonly IRenavigator LoginRenavigator;
         private readonly IInRegistrationUser _InRegistrationUser;
         private readonly IAuthenticators _Authenticators;
         private readonly ISnackbarMessageQueue snackbarMessageQueue;
+        #endregion
+        [ObservableProperty]
+        User currentUser;
 
-        private User _currentUser;
-
-        public User CurrentUser
-        {
-            get { return _currentUser; }
-            set 
-            { 
-                _currentUser = value;
-                _InRegistrationUser.RegisteringUser = _currentUser;
-                OnPropertyChanged(nameof(CurrentUser));
-            }
-        }
         public ICommand RegisterRenavigatCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
         public RegisterEmployeeViewModel(ILogger<RegisterEmployeeViewModel> registerEmployeeViewModelLogger,
             ViewModelDelegateRenavigator<RegisterViewModel> registerRenavigator,
             ViewModelDelegateRenavigator<LoginViewModel> loginRenavigator,
@@ -54,9 +49,40 @@ namespace INStore.UserControls.SignUp_IN.ViewModels
             LoginRenavigator = loginRenavigator;
             CurrentUser = _InRegistrationUser.RegisteringUser;
             RegisterRenavigatCommand = new RenavigateCommand(RegisterRenavigator);
-            RegisterCommand = new RegisterCommand(_Authenticators, _InRegistrationUser, LoginRenavigator, snackbarMessageQueue, _RegisterEmployeeViewModelLogger);
-
+ 
             _RegisterEmployeeViewModelLogger.Log(LogLevel.Information, "RegisterEmployeeViewModel Initialized");
+        }
+        [RelayCommand]
+        public async Task Register()
+        {
+            try
+            {
+                RegistrationResult result = RegistrationResult.Success;
+                await Task.Run(async () => {
+                    result = await _Authenticators.Register(_InRegistrationUser);
+                });
+                if (result == RegistrationResult.Success)
+                {
+                    LoginRenavigator.Renavigate();
+                }
+                else if (result == RegistrationResult.AdminPasswordDoNotMatch)
+                {
+                    snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["RegisterCommandWrongAdminPassword"]);
+                    _RegisterEmployeeViewModelLogger.LogTrace("Wrong Admin Password");
+
+                }
+                else if (result == RegistrationResult.UsernameAlreadyExists)
+                {
+                    snackbarMessageQueue.Enqueue(LocalizedStrings.Instance["RegisterCommandUsernameAlreadyExists"]);
+                    _RegisterEmployeeViewModelLogger.LogTrace("Username Already Exists");
+
+                }
+            }
+            catch (Exception excption)
+            {
+                _RegisterEmployeeViewModelLogger.LogError(excption.Message);
+            }
+
         }
     }
 }
